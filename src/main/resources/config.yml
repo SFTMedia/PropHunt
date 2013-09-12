@@ -36,7 +36,7 @@ use-solid-block: true
 # Time untill solid block
 solid-block-time: 5
 # Use the custom Tab scoreboard (You need TabAPI)
-using-custom-tab: true
+using-custom-tab: false
 # Use hit markers when hiders are hit
 use-hitmarkers: true
 # Use hit sounds when hiders are hit
@@ -123,3 +123,13 @@ SeekerClass:
   Chestplate: 311 0:4
   Leggings: 312 1:4
   Boots: 313 2:1
+block-disguises:
+- 1
+- 2
+- 3
+- 5
+- 6
+- 7
+- 81
+- 57
+- 71
