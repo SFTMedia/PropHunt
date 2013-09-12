@@ -654,9 +654,7 @@ public class GameManager {
     }
 
     public void addPlayerToGame(String name) {
-        if (gameStatus) {
-            plugin.SBS.addPlayerToLobby(plugin, plugin.getServer().getPlayer(name));
-        } else {
+        if (GameManager.useSideStats) {
             plugin.SBS.addPlayerToLobby(plugin, plugin.getServer().getPlayer(name));
         }
         if (playersWaiting.contains(name)) {

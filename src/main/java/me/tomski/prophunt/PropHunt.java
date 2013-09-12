@@ -114,7 +114,6 @@ public class PropHunt extends JavaPlugin {
         AS.loadData();
         if (GameManager.useSideStats) {
             SBS = new SideBarStats(this);
-
             SideTabTimer stt = new SideTabTimer(SBS);
             getServer().getScheduler().scheduleSyncRepeatingTask(this, stt, 20L, 20L);
         }
