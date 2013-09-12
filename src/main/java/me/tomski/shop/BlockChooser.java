@@ -27,7 +27,7 @@ import java.util.List;
 public class BlockChooser implements Listener {
 
     private PropHunt plugin;
-    private List<Player> inInventory = new ArrayList<Player>();
+    private List<Player> inChooser = new ArrayList<Player>();
 
     public BlockChooser(PropHunt plugin) {
         this.plugin = plugin;
@@ -43,12 +43,12 @@ public class BlockChooser implements Listener {
             sI.addToInventory(inv, p);
         }
         p.openInventory(inv);
-        inInventory.add(p);
+        inChooser.add(p);
     }
 
     @EventHandler
     public void onInventClick(InventoryClickEvent e) {
-        if (inInventory.contains((Player) e.getWhoClicked())) {
+        if (inChooser.contains((Player) e.getWhoClicked())) {
             if (e.getCurrentItem() != null) {
                 if (!hasPermsForBlock((Player) e.getWhoClicked(), e.getCurrentItem())) {
                     PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.NO_BLOCK_CHOICE_PERMISSION.getMsg());
@@ -86,8 +86,8 @@ public class BlockChooser implements Listener {
 
     @EventHandler
     public void inventoryClose(InventoryCloseEvent e) {
-        if (inInventory.contains(e.getPlayer())) {
-            inInventory.remove(e.getPlayer());
+        if (inChooser.contains(e.getPlayer())) {
+            inChooser.remove(e.getPlayer());
         }
     }
 

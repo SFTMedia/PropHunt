@@ -15,6 +15,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +95,12 @@ public class MainShop implements Listener {
                     if (e.getCurrentItem().getType().equals(Material.ENDER_CHEST)) {
                         e.setCancelled(true);
                         e.getView().close();
-                        plugin.getShopManager().getBlockChooser().openBlockShop((Player) e.getWhoClicked());
+                        plugin.getServer().getScheduler().runTaskLater(plugin, new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                plugin.getShopManager().getBlockChooser().openBlockShop((Player) e.getWhoClicked());
+                            }
+                        }, 2L);
                     } else if (e.getCurrentItem().getType().equals(Material.GOLD_BLOCK)) {
                         e.setCancelled(true);
                         e.getView().close();
