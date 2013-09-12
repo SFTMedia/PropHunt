@@ -50,11 +50,7 @@ public class ItemShop implements Listener {
                     if (item.itemStack.getType().equals(e.getCurrentItem().getType())) {
                         if (item.itemStack.getData() != null || item.itemStack.getData().getData() != 0) {
                             if (item.itemStack.getData().getData() == e.getCurrentItem().getData().getData()) {
-                                if (GameManager.gameStatus) {
-                                    item.buyItem((Player) e.getWhoClicked());
-                                } else {
-                                    PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.BLOCK_ACCESS_IN_GAME.getMsg());
-                                }
+                                item.buyItem((Player) e.getWhoClicked());
                                 e.getView().close();
                                 return;
                             }
@@ -69,6 +65,7 @@ public class ItemShop implements Listener {
                 }
             }
         }
+
     }
 
     @EventHandler
@@ -81,12 +78,12 @@ public class ItemShop implements Listener {
     private void addCurrencyItem(Inventory i, Player p) {
         ItemStack currency = new ItemStack(Material.EMERALD);
         ItemMeta currencyMeta = currency.getItemMeta();
-        currencyMeta.setDisplayName(ChatColor.GOLD  + ShopSettings.currencyName);
+        currencyMeta.setDisplayName(ChatColor.GOLD + ShopSettings.currencyName);
         List<String> currencyLore = new ArrayList<String>();
         currencyLore.add(ChatColor.GREEN + "" + getCurrencyBalance(p));
         currencyMeta.setLore(currencyLore);
         currency.setItemMeta(currencyMeta);
-        i.setItem(i.getSize()-1, currency);
+        i.setItem(i.getSize() - 1, currency);
     }
 
     private int getShopSize(int n) {

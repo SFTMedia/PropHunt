@@ -58,9 +58,13 @@ public class BlockChooser implements Listener {
                 if (e.getCurrentItem().getType().equals(Material.AIR)) {
                     return;
                 }
-                DisguiseManager.preChosenDisguise.put((Player) e.getWhoClicked(), parseItemToDisguise(e.getCurrentItem()));
-                PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.SHOP_CHOSEN_DISGUISE.getMsg() + e.getCurrentItem().getItemMeta().getDisplayName());
-                e.getView().close();
+                if (GameManager.playersWaiting.contains(((Player) e.getWhoClicked()).getName())) {
+                    DisguiseManager.preChosenDisguise.put((Player) e.getWhoClicked(), parseItemToDisguise(e.getCurrentItem()));
+                    PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.SHOP_CHOSEN_DISGUISE.getMsg() + e.getCurrentItem().getItemMeta().getDisplayName());
+                    e.getView().close();
+                } else {
+                    PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.BLOCK_ACCESS_IN_GAME.getMsg());
+                }
             }
         }
     }
