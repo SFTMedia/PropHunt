@@ -529,7 +529,7 @@ public class PropHunt extends JavaPlugin {
                 if (args.length >= 1) {
                     if (args[0].equalsIgnoreCase("balance")) {
                         if (!p.hasPermission("prophunt.currency.balance")) {
-                           PropHuntMessaging.sendMessage(p, "You don't have permission to check your balance");
+                            PropHuntMessaging.sendMessage(p, "You don't have permission to check your balance");
                             return true;
                         }
                         if (ShopSettings.enabled) {
@@ -542,18 +542,18 @@ public class PropHunt extends JavaPlugin {
                     }
                     if (args[0].equalsIgnoreCase("curremcy")) {
                         if (args.length == 2) {
-                             if (args[1].equalsIgnoreCase("balance")) {
-                                 if (!p.hasPermission("prophunt.currency.balance")) {
-                                     PropHuntMessaging.sendMessage(p, "You don't have permission to check your balance");
-                                     return true;
-                                 }
-                                 if (ShopSettings.enabled) {
-                                     PropHuntMessaging.sendMessage(p, MessageBank.CURRENCY_BALANCE.getMsg() + getCurrencyBalance(p));
-                                 } else {
-                                     PropHuntMessaging.sendMessage(p, MessageBank.SHOP_NOT_ENABLED.getMsg());
-                                     return true;
-                                 }
-                             }
+                            if (args[1].equalsIgnoreCase("balance")) {
+                                if (!p.hasPermission("prophunt.currency.balance")) {
+                                    PropHuntMessaging.sendMessage(p, "You don't have permission to check your balance");
+                                    return true;
+                                }
+                                if (ShopSettings.enabled) {
+                                    PropHuntMessaging.sendMessage(p, MessageBank.CURRENCY_BALANCE.getMsg() + getCurrencyBalance(p));
+                                } else {
+                                    PropHuntMessaging.sendMessage(p, MessageBank.SHOP_NOT_ENABLED.getMsg());
+                                    return true;
+                                }
+                            }
                         }
                         if (args.length == 4) {
                             handleEconomyCommand(p, args);
@@ -562,7 +562,7 @@ public class PropHunt extends JavaPlugin {
                     }
                 }
 
-                }
+            }
             if (p.hasPermission("prophunt.hostcommand.host")) {
                 PropHuntMessaging.sendHostHelp(p);
                 return true;
@@ -579,7 +579,7 @@ public class PropHunt extends JavaPlugin {
         String type = args[2];
         String amount = args[3];
         if (!isInt(amount)) {
-             PropHuntMessaging.sendMessage(p, "Please supply an integer");
+            PropHuntMessaging.sendMessage(p, "Please supply an integer");
             return;
         }
         if (!p.hasPermission("prophunt.economy" + type.toLowerCase())) {
@@ -620,7 +620,7 @@ public class PropHunt extends JavaPlugin {
                 return SQL.getCredits(p);
             case VAULT:
                 PropHuntMessaging.sendMessage(setter, "Use your economy commands");
-            default :
+            default:
                 return 0;
         }
     }
@@ -631,7 +631,7 @@ public class PropHunt extends JavaPlugin {
                 return SQL.getCredits(p.getName()) + " " + ShopSettings.currencyName;
             case VAULT:
                 return vaultUtils.economy.getBalance(p.getName()) + " " + vaultUtils.economy.currencyNamePlural();
-            default :
+            default:
                 return "0";
         }
     }

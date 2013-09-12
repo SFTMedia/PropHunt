@@ -36,7 +36,7 @@ public class PropHuntMessaging {
 
 
     public static void sendGameStatus(Player p) {
-        if (GameManager.gameStatus == false && GameManager.isHosting) {
+        if (!GameManager.gameStatus && GameManager.isHosting) {
             p.sendMessage(parseChatColors(banner));
             p.sendMessage(parseChatColors("&4[&fGameStatus&4]: &6Pre-Game"));
             p.sendMessage(parseChatColors("&c[&bArena&c]: &b" + GameManager.currentGameArena.getArenaName()));
@@ -44,7 +44,7 @@ public class PropHuntMessaging {
             p.sendMessage(parseChatColors("&c[&bPlayers&c]: &f" + GameManager.playersWaiting));
             return;
         }
-        if (GameManager.gameStatus == false) {
+        if (!GameManager.gameStatus) {
             p.sendMessage(parseChatColors(banner));
             p.sendMessage(parseChatColors("&4[&fGameStatus&4]: &6Not-Live"));
         } else {
@@ -64,6 +64,11 @@ public class PropHuntMessaging {
         p.sendMessage(parseChatColors("&b/ph leave &0- &6Leave the current PropHunt game"));
         p.sendMessage(parseChatColors("&b/ph spectate &0- &6Spectate the current PropHunt game"));
         p.sendMessage(parseChatColors("&b/ph status &0- &6Check the status of PropHunt"));
+        p.sendMessage(parseChatColors("&b/ph shop &0- &6Opem the PropHunt shop"));
+        p.sendMessage(parseChatColors("&b/ph chooser &0- &6Open the disguise chooser"));
+        p.sendMessage(parseChatColors("&b/ph loadout &0- &6Open the loadout chooser"));
+        p.sendMessage(parseChatColors("&b/ph balance &0- &6Check your PropHunt balance"));
+
     }
 
     public static void sendHostHelp(Player p) {
