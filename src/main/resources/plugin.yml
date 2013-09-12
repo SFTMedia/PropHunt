@@ -13,6 +13,12 @@ commands:
         permission-message: You dont have permission for PropHunt commands
         usage: /ph /prophunt  for PropHunt commands!
 permissions:
+    prophunt.currency.*:
+        description: Gives access to all economy commands
+        children:
+            prophunt.currency.give: true
+            prophunt.currency.remove: true
+            prophunt.currency.set: true
     prophunt.command.*:
         description: Gives access to all user commands
         children:
@@ -82,3 +88,12 @@ permissions:
     prophunt.admin.configreload:
         default: op
         description: Allows use of PropHunt configreload!
+    prophunt.currency.give:
+        default: op
+        description: Allows giving PropHunt credits
+    prophunt.currency.remove:
+        default: op
+        description: Allows removing PropHunt credits
+    prophunt.currency.set:
+        default: op
+        description: Allows setting PropHunt credits
