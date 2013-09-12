@@ -60,8 +60,16 @@ public class PropHuntListener implements Listener {
         this.GM = Gamem;
         allowedcmds.add("/ph leave");
         allowedcmds.add("/ph status");
+        allowedcmds.add("/ph balance");
+        allowedcmds.add("/ph shop");
+        allowedcmds.add("/ph chooser");
+        allowedcmds.add("/ph balance");
         allowedcmds.add("/prophunt leave");
-        allowedcmds.add("/prophunt leave");
+        allowedcmds.add("/prophunt status");
+        allowedcmds.add("/prophunt balance");
+        allowedcmds.add("/prophunt shop");
+        allowedcmds.add("/prophunt chooser");
+        allowedcmds.add("/prophunt balance");
     }
 
     @EventHandler

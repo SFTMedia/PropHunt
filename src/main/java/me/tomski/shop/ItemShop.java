@@ -1,8 +1,11 @@
 package me.tomski.shop;
 
 
+import me.tomski.language.MessageBank;
+import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.prophunt.ShopSettings;
+import me.tomski.utils.PropHuntMessaging;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -47,7 +50,11 @@ public class ItemShop implements Listener {
                     if (item.itemStack.getType().equals(e.getCurrentItem().getType())) {
                         if (item.itemStack.getData() != null || item.itemStack.getData().getData() != 0) {
                             if (item.itemStack.getData().getData() == e.getCurrentItem().getData().getData()) {
-                                item.buyItem((Player) e.getWhoClicked());
+                                if (GameManager.gameStatus) {
+                                    item.buyItem((Player) e.getWhoClicked());
+                                } else {
+                                    PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.BLOCK_ACCESS_IN_GAME.getMsg());
+                                }
                                 e.getView().close();
                                 return;
                             }

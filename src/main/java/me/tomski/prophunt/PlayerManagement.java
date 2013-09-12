@@ -57,7 +57,7 @@ public class PlayerManagement {
 
     @SuppressWarnings("deprecation")
     private static void healPlayer(Player p) {
-        p.setHealth(20);
+        p.setHealth(p.getMaxHealth());
         p.setFoodLevel(20);
         p.updateInventory();
     }
