@@ -353,6 +353,7 @@ public class PropHunt extends JavaPlugin {
                                 }
                                 if (ShopSettings.enabled) {
                                     PropHuntMessaging.sendMessage(p, MessageBank.CURRENCY_BALANCE.getMsg() + getCurrencyBalance(p));
+                                    return true;
                                 } else {
                                     PropHuntMessaging.sendMessage(p, MessageBank.SHOP_NOT_ENABLED.getMsg());
                                     return true;
@@ -472,6 +473,7 @@ public class PropHunt extends JavaPlugin {
                             return true;
                         }
                         getShopManager().getMainShop().openMainShop(p);
+                        return true;
                     }
                     if (args[0].equalsIgnoreCase("chooser")) {
                         if (!sender.hasPermission("prophunt.command.chooser")) {
@@ -480,6 +482,7 @@ public class PropHunt extends JavaPlugin {
                         }
                         if (GameManager.isHosting && GameManager.playersWaiting.contains(p.getName())) {
                             getShopManager().getBlockChooser().openBlockShop(p);
+                            return true;
                         }
                     }
                     if (args[0].equalsIgnoreCase("debug") && sender.isOp()) {
