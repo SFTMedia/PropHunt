@@ -58,6 +58,13 @@ public class PropHuntMessaging {
         }
     }
 
+    public static void sendEconomyHelp(Player p) {
+        p.sendMessage(parseChatColors(banner));
+        p.sendMessage(parseChatColors("&b/ph economy <player> grant <amount> &0- &6Grant credits"));
+        p.sendMessage(parseChatColors("&b/ph economy <player> remove <amount> &0- &6Remove credits"));
+        p.sendMessage(parseChatColors("&b/ph economy <player> set <amount> &0- &6Set credits"));
+    }
+
     public static void sendPlayerHelp(Player p) {
         p.sendMessage(parseChatColors(banner));
         p.sendMessage(parseChatColors("&b/ph join &0- &6Join the current PropHunt game"));

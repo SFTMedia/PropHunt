@@ -559,6 +559,8 @@ public class PropHunt extends JavaPlugin {
                             handleEconomyCommand(p, args);
                             return true;
                         }
+                        PropHuntMessaging.sendEconomyHelp(p);
+                        return true;
                     }
                 }
 
