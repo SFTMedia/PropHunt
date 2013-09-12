@@ -60,9 +60,9 @@ public class PropHuntMessaging {
 
     public static void sendEconomyHelp(Player p) {
         p.sendMessage(parseChatColors(banner));
-        p.sendMessage(parseChatColors("&b/ph economy <player> grant <amount> &0- &6Grant credits"));
-        p.sendMessage(parseChatColors("&b/ph economy <player> remove <amount> &0- &6Remove credits"));
-        p.sendMessage(parseChatColors("&b/ph economy <player> set <amount> &0- &6Set credits"));
+        p.sendMessage(parseChatColors("&b/ph currency <player> give <amount> &0- &6Grant credits"));
+        p.sendMessage(parseChatColors("&b/ph currency <player> remove <amount> &0- &6Remove credits"));
+        p.sendMessage(parseChatColors("&b/ph currency <player> set <amount> &0- &6Set credits"));
     }
 
     public static void sendPlayerHelp(Player p) {
@@ -71,7 +71,7 @@ public class PropHuntMessaging {
         p.sendMessage(parseChatColors("&b/ph leave &0- &6Leave the current PropHunt game"));
         p.sendMessage(parseChatColors("&b/ph spectate &0- &6Spectate the current PropHunt game"));
         p.sendMessage(parseChatColors("&b/ph status &0- &6Check the status of PropHunt"));
-        p.sendMessage(parseChatColors("&b/ph shop &0- &6Opem the PropHunt shop"));
+        p.sendMessage(parseChatColors("&b/ph shop &0- &6Open the PropHunt shop"));
         p.sendMessage(parseChatColors("&b/ph chooser &0- &6Open the disguise chooser"));
         p.sendMessage(parseChatColors("&b/ph loadout &0- &6Open the loadout chooser"));
         p.sendMessage(parseChatColors("&b/ph balance &0- &6Check your PropHunt balance"));
@@ -86,6 +86,7 @@ public class PropHuntMessaging {
         p.sendMessage(parseChatColors("&b/ph kick <player> &0- &6Kick a player from the game"));
         p.sendMessage(parseChatColors("&b/ph setup <ArenaName>&0- &4Admin Only command- setup!"));
         p.sendMessage(parseChatColors("&b/ph delete <arena> &0- &4Admin Only command- delete!!"));
+        p.sendMessage(parseChatColors("&b/ph currency &0- &4Currency commands!!"));
 
     }
 

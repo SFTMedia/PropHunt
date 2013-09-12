@@ -330,6 +330,45 @@ public class PropHunt extends JavaPlugin {
                     return true;
                 }
 
+                //currency
+                if (args.length >= 1) {
+                    if (args[0].equalsIgnoreCase("balance")) {
+                        if (!p.hasPermission("prophunt.currency.balance")) {
+                            PropHuntMessaging.sendMessage(p, "You don't have permission to check your balance");
+                            return true;
+                        }
+                        if (ShopSettings.enabled) {
+                            PropHuntMessaging.sendMessage(p, MessageBank.CURRENCY_BALANCE.getMsg() + getCurrencyBalance(p));
+                            return true;
+                        } else {
+                            PropHuntMessaging.sendMessage(p, MessageBank.SHOP_NOT_ENABLED.getMsg());
+                            return true;
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("currency")) {
+                        if (args.length == 2) {
+                            if (args[1].equalsIgnoreCase("balance")) {
+                                if (!p.hasPermission("prophunt.currency.balance")) {
+                                    PropHuntMessaging.sendMessage(p, "You don't have permission to check your balance");
+                                    return true;
+                                }
+                                if (ShopSettings.enabled) {
+                                    PropHuntMessaging.sendMessage(p, MessageBank.CURRENCY_BALANCE.getMsg() + getCurrencyBalance(p));
+                                } else {
+                                    PropHuntMessaging.sendMessage(p, MessageBank.SHOP_NOT_ENABLED.getMsg());
+                                    return true;
+                                }
+                            }
+                        }
+                        if (args.length == 4) {
+                            handleEconomyCommand(p, args);
+                            return true;
+                        }
+                        PropHuntMessaging.sendEconomyHelp(p);
+                        return true;
+                    }
+                }
+
                 if (args.length == 1) {
 
                     if (args[0].equalsIgnoreCase("configreload")) {
@@ -524,44 +563,6 @@ public class PropHunt extends JavaPlugin {
                         }
                     }
 
-                }
-                //currency
-                if (args.length >= 1) {
-                    if (args[0].equalsIgnoreCase("balance")) {
-                        if (!p.hasPermission("prophunt.currency.balance")) {
-                            PropHuntMessaging.sendMessage(p, "You don't have permission to check your balance");
-                            return true;
-                        }
-                        if (ShopSettings.enabled) {
-                            PropHuntMessaging.sendMessage(p, MessageBank.CURRENCY_BALANCE.getMsg() + getCurrencyBalance(p));
-                        } else {
-                            PropHuntMessaging.sendMessage(p, MessageBank.SHOP_NOT_ENABLED.getMsg());
-                            return true;
-                        }
-
-                    }
-                    if (args[0].equalsIgnoreCase("curremcy")) {
-                        if (args.length == 2) {
-                            if (args[1].equalsIgnoreCase("balance")) {
-                                if (!p.hasPermission("prophunt.currency.balance")) {
-                                    PropHuntMessaging.sendMessage(p, "You don't have permission to check your balance");
-                                    return true;
-                                }
-                                if (ShopSettings.enabled) {
-                                    PropHuntMessaging.sendMessage(p, MessageBank.CURRENCY_BALANCE.getMsg() + getCurrencyBalance(p));
-                                } else {
-                                    PropHuntMessaging.sendMessage(p, MessageBank.SHOP_NOT_ENABLED.getMsg());
-                                    return true;
-                                }
-                            }
-                        }
-                        if (args.length == 4) {
-                            handleEconomyCommand(p, args);
-                            return true;
-                        }
-                        PropHuntMessaging.sendEconomyHelp(p);
-                        return true;
-                    }
                 }
 
             }
