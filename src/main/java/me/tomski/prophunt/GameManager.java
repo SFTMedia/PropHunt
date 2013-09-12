@@ -279,17 +279,11 @@ public class GameManager {
     private void givePlayersLoadOuts(Arena a) {
         for (String seek : seekers) {
             if (plugin.getServer().getPlayer(seek) != null) {
-                if (plugin.getServer().getPlayer(seek).getGameMode().equals(GameMode.CREATIVE)) {
-                    plugin.getServer().getPlayer(seek).setGameMode(GameMode.SURVIVAL);
-                }
                 ArenaManager.arenaConfigs.get(a).getArenaSeekerClass().givePlayer(plugin.getServer().getPlayer(seek));
             }
         }
         for (String hider : hiders) {
             if (plugin.getServer().getPlayer(hider) != null) {
-                if (plugin.getServer().getPlayer(hider).getGameMode().equals(GameMode.CREATIVE)) {
-                    plugin.getServer().getPlayer(hider).setGameMode(GameMode.SURVIVAL);
-                }
                 ArenaManager.arenaConfigs.get(a).getArenaHiderClass().givePlayer(plugin.getServer().getPlayer(hider));
             }
         }
@@ -298,6 +292,9 @@ public class GameManager {
     private void freshPlayers() {
         for (String s : playersWaiting) {
             if (plugin.getServer().getPlayer(s) != null) {
+                if (plugin.getServer().getPlayer(s).getGameMode().equals(GameMode.CREATIVE)) {
+                    plugin.getServer().getPlayer(s).setGameMode(GameMode.SURVIVAL);
+                }
                 PlayerManagement.gameStartPlayer(plugin.getServer().getPlayer(s));
             }
         }

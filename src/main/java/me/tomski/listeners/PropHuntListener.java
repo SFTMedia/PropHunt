@@ -400,25 +400,11 @@ public class PropHuntListener implements Listener {
     }
 
     private boolean isLastHider() {
-        int hidersleft = 0;
-        for (String s : GameManager.hiders) {
-            hidersleft++;
-        }
-        if (hidersleft == 1) {
-            return true;
-        }
-        return false;
+        return GameManager.hiders.size() == 1;
     }
 
     private boolean isLastSeeker() {
-        int seekersleft = 0;
-        for (String s : GameManager.seekers) {
-            seekersleft++;
-        }
-        if (seekersleft == 1) {
-            return true;
-        }
-        return false;
+        return GameManager.seekers.size() == 1;
     }
 
     private void respawnQuick(final Player player) {
