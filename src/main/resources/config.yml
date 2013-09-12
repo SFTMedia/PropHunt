@@ -36,7 +36,7 @@ use-solid-block: true
 # Time untill solid block
 solid-block-time: 5
 # Use the custom Tab scoreboard (You need TabAPI)
-using-custom-tab: true
+using-custom-tab: false
 # Use hit markers when hiders are hit
 use-hitmarkers: true
 # Use hit sounds when hiders are hit
