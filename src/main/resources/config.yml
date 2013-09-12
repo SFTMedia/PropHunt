@@ -101,7 +101,7 @@ DatabaseSettings:
     host: localhost
     # Port of your database
     port: 3306
-    # Database name, will create a new one if it doesnt exist
+    # Database name, will create a new one if it doesn't exist
     database: minecraft
     # Database username
     username: root
