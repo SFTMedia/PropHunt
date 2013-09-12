@@ -66,6 +66,8 @@ not_in_lobby: "You are not in the lobby"
 already_purchased_item: "You have already bought that item"
 not_enough_currency: "You dont have enough for that item"
 purchase_complete: "You have just bought: "
+shop_not_enabled: "Shop is not enabled"
+currency_balance: "You have : &6"
 
 # setup
 seeker_spawn_set: "Seeker spawn Set"

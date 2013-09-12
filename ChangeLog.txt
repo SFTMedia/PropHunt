@@ -65,3 +65,4 @@
     - Fix inventory! Far too long....
     - Add shop messages to language.yml
     - Add rest of shops
+    - Add ./ph currency commands. ./ph currency balance, ./ph currency <player> give/remove/set <amount> prophunt.currency.give/remove/set
