@@ -420,6 +420,7 @@ public class PropHuntListener implements Listener {
                 } catch (Exception e) {
                     throw new RuntimeException("Cannot recieve packet.", e);
                 }
+
             }
         }, 5L);
 
