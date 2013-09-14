@@ -529,8 +529,6 @@ public class GameManager {
 
     public void kickPlayer(final String name) throws IOException {
         if (plugin.getServer().getPlayer(name) != null) {
-            PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(name));
-
             teleportToExit(plugin.getServer().getPlayer(name), true);
             if (PropHunt.usingTABAPI) {
                 if (SB != null) {
@@ -548,6 +546,7 @@ public class GameManager {
                         if (PropHunt.dc.isDisguised(plugin.getServer().getPlayer(name))) {
                             PropHunt.dc.undisguisePlayer(plugin.getServer().getPlayer(name));
                         }
+                        PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(name));
                     }
                 }
             }, 20L);
