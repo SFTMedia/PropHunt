@@ -73,6 +73,7 @@ public class PlayerManagement {
         restoreInvent(p);
         restoreArmour(p);
         removeFromMaps(p);
+        clearEffects(p);
     }
 
     @SuppressWarnings("deprecation")
