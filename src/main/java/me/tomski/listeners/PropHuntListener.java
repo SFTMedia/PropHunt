@@ -31,13 +31,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.event.player.*;
 
 import com.comphenix.protocol.Packets;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -70,6 +64,66 @@ public class PropHuntListener implements Listener {
         allowedcmds.add("/prophunt shop");
         allowedcmds.add("/prophunt chooser");
         allowedcmds.add("/prophunt balance");
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e) {
+        if (GameManager.seekers.contains(e.getPlayer().getName())) {
+            if (cancelItemUse(e)) {
+                e.setCancelled(true);
+            }
+        }
+        if (GameManager.hiders.contains(e.getPlayer().getName())) {
+            if (cancelItemUse(e)) {
+                e.setCancelled(true);
+            }
+        }
+        if (GameManager.playersWaiting.contains(e.getPlayer().getName())) {
+            if (cancelItemUse(e)) {
+                e.setCancelled(true);
+            }
+        }
+        if (GameManager.spectators.contains(e.getPlayer().getName())) {
+            if (cancelItemUse(e)) {
+                e.setCancelled(true);
+            }
+        }
+    }
+
+    private boolean cancelItemUse(PlayerInteractEvent e) {
+        if (e.getClickedBlock() != null) {
+            switch (e.getClickedBlock().getType()) {
+                case ENDER_CHEST:
+                    return true;
+                case CHEST:
+                    return true;
+                case STORAGE_MINECART:
+                    return true;
+                case LOCKED_CHEST:
+                    return true;
+                case TRAPPED_CHEST:
+                    return true;
+                case DISPENSER:
+                    return true;
+                case POWERED_MINECART:
+                    return true;
+                case ANVIL:
+                    return true;
+                case BREWING_STAND:
+                    return true;
+                case HOPPER:
+                    return true;
+                case HOPPER_MINECART:
+                    return true;
+                case DROPPER:
+                    return true;
+                case BEACON:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        return false;
     }
 
     @EventHandler
