@@ -66,3 +66,8 @@
     - Add shop messages to language.yml
     - Add rest of shops
     - Add ./ph currency commands. ./ph currency balance, ./ph currency <player> give/remove/set <amount> prophunt.currency.give/remove/set
+- V 1.38
+    - Prevent container use
+    - Dont load before multiverse to ensure non null worlds
+    - Add delay for ph leave
+    - Fix config default problems
