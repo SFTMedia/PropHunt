@@ -1,5 +1,7 @@
 package me.tomski.language;
 
+import org.bukkit.ChatColor;
+
 public enum MessageBank {
 
     //Game Messages
@@ -53,6 +55,25 @@ public enum MessageBank {
     DISGUISE_ERROR(getCfgMsg("disguise_error")),
     DISGUISE_MESSAGE(getCfgMsg("disguise_message")),
 
+
+
+    ITEM_BOUGHT_DESC(getCfgMsg("item_bought_desc")),
+    ITEM_COST(getCfgMsg("item_cost")),
+
+    SHOP_TITLE(getCfgMsg("shop_title")),
+
+    ITEM_SHOP_NAME(getCfgMsg("item_shop_name")),
+    ITEM_SHOP_DESC(getCfgMsg("item_shop_desc")),
+
+    DISGUISE_SHOP_NAME(getCfgMsg("disguise_shop_name")),
+    DISGUISE_SHOP_DESC(getCfgMsg("disguise_shop_desc")),
+
+    LOADOUT_NAME(getCfgMsg("loadout_name")),
+    LOADOUT_DESC(getCfgMsg("loadout_desc")),
+
+    DISGUISE_NAME(getCfgMsg("disguise_name")),
+    DISGUISE_DESC(getCfgMsg("disguise_desc")),
+
     SHOP_CHOSEN_DISGUISE(getCfgMsg("shop_chosen_disguise")),
     NO_BLOCK_CHOICE_PERMISSION(getCfgMsg("no_block_choice_permission")),
     NOT_IN_LOBBY(getCfgMsg("not_in_lobby")),
@@ -85,7 +106,7 @@ public enum MessageBank {
     }
 
     public String getMsg() {
-        return msg;
+        return ChatColor.translateAlternateColorCodes('&', msg);
     }
 
 }

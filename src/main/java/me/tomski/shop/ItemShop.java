@@ -33,7 +33,7 @@ public class ItemShop implements Listener {
 
 
     public void openMainShop(Player p) {
-        Inventory i = Bukkit.createInventory(p, getShopSize(plugin.getShopSettings().itemChoices.size()), ChatColor.DARK_AQUA + "Item Shop");
+        Inventory i = Bukkit.createInventory(p, getShopSize(plugin.getShopSettings().itemChoices.size()), MessageBank.ITEM_SHOP_NAME.getMsg());
         for (ShopItem item : plugin.getShopSettings().itemChoices) {
             item.addToInventory(i, p);
         }

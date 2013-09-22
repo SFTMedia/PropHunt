@@ -60,6 +60,28 @@ host_ended: "GAMEOVER! Host has ended the match!"
 disguise_error: "There is something wrong with your disguise, please report: 'null' to an admin"
 disguise_message: "You have been disguised as a "
 
+# Shop
+# Main Shop
+item_bought_desc: "&7Already purchased"
+item_cost: "&6Cost: "
+
+shop_title: "&1Prophunt Shop"
+# Item Shop
+item_shop_name: "2PropHunt Items"
+item_shop_desc: "&6Buy your Custom PropHunt Items here"
+
+# Disguise Shop
+disguise_shop_name: "&2PropHunt Disguises"
+disguise_shop_desc: "&6Buy your PropHunt disguises here"
+
+# Loadout chooser
+loadout_name: "&4Loadout Chooser"
+loadout_desc: "&6Choose your loadout for the next game"
+
+# Disguise Chooser
+disguise_name: "&4Disguise Chooser"
+disguise_desc: "&6Choose your disguise for the next game"
+
 shop_chosen_disguise: "You have chosen your disguise: "
 no_block_choice_permission: "You dont have permission for that disguise"
 not_in_lobby: "You are not in the lobby"

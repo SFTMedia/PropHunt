@@ -6,7 +6,7 @@
 
     <groupId>me.tomski</groupId>
     <artifactId>PropHunt</artifactId>
-    <version>1.38-SNAPSHOT</version>
+    <version>1.39-SNAPSHOT</version>
     <name>PropHunt</name>
 
     <build>
@@ -81,7 +81,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.6.1-R0.1-SNAPSHOT</version>
+            <version>1.6.4-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>pgDev</groupId>

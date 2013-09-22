@@ -1,6 +1,7 @@
 package me.tomski.shop;
 
 
+import me.tomski.language.MessageBank;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.prophunt.ShopSettings;
 import org.bukkit.Bukkit;
@@ -29,7 +30,7 @@ public class DisguiseShop implements Listener {
     }
 
     public void openDisguiseShop(Player p) {
-        Inventory i = Bukkit.createInventory(p, getShopSize(plugin.getShopSettings().blockChoices.size()), ChatColor.DARK_AQUA + "Disguise Shop");
+        Inventory i = Bukkit.createInventory(p, getShopSize(plugin.getShopSettings().blockChoices.size()), MessageBank.DISGUISE_SHOP_NAME.getMsg());
         for (ShopItem item : plugin.getShopSettings().blockChoices) {
             item.addToInventory(i, p);
         }

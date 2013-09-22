@@ -1,6 +1,7 @@
 package me.tomski.shop;
 
 
+import me.tomski.language.MessageBank;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.prophunt.ShopSettings;
 import me.tomski.utils.VaultUtils;
@@ -32,40 +33,39 @@ public class MainShop implements Listener {
 
 
     public void openMainShop(Player p) {
-        Inventory inv = Bukkit.createInventory(p, 9, ChatColor.BLUE + "PropHunt Shop!");
+        Inventory inv = Bukkit.createInventory(p, 9, MessageBank.SHOP_TITLE.getMsg());
+
         ItemStack customItems = new ItemStack(Material.DIAMOND_SWORD);
         ItemMeta itemMeta = customItems.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "PropHunt Items");
+        itemMeta.setDisplayName(MessageBank.ITEM_SHOP_NAME.getMsg());
         List<String> itemLore = new ArrayList<String>();
-        itemLore.add(ChatColor.GOLD + "Buy your PropHunt items here!");
+        itemLore.add(MessageBank.ITEM_SHOP_DESC.getMsg());
         itemMeta.setLore(itemLore);
         customItems.setItemMeta(itemMeta);
 
 
         ItemStack customDisguises = new ItemStack(Material.GOLD_BLOCK);
         ItemMeta disguiseMeta = customDisguises.getItemMeta();
-        disguiseMeta.setDisplayName(ChatColor.DARK_GREEN + "PropHunt Disguises");
+        disguiseMeta.setDisplayName(MessageBank.DISGUISE_SHOP_NAME.getMsg());
         List<String> disLore = new ArrayList<String>();
-        disLore.add(ChatColor.GOLD + "Buy your PropHunt disguises here!");
+        disLore.add(MessageBank.DISGUISE_SHOP_DESC.getMsg());
         disguiseMeta.setLore(disLore);
         customDisguises.setItemMeta(disguiseMeta);
 
 
         ItemStack placeHolder = new ItemStack(Material.ENDER_CHEST);
         ItemMeta placeMeta = placeHolder.getItemMeta();
-        placeMeta.setDisplayName(ChatColor.DARK_RED + "Disguise Chooser");
+        placeMeta.setDisplayName(MessageBank.DISGUISE_NAME.getMsg());
         List<String> placeLore = new ArrayList<String>();
-        placeLore.add(ChatColor.GOLD + "Use to select your disguises!");
-        placeLore.add(ChatColor.GOLD + "You need to be in the lobby!");
+        placeLore.add(MessageBank.DISGUISE_DESC.getMsg());
         placeMeta.setLore(placeLore);
         placeHolder.setItemMeta(placeMeta);
 
         ItemStack loadout = new ItemStack(Material.CHEST);
         ItemMeta loadMeta = loadout.getItemMeta();
-        loadMeta.setDisplayName(ChatColor.DARK_RED + "Loadout Chooser");
+        loadMeta.setDisplayName(MessageBank.LOADOUT_NAME.getMsg());
         List<String> loadLore = new ArrayList<String>();
-        loadLore.add(ChatColor.GOLD + "Use to select your loadout!");
-        loadLore.add(ChatColor.GOLD + "You need to be in the lobby!");
+        loadLore.add(MessageBank.LOADOUT_DESC.getMsg());
         loadMeta.setLore(loadLore);
         loadout.setItemMeta(loadMeta);
 

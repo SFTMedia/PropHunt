@@ -1,6 +1,6 @@
 name: PropHunt
 main: me.tomski.prophunt.PropHunt
-version: 1.38
+version: 1.39
 depend: [DisguiseCraft,ProtocolLib]
 softdepend: [TabAPI,PropHuntSigns, Vault, Multiverse-Core]
 author: Tomski - Owner of Skicraft

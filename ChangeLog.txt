@@ -71,3 +71,6 @@
     - Dont load before multiverse to ensure non null worlds
     - Add delay for ph leave
     - Fix config default problems
+- V 1.39
+    - Add translate for shop ;)
+    - Finish item Shop

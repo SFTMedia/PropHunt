@@ -37,10 +37,10 @@ public class ShopItem {
     public void addToInventory(Inventory i, Player p) {
         if (p.hasPermission(itemPermission)) {
             description.clear();
-            description.add(ChatColor.GRAY + "Already purchased!");
+            description.add(MessageBank.ITEM_BOUGHT_DESC.getMsg());
         } else {
             description.clear();
-            description.add(ChatColor.GREEN + "Cost: " + itemCost);
+            description.add(MessageBank.ITEM_COST.getMsg()+ itemCost);
         }
         ItemStack stack = itemStack.clone();
         ItemMeta newMeta = stack.getItemMeta();

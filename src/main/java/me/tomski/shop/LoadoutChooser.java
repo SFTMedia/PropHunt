@@ -39,7 +39,7 @@ public class LoadoutChooser implements Listener {
             return;
         }
         PropHuntMessaging.sendMessage(p, "Coming soon");
-        Inventory inv = Bukkit.createInventory(p, getShopSize(plugin.getShopSettings().itemChoices.size()), ChatColor.DARK_AQUA + "Loadout Selector");
+        Inventory inv = Bukkit.createInventory(p, getShopSize(plugin.getShopSettings().itemChoices.size()), MessageBank.LOADOUT_NAME.getMsg());
 
     }
 
