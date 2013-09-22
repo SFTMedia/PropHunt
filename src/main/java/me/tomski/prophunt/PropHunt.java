@@ -485,6 +485,16 @@ public class PropHunt extends JavaPlugin {
                             return true;
                         }
                     }
+                    if (args[0].equalsIgnoreCase("loadout")) {
+                        if (!sender.hasPermission("prophunt.command.loadout")) {
+                            PropHuntMessaging.sendMessage(p, "You do not have the permission to use this loadout");
+                            return true;
+                        }
+                        if (GameManager.isHosting && GameManager.playersWaiting.contains(p.getName())) {
+                            getShopManager().getLoadoutChooser().openBlockShop(p);
+                            return true;
+                        }
+                    }
                     if (args[0].equalsIgnoreCase("debug") && sender.isOp()) {
                         sender.sendMessage("Debug for Tomski");
                         return true;

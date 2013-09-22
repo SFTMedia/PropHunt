@@ -67,7 +67,7 @@ item_cost: "&6Cost: "
 
 shop_title: "&1Prophunt Shop"
 # Item Shop
-item_shop_name: "2PropHunt Items"
+item_shop_name: "&2PropHunt Items"
 item_shop_desc: "&6Buy your Custom PropHunt Items here"
 
 # Disguise Shop

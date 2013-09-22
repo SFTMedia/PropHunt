@@ -74,3 +74,6 @@
 - V 1.39
     - Add translate for shop ;)
     - Finish item Shop
+    - Compile against 1.6.4
+    - Working ./ph loadout
+    - Add delay to all shops. 2 ticks.

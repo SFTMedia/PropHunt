@@ -104,15 +104,32 @@ public class MainShop implements Listener {
                     } else if (e.getCurrentItem().getType().equals(Material.GOLD_BLOCK)) {
                         e.setCancelled(true);
                         e.getView().close();
-                        plugin.getShopManager().getDisguiseShop().openDisguiseShop((Player) e.getWhoClicked());
+                        plugin.getServer().getScheduler().runTaskLater(plugin, new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                plugin.getShopManager().getDisguiseShop().openDisguiseShop((Player) e.getWhoClicked());
+                            }
+                        }, 2L);
+
                     } else if (e.getCurrentItem().getType().equals(Material.DIAMOND_SWORD)) {
                         e.setCancelled(true);
                         e.getView().close();
-                        plugin.getShopManager().getItemShop().openMainShop((Player) e.getWhoClicked());
+                        plugin.getServer().getScheduler().runTaskLater(plugin, new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                plugin.getShopManager().getItemShop().openMainShop((Player) e.getWhoClicked());
+                            }
+                        }, 2L);
+
                     } else if (e.getCurrentItem().getType().equals(Material.CHEST)) {
                         e.setCancelled(true);
                         e.getView().close();
-                        plugin.getShopManager().getLoadoutChooser().openBlockShop((Player) e.getWhoClicked());
+                        plugin.getServer().getScheduler().runTaskLater(plugin, new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                plugin.getShopManager().getLoadoutChooser().openBlockShop((Player) e.getWhoClicked());
+                            }
+                        }, 2L);
                     } else {
                         e.setCancelled(true);
                         e.getView().close();
