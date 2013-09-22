@@ -279,12 +279,22 @@ public class GameManager {
     private void givePlayersLoadOuts(Arena a) {
         for (String seek : seekers) {
             if (plugin.getServer().getPlayer(seek) != null) {
-                ArenaManager.arenaConfigs.get(a).getArenaSeekerClass().givePlayer(plugin.getServer().getPlayer(seek));
+                Player p = plugin.getServer().getPlayer(seek);
+                ArenaManager.arenaConfigs.get(a).getArenaSeekerClass().givePlayer(p);
+                if (DisguiseManager.loadouts.containsKey(p)) {
+                    DisguiseManager.loadouts.get(p).giveLoadout();
+                    DisguiseManager.loadouts.remove(p);
+                }
             }
         }
         for (String hider : hiders) {
             if (plugin.getServer().getPlayer(hider) != null) {
-                ArenaManager.arenaConfigs.get(a).getArenaHiderClass().givePlayer(plugin.getServer().getPlayer(hider));
+                Player p = plugin.getServer().getPlayer(hider);
+                ArenaManager.arenaConfigs.get(a).getArenaHiderClass().givePlayer(p);
+                if (DisguiseManager.loadouts.containsKey(p)) {
+                    DisguiseManager.loadouts.get(p).giveLoadout();
+                    DisguiseManager.loadouts.remove(p);
+                }
             }
         }
     }

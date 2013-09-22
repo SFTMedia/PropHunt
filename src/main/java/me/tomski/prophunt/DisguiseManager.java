@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 
+import me.tomski.objects.Loadout;
 import me.tomski.utils.PropHuntMessaging;
 import me.tomski.arenas.ArenaConfig;
 import me.tomski.language.MessageBank;
@@ -22,6 +23,8 @@ public class DisguiseManager {
     private static PropHunt plugin;
     public static Map<Integer, String> blockDisguises = new HashMap<Integer, String>();
     public static Map<Player, Disguise> preChosenDisguise = new HashMap<Player, Disguise>();
+
+    public static Map<Player, Loadout> loadouts = new HashMap<Player, Loadout>();
 
 
     public DisguiseManager(PropHunt plugin) {
@@ -44,6 +47,7 @@ public class DisguiseManager {
                 PropHunt.dc.disguisePlayer(p, ds);
                 PropHuntMessaging.sendMessage(p, MessageBank.DISGUISE_MESSAGE.getMsg() + parseDisguiseToName(ds));
             }
+            preChosenDisguise.remove(p);
             return;
         }
         String id = getRandomBlockID(ac.getArenaDisguises());

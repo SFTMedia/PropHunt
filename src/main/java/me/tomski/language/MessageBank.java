@@ -75,7 +75,9 @@ public enum MessageBank {
     DISGUISE_DESC(getCfgMsg("disguise_desc")),
 
     SHOP_CHOSEN_DISGUISE(getCfgMsg("shop_chosen_disguise")),
+    ITEM_CHOSEN(getCfgMsg("item_chosen")),
     NO_BLOCK_CHOICE_PERMISSION(getCfgMsg("no_block_choice_permission")),
+    NO_ITEM_CHOICE_PERMISSION(getCfgMsg("no_item_choice_permission")),
     NOT_IN_LOBBY(getCfgMsg("not_in_lobby")),
     ALREADY_PURCHASED_ITEM(getCfgMsg("already_purchased_item")),
     NOT_ENOUGH_CURRENCY(getCfgMsg("not_enough_currency")),

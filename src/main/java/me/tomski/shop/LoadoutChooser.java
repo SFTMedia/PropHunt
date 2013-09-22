@@ -2,6 +2,7 @@ package me.tomski.shop;
 
 
 import me.tomski.language.MessageBank;
+import me.tomski.objects.Loadout;
 import me.tomski.prophunt.DisguiseManager;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
@@ -39,7 +40,11 @@ public class LoadoutChooser implements Listener {
             return;
         }
         Inventory inv = Bukkit.createInventory(p, getShopSize(plugin.getShopSettings().itemChoices.size()), MessageBank.LOADOUT_NAME.getMsg());
-
+        for (ShopItem sI : plugin.getShopSettings().itemChoices) {
+            sI.addToInventory(inv, p);
+        }
+        p.openInventory(inv);
+        inInventory.add(p);
 
     }
 
@@ -47,7 +52,26 @@ public class LoadoutChooser implements Listener {
     public void onInventClick(InventoryClickEvent e) {
         if (inInventory.contains((Player) e.getWhoClicked())) {
             if (e.getCurrentItem() != null) {
-
+                if (!hasPermsForItem((Player) e.getWhoClicked(), e.getCurrentItem())) {
+                    PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.NO_ITEM_CHOICE_PERMISSION.getMsg());
+                    e.setCancelled(true);
+                    return;
+                }
+                if (e.getCurrentItem().getType().equals(Material.AIR)) {
+                    return;
+                }
+                if (GameManager.playersWaiting.contains(((Player) e.getWhoClicked()).getName())) {
+                    if (!DisguiseManager.loadouts.containsKey((Player)e.getWhoClicked())) {
+                        DisguiseManager.loadouts.put((Player) e.getWhoClicked(), new Loadout((Player)e.getWhoClicked()));
+                        DisguiseManager.loadouts.get((Player)e.getWhoClicked()).addItem(e.getCurrentItem());
+                    } else {
+                        DisguiseManager.loadouts.get((Player)e.getWhoClicked()).addItem(e.getCurrentItem());
+                    }
+                    PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.ITEM_CHOSEN.getMsg() + e.getCurrentItem().getItemMeta().getDisplayName());
+                    e.getView().close();
+                } else {
+                    PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.BLOCK_ACCESS_IN_GAME.getMsg());
+                }
             }
         }
     }
