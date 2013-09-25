@@ -64,6 +64,10 @@ public class PropHuntListener implements Listener {
         allowedcmds.add("/prophunt shop");
         allowedcmds.add("/prophunt chooser");
         allowedcmds.add("/prophunt balance");
+        allowedcmds.add("/prophunt stsrt");
+        allowedcmds.add("/prophunt stop");
+        allowedcmds.add("/ph stsrt");
+        allowedcmds.add("/ph stop");
     }
 
     @EventHandler
@@ -613,11 +617,11 @@ public class PropHuntListener implements Listener {
             GameManager.playersQuit.add(e.getPlayer().getName());
         }
         if (GameManager.hiders.contains(e.getPlayer().getName())) {
-            GM.kickPlayer(e.getPlayer().getName());
+            GM.kickPlayer(e.getPlayer().getName(), true);
             GameManager.playersQuit.add(e.getPlayer().getName());
         }
         if (GameManager.seekers.contains(e.getPlayer().getName())) {
-            GM.kickPlayer(e.getPlayer().getName());
+            GM.kickPlayer(e.getPlayer().getName(),true);
             GameManager.playersQuit.add(e.getPlayer().getName());
         }
 

@@ -444,14 +444,14 @@ public class PropHunt extends JavaPlugin {
                         if (GameManager.gameStatus) {
                             PlayerManagement.gameRestorePlayer(p);
                             try {
-                                GM.kickPlayer(p.getName());
+                                GM.kickPlayer(p.getName(), false);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         } else if (GameManager.playersWaiting.contains(p.getName())) {
                             GameManager.playersWaiting.remove(p.getName());
                             try {
-                                GM.kickPlayer(p.getName());
+                                GM.kickPlayer(p.getName(), false);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -566,7 +566,7 @@ public class PropHunt extends JavaPlugin {
                         }
                         if (this.getServer().getPlayer(args[1]) != null) {
                             try {
-                                GM.kickPlayer(args[1]);
+                                GM.kickPlayer(args[1], false);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

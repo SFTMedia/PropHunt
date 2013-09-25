@@ -537,7 +537,7 @@ public class GameManager {
 
     }
 
-    public void kickPlayer(final String name) throws IOException {
+    public void kickPlayer(final String name, boolean logOff) throws IOException {
         if (plugin.getServer().getPlayer(name) != null) {
             teleportToExit(plugin.getServer().getPlayer(name), true);
             if (PropHunt.usingTABAPI) {
@@ -548,19 +548,25 @@ public class GameManager {
             if (useSideStats) {
                 plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayer(name));
             }
-            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-
-                @Override
-                public void run() {
-                    if (plugin.getServer().getPlayer(name) != null) {
-                        if (PropHunt.dc.isDisguised(plugin.getServer().getPlayer(name))) {
-                            PropHunt.dc.undisguisePlayer(plugin.getServer().getPlayer(name));
-                        }
-                        PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(name));
-                    }
+            if (logOff) {
+                if (PropHunt.dc.isDisguised(plugin.getServer().getPlayer(name))) {
+                    PropHunt.dc.undisguisePlayer(plugin.getServer().getPlayer(name));
                 }
-            }, 20L);
+                PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(name));
+            } else {
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 
+                    @Override
+                    public void run() {
+                        if (plugin.getServer().getPlayer(name) != null) {
+                            if (PropHunt.dc.isDisguised(plugin.getServer().getPlayer(name))) {
+                                PropHunt.dc.undisguisePlayer(plugin.getServer().getPlayer(name));
+                            }
+                            PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(name));
+                        }
+                    }
+                }, 20L);
+            }
         }
 
         if (spectators.contains(name)) {
