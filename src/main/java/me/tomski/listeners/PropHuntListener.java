@@ -64,9 +64,9 @@ public class PropHuntListener implements Listener {
         allowedcmds.add("/prophunt shop");
         allowedcmds.add("/prophunt chooser");
         allowedcmds.add("/prophunt balance");
-        allowedcmds.add("/prophunt stsrt");
+        allowedcmds.add("/prophunt start");
         allowedcmds.add("/prophunt stop");
-        allowedcmds.add("/ph stsrt");
+        allowedcmds.add("/ph start");
         allowedcmds.add("/ph stop");
     }
 
