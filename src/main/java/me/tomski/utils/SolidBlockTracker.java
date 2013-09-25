@@ -29,6 +29,8 @@ public class SolidBlockTracker implements Runnable {
         this.plugin = plugin;
     }
 
+
+    //TODO REWRITE ALL OF THIS
     @Override
     public void run() {
 
