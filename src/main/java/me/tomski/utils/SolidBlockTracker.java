@@ -1,19 +1,17 @@
 package me.tomski.utils;
 
+import me.tomski.blocks.SolidBlock;
+import me.tomski.language.MessageBank;
+import me.tomski.prophunt.GameManager;
+import me.tomski.prophunt.PropHunt;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import me.tomski.prophunt.GameManager;
-import me.tomski.blocks.SolidBlock;
-import me.tomski.language.MessageBank;
-import me.tomski.prophunt.PropHunt;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
 
 public class SolidBlockTracker implements Runnable {
 

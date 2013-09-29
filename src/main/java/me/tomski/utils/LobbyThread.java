@@ -1,8 +1,8 @@
 package me.tomski.utils;
 
-import me.tomski.prophunt.GameManager;
 import me.tomski.language.LanguageManager;
 import me.tomski.language.MessageBank;
+import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
 
 public class LobbyThread implements Runnable {

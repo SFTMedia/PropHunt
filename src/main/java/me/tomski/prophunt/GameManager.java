@@ -1,36 +1,23 @@
 package me.tomski.prophunt;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.logging.Level;
-
 import me.tomski.arenas.Arena;
 import me.tomski.arenas.ArenaManager;
 import me.tomski.blocks.SolidBlock;
-import me.tomski.classes.HiderClass;
-import me.tomski.language.LanguageManager;
 import me.tomski.bungee.Pinger;
+import me.tomski.classes.HiderClass;
 import me.tomski.classes.SeekerClass;
+import me.tomski.language.LanguageManager;
 import me.tomski.language.MessageBank;
-import me.tomski.utils.DeSolidifyThread;
-import me.tomski.utils.GameTimer;
-import me.tomski.utils.LobbyThread;
-import me.tomski.utils.PropHuntMessaging;
-import me.tomski.utils.Reason;
-import me.tomski.utils.PHScoreboard;
-import me.tomski.utils.SeekerDelay;
-import me.tomski.utils.SideBarStats;
-import me.tomski.utils.SolidBlockTracker;
-
+import me.tomski.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
+import java.util.logging.Level;
 
 public class GameManager {
 

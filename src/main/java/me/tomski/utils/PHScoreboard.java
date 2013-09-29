@@ -1,15 +1,11 @@
 package me.tomski.utils;
 
+import me.tomski.prophunt.GameManager;
+import me.tomski.prophunt.PropHunt;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.mcsg.double0negative.tabapi.TabAPI;
-
-import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
-
-import me.tomski.prophunt.DisguiseManager;
-import me.tomski.prophunt.GameManager;
-import me.tomski.prophunt.PropHunt;
 
 public class PHScoreboard {
 

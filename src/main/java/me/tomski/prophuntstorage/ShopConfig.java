@@ -1,26 +1,13 @@
 package me.tomski.prophuntstorage;
 
+import me.tomski.prophunt.PropHunt;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
-
-import me.tomski.arenas.Arena;
-import me.tomski.objects.ArenaFileStructureWrapper;
-import me.tomski.objects.LocationBox;
-import me.tomski.prophunt.DisguiseManager;
-import me.tomski.prophunt.GameManager;
-import me.tomski.prophunt.PropHunt;
-import me.tomski.arenas.ArenaConfig;
-import me.tomski.arenas.ArenaManager;
-
-import me.tomski.shop.ShopItem;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 
 public class ShopConfig {

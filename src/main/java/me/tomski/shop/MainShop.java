@@ -4,7 +4,6 @@ package me.tomski.shop;
 import me.tomski.language.MessageBank;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.prophunt.ShopSettings;
-import me.tomski.utils.VaultUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

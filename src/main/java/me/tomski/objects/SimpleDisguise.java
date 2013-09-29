@@ -1,15 +1,7 @@
 package me.tomski.objects;
 
-import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
-import me.tomski.prophunt.PropHunt;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import pgDev.bukkit.DisguiseCraft.api.DisguiseCraftAPI;
-import pgDev.bukkit.DisguiseCraft.disguise.Disguise;
-import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
-
-import java.util.LinkedList;
 
 public class SimpleDisguise {
 
@@ -34,6 +26,7 @@ public class SimpleDisguise {
         } else {
             this.id = Integer.parseInt(configString);
         }
+        this.name = initName();
     }
 
     private String initName() {
@@ -48,32 +41,15 @@ public class SimpleDisguise {
         return name;
     }
 
-    public Disguise getDisguise(PropHunt plugin) {
-        if (ent == null) {
-            LinkedList<String> data = new LinkedList<String>();
-            data.add("blockID:" + id);
-            data.add("blockData:" + damage);
-            return new Disguise(plugin.dm.getDcAPI().newEntityID(), data, DisguiseType.FallingBlock);
-        } else {
-            return new Disguise(plugin.dm.getDcAPI().newEntityID(), "", DisguiseType.fromString(ent.name()));
-        }
-
-    }
-
-    public me.libraryaddict.disguise.disguisetypes.Disguise getLibsDisguise() {
-        if (ent == null) {
-            return new MiscDisguise(me.libraryaddict.disguise.disguisetypes.DisguiseType.FALLING_BLOCK, id, damage);
-        } else {
-            return new me.libraryaddict.disguise.disguisetypes.MobDisguise(me.libraryaddict.disguise.disguisetypes.DisguiseType.getType(ent));
-        }
-    }
-
-
     public Integer getID() {
         return id;
     }
 
     public int getDamage() {
         return damage;
+    }
+
+    public EntityType getEntityType() {
+        return ent;
     }
 }

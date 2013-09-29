@@ -1,13 +1,12 @@
 package me.tomski.utils;
 
-import java.util.List;
-import java.util.Map;
-
 import me.tomski.arenas.Arena;
 import me.tomski.prophunt.GameManager;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.List;
+import java.util.Map;
 
 public class PropHuntMessaging {
 

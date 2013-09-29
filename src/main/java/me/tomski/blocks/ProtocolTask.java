@@ -1,19 +1,14 @@
 package me.tomski.blocks;
 
+import com.comphenix.protocol.Packets;
+import com.comphenix.protocol.events.*;
+import com.comphenix.protocol.injector.GamePhase;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.utils.SolidBlockTracker;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-
-import com.comphenix.protocol.Packets;
-import com.comphenix.protocol.events.ConnectionSide;
-import com.comphenix.protocol.events.ListenerPriority;
-import com.comphenix.protocol.events.PacketAdapter;
-import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.injector.GamePhase;
 
 public class ProtocolTask implements Listener {
 

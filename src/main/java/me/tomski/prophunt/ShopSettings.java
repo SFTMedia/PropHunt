@@ -4,11 +4,8 @@ package me.tomski.prophunt;
 import me.tomski.enums.EconomyType;
 import me.tomski.prophuntstorage.ShopConfig;
 import me.tomski.shop.ShopItem;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,16 +1,15 @@
 package me.tomski.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import me.tomski.language.MessageBank;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
-import me.tomski.language.MessageBank;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SeekerDelay implements Runnable {
 

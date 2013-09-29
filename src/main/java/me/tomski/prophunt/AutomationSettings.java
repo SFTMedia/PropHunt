@@ -1,11 +1,10 @@
 package me.tomski.prophunt;
 
+import me.tomski.bungee.Pinger;
+import org.bukkit.entity.Player;
+
 import java.io.IOException;
 import java.util.List;
-
-import me.tomski.bungee.Pinger;
-
-import org.bukkit.entity.Player;
 
 public class AutomationSettings {
 

@@ -1,5 +1,35 @@
 package me.tomski.prophunt;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+import me.tomski.arenas.ArenaManager;
+import me.tomski.blocks.ProtocolTask;
+import me.tomski.bungee.Pinger;
+import me.tomski.classes.HiderClass;
+import me.tomski.classes.SeekerClass;
+import me.tomski.currency.SqlConnect;
+import me.tomski.language.LanguageManager;
+import me.tomski.language.MessageBank;
+import me.tomski.language.ScoreboardTranslate;
+import me.tomski.listeners.PropHuntListener;
+import me.tomski.listeners.SetupListener;
+import me.tomski.objects.SimpleDisguise;
+import me.tomski.prophuntstorage.ArenaStorage;
+import me.tomski.prophuntstorage.ShopConfig;
+import me.tomski.shop.ShopManager;
+import me.tomski.utils.*;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,45 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
-import me.tomski.currency.SqlConnect;
-import me.tomski.enums.EconomyType;
-import me.tomski.language.MessageBank;
-import me.tomski.language.ScoreboardTranslate;
-import me.tomski.objects.SimpleDisguise;
-import me.tomski.prophuntstorage.ArenaStorage;
-import me.tomski.arenas.ArenaManager;
-import me.tomski.bungee.Pinger;
-import me.tomski.classes.HiderClass;
-import me.tomski.language.LanguageManager;
-import me.tomski.listeners.SetupListener;
-import me.tomski.blocks.ProtocolTask;
-import me.tomski.classes.SeekerClass;
-import me.tomski.listeners.PropHuntListener;
-import me.tomski.prophuntstorage.ShopConfig;
-import me.tomski.shop.BlockChooser;
-import me.tomski.shop.MainShop;
-import me.tomski.shop.ShopManager;
-import me.tomski.utils.*;
-
-import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
-
-import pgDev.bukkit.DisguiseCraft.DisguiseCraft;
-import pgDev.bukkit.DisguiseCraft.api.DisguiseCraftAPI;
-import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
-
-public class PropHunt extends JavaPlugin {
+public class PropHunt extends JavaPlugin implements Listener {
 
 
     public DisguiseManager dm;
@@ -64,11 +56,18 @@ public class PropHunt extends JavaPlugin {
     private ShopSettings shopSettings;
     private ShopManager shopManager;
 
+    boolean shouldDisable = false;
+
     public void onEnable() {
         getConfig().options().copyDefaults(true);
         saveConfig();
         try {
             init();
+            if (shouldDisable) {
+                getLogger().warning("Disabling plugin. Reason: DisguiseCraft or LibsDisguises not found, please install then reboot");
+                getPluginLoader().disablePlugin(this);
+                return;
+            }
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -97,7 +96,16 @@ public class PropHunt extends JavaPlugin {
         AS = new ArenaStorage(this, GM);
         AM = new ArenaManager(this);
 
-        dm = new DisguiseManager(this);
+        if (getServer().getPluginManager().isPluginEnabled("DisguiseCraft")) {
+            dm = new DisguiseCraftManager(this);
+            getServer().getPluginManager().registerEvents(dm, this);
+        } else if (getServer().getPluginManager().isPluginEnabled("LibsDisguises")) {
+            dm = new LibsDisguiseManager(this);
+        } else {
+            shouldDisable = true;
+            return;
+        }
+
 
         shopManager = new ShopManager(this);
         loadProtocolManager();
@@ -656,6 +664,7 @@ public class PropHunt extends JavaPlugin {
             List<String> blockIds = getConfig().getStringList("block-disguises");
             for (String item : blockIds) {
                 DisguiseManager.blockDisguises.put(i, new SimpleDisguise(item));
+                i++;
             }
         }
         return i;

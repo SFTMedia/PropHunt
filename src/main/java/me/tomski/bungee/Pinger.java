@@ -1,15 +1,14 @@
 package me.tomski.bungee;
 
+import me.tomski.prophunt.BungeeSettings;
+import me.tomski.prophunt.GameManager;
+import me.tomski.prophunt.PropHunt;
+import me.tomski.prophunt.ServerManager;
+import org.bukkit.entity.Player;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-
-import me.tomski.prophunt.GameManager;
-import org.bukkit.entity.Player;
-
-import me.tomski.prophunt.BungeeSettings;
-import me.tomski.prophunt.PropHunt;
-import me.tomski.prophunt.ServerManager;
 
 public class Pinger {
 

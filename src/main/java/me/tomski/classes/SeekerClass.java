@@ -1,10 +1,10 @@
 package me.tomski.classes;
 
-import java.util.List;
-
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
+
+import java.util.List;
 
 public class SeekerClass {
 

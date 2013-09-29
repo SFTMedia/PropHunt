@@ -1,8 +1,8 @@
 package me.tomski.utils;
 
-import java.io.IOException;
-
 import me.tomski.bungee.Pinger;
+
+import java.io.IOException;
 
 public class PingTimer implements Runnable {
 

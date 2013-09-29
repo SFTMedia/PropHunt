@@ -1,12 +1,11 @@
 package me.tomski.prophunt;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerManagement {
 

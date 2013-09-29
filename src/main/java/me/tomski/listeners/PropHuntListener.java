@@ -1,21 +1,18 @@
 package me.tomski.listeners;
 
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-
-import me.tomski.prophunt.*;
+import com.comphenix.protocol.Packets;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
 import me.tomski.arenas.ArenaManager;
 import me.tomski.blocks.SolidBlock;
 import me.tomski.bungee.Pinger;
 import me.tomski.language.LanguageManager;
 import me.tomski.language.MessageBank;
+import me.tomski.prophunt.*;
 import me.tomski.utils.PropHuntMessaging;
 import me.tomski.utils.Reason;
 import me.tomski.utils.SolidBlockTracker;
-
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -29,14 +26,12 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
-
-import com.comphenix.protocol.Packets;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketContainer;
-
-import pgDev.bukkit.DisguiseCraft.api.PlayerUndisguiseEvent;
-import pgDev.bukkit.DisguiseCraft.disguise.Disguise;
-import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PropHuntListener implements Listener {
 
@@ -186,16 +181,7 @@ public class PropHuntListener implements Listener {
                 }
                 if (PH.dm.isDisguised(e.getPlayer())) {
                     if (PH.dm.disguisePluginType.equals(DisguisePluginType.DISGUISECRAFT)) {
-                    Disguise d = PH.dm.getDcAPI().getDisguise(e.getPlayer());
-                        if (d.type.equals(DisguiseType.FallingBlock)) {
-                            if (e.isSneaking()) {
-                                d.addSingleData("blocklock");
-                                PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.TOGGLE_BLOCK_LOCK_ON.getMsg());
-                            } else {
-                                d.data.remove("blocklock");
-                                PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.TOGGLE_BLOCK_LOCK_OFF.getMsg());
-                            }
-                        }
+                        PH.dm.toggleBlockLock(e);
                     }
                 }
             }
@@ -241,7 +227,7 @@ public class PropHuntListener implements Listener {
 
             @Override
             public void run() {
-                for (Player p : PH.dm.getDcAPI().getOnlineDisguisedPlayers()) {
+                for (Player p : PH.getServer().getOnlinePlayers()) {
                     if (p.isOnline() && PH.dm.isDisguised(p)) {
                         if (GameManager.seekers.contains(p.getName())) {
                             PH.dm.undisguisePlayer(p);
@@ -547,17 +533,6 @@ public class PropHuntListener implements Listener {
                     }
                 }
             }
-        }
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void playerundis(PlayerUndisguiseEvent e) {
-        if (GameManager.hiders.contains(e.getPlayer().getName())) {
-            if (tempIgnoreUndisguise.contains(e.getPlayer())) {
-                tempIgnoreUndisguise.remove(e.getPlayer());
-                return;
-            }
-            e.setCancelled(true);
         }
     }
 

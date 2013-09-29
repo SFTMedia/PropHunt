@@ -1,11 +1,11 @@
 package me.tomski.arenas;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import me.tomski.classes.HiderClass;
 import me.tomski.classes.SeekerClass;
 import me.tomski.objects.SimpleDisguise;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArenaConfig {
 

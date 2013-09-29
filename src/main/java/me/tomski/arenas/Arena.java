@@ -2,7 +2,6 @@ package me.tomski.arenas;
 
 import me.tomski.objects.LocationBox;
 import me.tomski.prophunt.PropHunt;
-
 import org.bukkit.Location;
 
 public class Arena {

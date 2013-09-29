@@ -1,13 +1,12 @@
 package me.tomski.listeners;
 
-import me.tomski.utils.PropHuntMessaging;
-import me.tomski.prophunt.DisguiseManager;
-import me.tomski.prophunt.GameManager;
-import me.tomski.prophunt.PropHunt;
 import me.tomski.arenas.ArenaConfig;
 import me.tomski.arenas.ArenaManager;
 import me.tomski.language.MessageBank;
-
+import me.tomski.prophunt.DisguiseManager;
+import me.tomski.prophunt.GameManager;
+import me.tomski.prophunt.PropHunt;
+import me.tomski.utils.PropHuntMessaging;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;

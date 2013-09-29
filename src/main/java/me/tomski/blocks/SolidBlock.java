@@ -1,20 +1,15 @@
 package me.tomski.blocks;
 
-import java.lang.reflect.InvocationTargetException;
-
-import me.tomski.objects.SimpleDisguise;
-import me.tomski.prophunt.PropHunt;
-import me.tomski.listeners.PropHuntListener;
-
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
-import pgDev.bukkit.DisguiseCraft.disguise.Disguise;
-import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
-
 import com.comphenix.protocol.Packets;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
+import me.tomski.listeners.PropHuntListener;
+import me.tomski.objects.SimpleDisguise;
+import me.tomski.prophunt.PropHunt;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
+import java.lang.reflect.InvocationTargetException;
 
 
 public class SolidBlock {
@@ -84,6 +79,7 @@ public class SolidBlock {
                 write(3, 0).
                 write(4, (int) damage);
 
+        PropHuntListener.tempIgnoreUndisguise.remove(owner);
         plugin.dm.disguisePlayer(owner, d);
     }
 

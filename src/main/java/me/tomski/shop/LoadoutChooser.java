@@ -6,10 +6,8 @@ import me.tomski.objects.Loadout;
 import me.tomski.prophunt.DisguiseManager;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
-import me.tomski.prophunt.ShopSettings;
 import me.tomski.utils.PropHuntMessaging;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,11 +16,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import pgDev.bukkit.DisguiseCraft.disguise.Disguise;
-import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class LoadoutChooser implements Listener {

@@ -2,10 +2,8 @@ package me.tomski.shop;
 
 
 import me.tomski.language.MessageBank;
-import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.prophunt.ShopSettings;
-import me.tomski.utils.PropHuntMessaging;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

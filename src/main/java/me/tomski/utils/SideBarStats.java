@@ -1,12 +1,7 @@
 package me.tomski.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import me.tomski.prophunt.DisguiseManager;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,6 +9,9 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SideBarStats {

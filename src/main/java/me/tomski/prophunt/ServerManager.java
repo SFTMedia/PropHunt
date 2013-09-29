@@ -1,17 +1,16 @@
 package me.tomski.prophunt;
 
-import java.io.IOException;
-
 import me.tomski.bungee.Pinger;
 import me.tomski.language.LanguageManager;
 import me.tomski.language.MessageBank;
-
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.server.ServerListPingEvent;
+
+import java.io.IOException;
 
 public class ServerManager implements Listener {
 

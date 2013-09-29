@@ -1,10 +1,10 @@
 package me.tomski.utils;
 
-import java.io.IOException;
-
+import me.tomski.language.MessageBank;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
-import me.tomski.language.MessageBank;
+
+import java.io.IOException;
 
 public class GameTimer implements Runnable {
 
