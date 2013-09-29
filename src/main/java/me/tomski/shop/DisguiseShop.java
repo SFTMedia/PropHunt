@@ -74,12 +74,12 @@ public class DisguiseShop implements Listener {
     private void addCurrencyItem(Inventory i, Player p) {
         ItemStack currency = new ItemStack(Material.EMERALD);
         ItemMeta currencyMeta = currency.getItemMeta();
-        currencyMeta.setDisplayName(ChatColor.GOLD  + ShopSettings.currencyName);
+        currencyMeta.setDisplayName(ChatColor.GOLD + ShopSettings.currencyName);
         List<String> currencyLore = new ArrayList<String>();
         currencyLore.add(ChatColor.GREEN + "" + getCurrencyBalance(p));
         currencyMeta.setLore(currencyLore);
         currency.setItemMeta(currencyMeta);
-        i.setItem(i.getSize()-1, currency);
+        i.setItem(i.getSize() - 1, currency);
     }
 
 

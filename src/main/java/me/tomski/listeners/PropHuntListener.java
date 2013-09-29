@@ -26,6 +26,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -593,7 +594,7 @@ public class PropHuntListener implements Listener {
             GameManager.playersQuit.add(e.getPlayer().getName());
         }
         if (GameManager.seekers.contains(e.getPlayer().getName())) {
-            GM.kickPlayer(e.getPlayer().getName(),true);
+            GM.kickPlayer(e.getPlayer().getName(), true);
             GameManager.playersQuit.add(e.getPlayer().getName());
         }
 

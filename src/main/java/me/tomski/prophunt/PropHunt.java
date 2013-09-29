@@ -949,7 +949,7 @@ public class PropHunt extends JavaPlugin implements Listener {
         if (getConfig().contains("CustomArenaConfigs." + arenaName + ".block-disguises")) {
             List<String> blockIds = getConfig().getStringList("CustomArenaConfigs." + arenaName + ".block-disguises");
             for (String item : blockIds) {
-                disguiseMap.put(i, new SimpleDisguise(item)) ;
+                disguiseMap.put(i, new SimpleDisguise(item));
             }
         }
         return disguiseMap;

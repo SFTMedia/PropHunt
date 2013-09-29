@@ -51,7 +51,7 @@ public class PHScoreboard {
         if (plugin.dm.isDisguised(p)) {
             TabAPI.setTabString(plugin, p, 6, 2, ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Disguise:");
             if (plugin.dm.isDisguised(p)) {
-                 TabAPI.setTabString(plugin, p, 7, 2, ChatColor.LIGHT_PURPLE + plugin.dm.getDisguiseName(p));
+                TabAPI.setTabString(plugin, p, 7, 2, ChatColor.LIGHT_PURPLE + plugin.dm.getDisguiseName(p));
             }
         }
         if (disguisesBlown) {

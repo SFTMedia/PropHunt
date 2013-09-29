@@ -56,7 +56,6 @@ public enum MessageBank {
     DISGUISE_MESSAGE(getCfgMsg("disguise_message")),
 
 
-
     ITEM_BOUGHT_DESC(getCfgMsg("item_bought_desc")),
     ITEM_COST(getCfgMsg("item_cost")),
 

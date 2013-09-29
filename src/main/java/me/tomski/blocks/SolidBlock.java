@@ -24,7 +24,7 @@ public class SolidBlock {
     private SimpleDisguise d;
     public boolean dead = false;
 
-    public SolidBlock(Location loc,Player p, ProtocolManager pm, PropHunt plugin) throws InvocationTargetException {
+    public SolidBlock(Location loc, Player p, ProtocolManager pm, PropHunt plugin) throws InvocationTargetException {
         this.loc = loc.clone();
         this.pm = pm;
         d = plugin.dm.getSimpleDisguise(p);

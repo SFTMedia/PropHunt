@@ -56,11 +56,11 @@ public class LoadoutChooser implements Listener {
                     return;
                 }
                 if (GameManager.playersWaiting.contains(((Player) e.getWhoClicked()).getName())) {
-                    if (!DisguiseManager.loadouts.containsKey((Player)e.getWhoClicked())) {
-                        DisguiseManager.loadouts.put((Player) e.getWhoClicked(), new Loadout((Player)e.getWhoClicked()));
-                        DisguiseManager.loadouts.get((Player)e.getWhoClicked()).addItem(e.getCurrentItem());
+                    if (!DisguiseManager.loadouts.containsKey((Player) e.getWhoClicked())) {
+                        DisguiseManager.loadouts.put((Player) e.getWhoClicked(), new Loadout((Player) e.getWhoClicked()));
+                        DisguiseManager.loadouts.get((Player) e.getWhoClicked()).addItem(e.getCurrentItem());
                     } else {
-                        DisguiseManager.loadouts.get((Player)e.getWhoClicked()).addItem(e.getCurrentItem());
+                        DisguiseManager.loadouts.get((Player) e.getWhoClicked()).addItem(e.getCurrentItem());
                     }
                     PropHuntMessaging.sendMessage((Player) e.getWhoClicked(), MessageBank.ITEM_CHOSEN.getMsg() + e.getCurrentItem().getItemMeta().getDisplayName());
                     e.getView().close();

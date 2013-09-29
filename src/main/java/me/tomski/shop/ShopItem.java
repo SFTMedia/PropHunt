@@ -40,7 +40,7 @@ public class ShopItem {
             description.add(MessageBank.ITEM_BOUGHT_DESC.getMsg());
         } else {
             description.clear();
-            description.add(MessageBank.ITEM_COST.getMsg()+ itemCost);
+            description.add(MessageBank.ITEM_COST.getMsg() + itemCost);
         }
         ItemStack stack = itemStack.clone();
         ItemMeta newMeta = stack.getItemMeta();

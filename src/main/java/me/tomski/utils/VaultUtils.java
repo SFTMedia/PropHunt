@@ -34,16 +34,16 @@ public class VaultUtils {
     }
 
     public VaultUtils(PropHunt plugin, boolean usingPropHunt) {
-      if (usingPropHunt) {
-          this.plugin = plugin;
-          if (setupPermissions()) {
-              ShopSettings.enabled = true;
-              plugin.getLogger().info("Vault permissions found!");
-          } else {
-              ShopSettings.enabled = false;
-              plugin.getLogger().info("Vault permissions not found! Shop disabling!");
-          }
-      }
+        if (usingPropHunt) {
+            this.plugin = plugin;
+            if (setupPermissions()) {
+                ShopSettings.enabled = true;
+                plugin.getLogger().info("Vault permissions found!");
+            } else {
+                ShopSettings.enabled = false;
+                plugin.getLogger().info("Vault permissions not found! Shop disabling!");
+            }
+        }
     }
 
     private boolean setupPermissions() {
