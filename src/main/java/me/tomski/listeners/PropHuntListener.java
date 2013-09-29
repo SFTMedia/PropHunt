@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-import me.tomski.prophunt.BungeeSettings;
-import me.tomski.prophunt.GameManager;
-import me.tomski.prophunt.PlayerManagement;
-import me.tomski.prophunt.PropHunt;
+import me.tomski.prophunt.*;
 import me.tomski.arenas.ArenaManager;
 import me.tomski.blocks.SolidBlock;
 import me.tomski.bungee.Pinger;
@@ -187,15 +184,17 @@ public class PropHuntListener implements Listener {
                 if (SolidBlockTracker.solidBlocks.containsKey(e.getPlayer().getName())) {
                     return;
                 }
-                if (PropHunt.dc.isDisguised(e.getPlayer())) {
-                    Disguise d = PropHunt.dc.getDisguise(e.getPlayer());
-                    if (d.type.equals(DisguiseType.FallingBlock)) {
-                        if (e.isSneaking()) {
-                            d.addSingleData("blocklock");
-                            PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.TOGGLE_BLOCK_LOCK_ON.getMsg());
-                        } else {
-                            d.data.remove("blocklock");
-                            PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.TOGGLE_BLOCK_LOCK_OFF.getMsg());
+                if (PH.dm.isDisguised(e.getPlayer())) {
+                    if (PH.dm.disguisePluginType.equals(DisguisePluginType.DISGUISECRAFT)) {
+                    Disguise d = PH.dm.getDcAPI().getDisguise(e.getPlayer());
+                        if (d.type.equals(DisguiseType.FallingBlock)) {
+                            if (e.isSneaking()) {
+                                d.addSingleData("blocklock");
+                                PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.TOGGLE_BLOCK_LOCK_ON.getMsg());
+                            } else {
+                                d.data.remove("blocklock");
+                                PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.TOGGLE_BLOCK_LOCK_OFF.getMsg());
+                            }
                         }
                     }
                 }
@@ -242,12 +241,10 @@ public class PropHuntListener implements Listener {
 
             @Override
             public void run() {
-                for (Player p : PropHunt.dc.getOnlineDisguisedPlayers()) {
-                    if (p.isOnline() && PropHunt.dc.isDisguised(p)) {
+                for (Player p : PH.dm.getDcAPI().getOnlineDisguisedPlayers()) {
+                    if (p.isOnline() && PH.dm.isDisguised(p)) {
                         if (GameManager.seekers.contains(p.getName())) {
-                            PropHunt.dc.undisguisePlayer(p);
-                        } else {
-                            PropHunt.dc.disguisePlayer(p, PropHunt.dc.getDisguise(p));
+                            PH.dm.undisguisePlayer(p);
                         }
                     }
                 }
@@ -278,16 +275,16 @@ public class PropHuntListener implements Listener {
             }, 20L);
             GameManager.playersQuit.remove(e.getPlayer().getName());
             refreshDisguises();
-            if (PropHunt.dc.isDisguised(e.getPlayer())) {
-                PropHunt.dc.undisguisePlayer(e.getPlayer());
+            if (PH.dm.isDisguised(e.getPlayer())) {
+                PH.dm.undisguisePlayer(e.getPlayer());
                 return;
             }
         }
         if (GameManager.spectators.contains(e.getPlayer().getName())) {
             PH.SBS.addPlayerToGame(PH, e.getPlayer());
             e.setRespawnLocation(GameManager.currentGameArena.getSpectatorSpawn());
-            if (PropHunt.dc.isDisguised(e.getPlayer())) {
-                PropHunt.dc.undisguisePlayer(e.getPlayer());
+            if (PH.dm.isDisguised(e.getPlayer())) {
+                PH.dm.undisguisePlayer(e.getPlayer());
             }
             refreshDisguises();
             return;
@@ -305,8 +302,8 @@ public class PropHuntListener implements Listener {
                 public void run() {
                     PH.showPlayer(e.getPlayer());
 
-                    if (PropHunt.dc.isDisguised(e.getPlayer())) {
-                        PropHunt.dc.undisguisePlayer(e.getPlayer());
+                    if (PH.dm.isDisguised(e.getPlayer())) {
+                        PH.dm.undisguisePlayer(e.getPlayer());
                     }
                     ArenaManager.arenaConfigs.get(GameManager.currentGameArena).getArenaSeekerClass().givePlayer(e.getPlayer());
                     PH.SBS.addPlayerToGame(PH, e.getPlayer());
@@ -323,8 +320,8 @@ public class PropHuntListener implements Listener {
             refreshDisguises();
             return;
         }
-        if (PropHunt.dc.isDisguised(e.getPlayer())) {
-            PropHunt.dc.undisguisePlayer(e.getPlayer());
+        if (PH.dm.isDisguised(e.getPlayer())) {
+            PH.dm.undisguisePlayer(e.getPlayer());
         }
     }
 

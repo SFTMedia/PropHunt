@@ -2,6 +2,7 @@ package me.tomski.blocks;
 
 import java.lang.reflect.InvocationTargetException;
 
+import me.tomski.objects.SimpleDisguise;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.listeners.PropHuntListener;
 
@@ -21,22 +22,20 @@ public class SolidBlock {
 
     public Player owner;
     public Location loc;
-    public Integer id;
-    byte damage;
+    public int id;
+    int damage;
     ProtocolManager pm;
     PacketContainer blockChange;
-    private Disguise d;
+    private SimpleDisguise d;
     public boolean dead = false;
 
-    public SolidBlock(Location loc, Integer integer, byte dmg, Player p, ProtocolManager pm, PropHunt plugin) throws InvocationTargetException {
+    public SolidBlock(Location loc,Player p, ProtocolManager pm, PropHunt plugin) throws InvocationTargetException {
         this.loc = loc.clone();
-        this.damage = dmg;
         this.pm = pm;
-        this.id = integer;
-        d = PropHunt.dc.getDisguise(p);
-        if (d.type.equals(DisguiseType.FallingBlock)) {
-            d.addSingleData("blocklock");
-        }
+        d = plugin.dm.getSimpleDisguise(p);
+        this.id = d.getID();
+        this.damage = d.getDamage();
+
         blockChange = getBlockPacket();
         this.owner = p;
         PropHuntListener.tempIgnoreUndisguise.add(owner);
@@ -70,8 +69,8 @@ public class SolidBlock {
                 write(0, loc.getBlockX()).
                 write(1, loc.getBlockY()).
                 write(2, loc.getBlockZ()).
-                write(3, id.intValue()).
-                write(4, (int) damage);
+                write(3, id).
+                write(4, damage);
         return blockChange;
     }
 
@@ -85,13 +84,7 @@ public class SolidBlock {
                 write(3, 0).
                 write(4, (int) damage);
 
-        PropHunt.dc.disguisePlayer(owner, d);
-        if (PropHunt.dc.isDisguised(owner)) {
-            Disguise d = PropHunt.dc.getDisguise(owner);
-            if (d.type.equals(DisguiseType.FallingBlock)) {
-                d.data.remove("blocklock");
-            }
-        }
+        plugin.dm.disguisePlayer(owner, d);
     }
 
     public void sendPacket(Player[] players) throws InvocationTargetException {

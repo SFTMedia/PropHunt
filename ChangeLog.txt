@@ -78,3 +78,4 @@
     - Working ./ph loadout
     - Add delay to all shops. 2 ticks.
     - Some spelling fixes
+    - LibsDisguises support

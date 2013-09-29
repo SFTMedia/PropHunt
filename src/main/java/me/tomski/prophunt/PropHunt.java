@@ -11,6 +11,7 @@ import me.tomski.currency.SqlConnect;
 import me.tomski.enums.EconomyType;
 import me.tomski.language.MessageBank;
 import me.tomski.language.ScoreboardTranslate;
+import me.tomski.objects.SimpleDisguise;
 import me.tomski.prophuntstorage.ArenaStorage;
 import me.tomski.arenas.ArenaManager;
 import me.tomski.bungee.Pinger;
@@ -47,8 +48,7 @@ import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
 public class PropHunt extends JavaPlugin {
 
 
-    public static DisguiseCraftAPI dc;
-    public static DisguiseManager dm;
+    public DisguiseManager dm;
     public static ProtocolManager protocolManager;
 
     public ArenaStorage AS;
@@ -97,7 +97,6 @@ public class PropHunt extends JavaPlugin {
         AS = new ArenaStorage(this, GM);
         AM = new ArenaManager(this);
 
-        dc = DisguiseCraft.getAPI();
         dm = new DisguiseManager(this);
 
         shopManager = new ShopManager(this);
@@ -656,33 +655,7 @@ public class PropHunt extends JavaPlugin {
         if (getConfig().contains("block-disguises")) {
             List<String> blockIds = getConfig().getStringList("block-disguises");
             for (String item : blockIds) {
-                if (item.startsWith("e:")) {
-                    String[] split = item.split(":");
-                    if (split.length == 2) {
-                        DisguiseType dt = DisguiseType.fromString(split[1]);
-                        if (dt != null) {
-                            i++;
-                            DisguiseManager.blockDisguises.put(i, item);
-                            continue;
-                        } else {
-                            getLogger().log(Level.WARNING, "Error with custom Disguise id: " + item);
-                            continue;
-                        }
-                    } else {
-                        getLogger().log(Level.WARNING, "Error with custom Disguise id: " + item);
-                        continue;
-                    }
-                }
-                String disguise = parseDisguise(item);
-
-                if (disguise != null) {
-                    i++;
-                    DisguiseManager.blockDisguises.put(i, disguise);
-                    continue;
-                } else {
-                    getLogger().log(Level.WARNING, "PropHunt: Invalid disguise id : " + item);
-                }
-
+                DisguiseManager.blockDisguises.put(i, new SimpleDisguise(item));
             }
         }
         return i;
@@ -961,38 +934,13 @@ public class PropHunt extends JavaPlugin {
         return null;
     }
 
-    public Map<Integer, String> getCustomDisguises(String arenaName) {
+    public Map<Integer, SimpleDisguise> getCustomDisguises(String arenaName) {
         int i = 0;
-        Map<Integer, String> disguiseMap = new HashMap<Integer, String>();
+        Map<Integer, SimpleDisguise> disguiseMap = new HashMap<Integer, SimpleDisguise>();
         if (getConfig().contains("CustomArenaConfigs." + arenaName + ".block-disguises")) {
             List<String> blockIds = getConfig().getStringList("CustomArenaConfigs." + arenaName + ".block-disguises");
             for (String item : blockIds) {
-                if (item.startsWith("e:")) {
-                    String[] split = item.split(":");
-                    if (split.length == 2) {
-                        DisguiseType dt = DisguiseType.fromString(split[1]);
-                        if (dt != null) {
-                            i++;
-                            disguiseMap.put(i, item);
-                            continue;
-                        } else {
-                            getLogger().log(Level.WARNING, "Error with custom Disguise id: " + item);
-                            continue;
-                        }
-                    } else {
-                        getLogger().log(Level.WARNING, "Error with custom Disguise id: " + item);
-                        continue;
-                    }
-                }
-                String disguise = parseDisguise(item);
-
-                if (disguise != null) {
-                    i++;
-                    disguiseMap.put(i, disguise);
-                    continue;
-                } else {
-                    getLogger().log(Level.WARNING, "PropHunt: Invalid disguise id : " + item);
-                }
+                disguiseMap.put(i, new SimpleDisguise(item)) ;
             }
         }
         return disguiseMap;
@@ -1156,7 +1104,7 @@ public class PropHunt extends JavaPlugin {
 
             @Override
             public void run() {
-                PropHunt.dc.undisguisePlayer(owner);
+                dm.undisguisePlayer(owner);
             }
         }, 1L);
         getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {

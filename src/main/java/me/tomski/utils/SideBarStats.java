@@ -49,8 +49,8 @@ public class SideBarStats {
                 if (ob == null) {
                     ob = playerBoards.get(p).registerNewObjective("hiderboard", "dummy");
                 }
-                if (PropHunt.dc.isDisguised(p)) {
-                    ob.setDisplayName(ChatColor.AQUA + DisguiseManager.parseDisguiseToName(PropHunt.dc.getDisguise(p)));
+                if (plugin.dm.isDisguised(p)) {
+                    ob.setDisplayName(ChatColor.AQUA + plugin.dm.getDisguiseName(p));
                 }
                 Score score = ob.getScore(Bukkit.getOfflinePlayer(ChatColor.RED + plugin.ST.seeker_Translate + ":"));
                 score.setScore(GameManager.seekers.size());
@@ -163,7 +163,7 @@ public class SideBarStats {
             Scoreboard sb = plugin.getServer().getScoreboardManager().getNewScoreboard();
             Objective ob = sb.registerNewObjective("hiderboard", "dummy");
             ob.setDisplaySlot(DisplaySlot.SIDEBAR);
-            ob.setDisplayName(ChatColor.AQUA + DisguiseManager.parseDisguiseToName(PropHunt.dc.getDisguise(p)));
+            ob.setDisplayName(ChatColor.AQUA + plugin.dm.getDisguiseName(p));
             Score score = ob.getScore(Bukkit.getOfflinePlayer(ChatColor.RED + plugin.ST.seeker_Translate + ":"));
             score.setScore(GameManager.seekers.size());
 

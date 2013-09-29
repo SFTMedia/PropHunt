@@ -14,7 +14,7 @@
         <directory>target</directory>
         <outputDirectory>target/classes</outputDirectory>
         <finalName>PropHunt</finalName>
-        <sourceDirectory>${basedir}/src/main/</sourceDirectory>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>
                 <targetPath>.</targetPath>
@@ -75,6 +75,10 @@
             <id>vault-repo</id>
             <url>http://ci.herocraftonline.com/plugin/repository/everything</url>
         </repository>
+        <repository>
+            <id>libs-disguises-repo</id>
+            <url>http://repo.md-5.net/content/groups/public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -103,8 +107,11 @@
             <artifactId>Vault</artifactId>
             <version>LATEST</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>LibsDisguises</groupId>
+            <artifactId>LibsDisguises</artifactId>
+            <version>7.6.3</version>
+        </dependency>
     </dependencies>
 
 

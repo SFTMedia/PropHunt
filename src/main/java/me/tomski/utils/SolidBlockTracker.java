@@ -39,7 +39,7 @@ public class SolidBlockTracker implements Runnable {
                 removeList.add(s);
                 continue;
             }
-            if (!PropHunt.dc.isDisguised(Bukkit.getPlayer(s))) {
+            if (!plugin.dm.isDisguised(Bukkit.getPlayer(s))) {
                 removeList.add(s);
                 continue;
             }
@@ -51,12 +51,11 @@ public class SolidBlockTracker implements Runnable {
             if (shouldBeSolid(movementTracker.get(s))) {
                 SolidBlock sb = null;
                 try {
-                    Byte data = PropHunt.dc.getDisguise(Bukkit.getPlayer(s)).getBlockData();
-                    if (data == null) {
-                        data = 0;
+                    if (plugin.dm.getSimpleDisguise(Bukkit.getPlayer(s)) == null) {
+                        continue;
                     }
-                    if (PropHunt.dc.getDisguise(Bukkit.getPlayer(s)).getBlockID() != null) {
-                        sb = new SolidBlock(currentLocation.get(s), PropHunt.dc.getDisguise(Bukkit.getPlayer(s)).getBlockID(), data, Bukkit.getPlayer(s), PropHunt.protocolManager, plugin);
+                    if (plugin.dm.getSimpleDisguise(Bukkit.getPlayer(s)) != null) {
+                        sb = new SolidBlock(currentLocation.get(s), Bukkit.getPlayer(s), PropHunt.protocolManager, plugin);
                     }
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();

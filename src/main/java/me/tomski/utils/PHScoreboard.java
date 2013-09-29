@@ -52,12 +52,10 @@ public class PHScoreboard {
         }
         TabAPI.setTabString(plugin, p, 4, 2, ChatColor.GOLD + "" + ChatColor.BOLD + "Your team:");
         TabAPI.setTabString(plugin, p, 5, 2, ChatColor.YELLOW + team);
-        if (PropHunt.dc.isDisguised(p) && PropHunt.dc.getDisguise(p).type.equals(DisguiseType.FallingBlock)) {
+        if (plugin.dm.isDisguised(p)) {
             TabAPI.setTabString(plugin, p, 6, 2, ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Disguise:");
-            if (PropHunt.dc.getDisguise(p) != null) {
-                if (PropHunt.dc.getDisguise(p).getBlockID() != null) {
-                    TabAPI.setTabString(plugin, p, 7, 2, ChatColor.LIGHT_PURPLE + DisguiseManager.parseDisguiseToName(PropHunt.dc.getDisguise(p)));
-                }
+            if (plugin.dm.isDisguised(p)) {
+                 TabAPI.setTabString(plugin, p, 7, 2, ChatColor.LIGHT_PURPLE + plugin.dm.getDisguiseName(p));
             }
         }
         if (disguisesBlown) {
@@ -80,8 +78,8 @@ public class PHScoreboard {
                     continue;
                 }
                 if (plugin.getServer().getPlayer(name) != null && plugin.getServer().getPlayer(name).isOnline()) {
-                    if (PropHunt.dc.isDisguised(plugin.getServer().getPlayer(name))) {
-                        TabAPI.setTabString(plugin, p, y, 1, ChatColor.GREEN + DisguiseManager.parseDisguiseToName(PropHunt.dc.getDisguise(plugin.getServer().getPlayer(name))) + TabAPI.nextNull());
+                    if (plugin.dm.isDisguised(plugin.getServer().getPlayer(name))) {
+                        TabAPI.setTabString(plugin, p, y, 1, ChatColor.GREEN + plugin.dm.getDisguiseName(plugin.getServer().getPlayer(name)) + TabAPI.nextNull());
                         y++;
                     }
                 }

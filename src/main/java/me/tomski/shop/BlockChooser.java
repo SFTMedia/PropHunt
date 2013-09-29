@@ -2,6 +2,7 @@ package me.tomski.shop;
 
 
 import me.tomski.language.MessageBank;
+import me.tomski.objects.SimpleDisguise;
 import me.tomski.prophunt.DisguiseManager;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
@@ -77,11 +78,8 @@ public class BlockChooser implements Listener {
         }
     }
 
-    private Disguise parseItemToDisguise(ItemStack itemStack) {
-        LinkedList<String> data = new LinkedList<String>();
-        data.add(("blockID:" + itemStack.getTypeId()));
-        data.add(("blockData" + itemStack.getData().getData()));
-        return new Disguise(PropHunt.dc.newEntityID(), data, DisguiseType.FallingBlock);
+    private SimpleDisguise parseItemToDisguise(ItemStack itemStack) {
+        return new SimpleDisguise(itemStack.getTypeId(), (int)itemStack.getData().getData(), null);
     }
 
     @EventHandler
