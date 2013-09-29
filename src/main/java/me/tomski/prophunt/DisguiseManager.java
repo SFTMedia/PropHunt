@@ -37,6 +37,7 @@ public class DisguiseManager {
     public DisguiseManager(PropHunt plugin) {
         if (plugin.getServer().getPluginManager().isPluginEnabled("LibsDisguises")) {
             disguisePluginType = DisguisePluginType.LIBSDISGUISES;
+            DisguiseAPI.setViewDisguises(true);
         } else if (plugin.getServer().getPluginManager().isPluginEnabled("DisguiseCraft")) {
             disguisePluginType = DisguisePluginType.DISGUISECRAFT;
             dcAPI = DisguiseCraft.getAPI();
