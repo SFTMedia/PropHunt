@@ -181,9 +181,7 @@ public class PropHuntListener implements Listener {
                     return;
                 }
                 if (PH.dm.isDisguised(e.getPlayer())) {
-                    if (PH.dm.disguisePluginType.equals(DisguisePluginType.DISGUISECRAFT)) {
                         PH.dm.toggleBlockLock(e);
-                    }
                 }
             }
         }

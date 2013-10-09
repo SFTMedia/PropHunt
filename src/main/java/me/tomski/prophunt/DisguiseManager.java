@@ -22,8 +22,6 @@ public class DisguiseManager implements Listener {
 
     boolean shouldDisable = false;
 
-    public DisguisePluginType disguisePluginType;
-
     public DisguiseManager(PropHunt plugin) {
 
     }
