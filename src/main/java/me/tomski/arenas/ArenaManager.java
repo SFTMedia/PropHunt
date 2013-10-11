@@ -115,13 +115,13 @@ public class ArenaManager {
     }
 
     public static Arena getNextInRotation() {
-        rotationCounter++;
         if (rotationCounter >= arenasInRotation.size()) {
             rotationCounter = 0;
-            return arenasInRotation.get(rotationCounter);
-        } else {
-            return arenasInRotation.get(rotationCounter);
         }
+        Arena a = arenasInRotation.get(rotationCounter);
+        rotationCounter++;
+        System.out.println("PROPHUNT DEBUG: " + rotationCounter + "  " + "Arena chosen: " + a.getArenaName());
+        return a;
     }
 
 

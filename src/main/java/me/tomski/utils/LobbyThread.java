@@ -13,7 +13,7 @@ public class LobbyThread implements Runnable {
     private PropHunt plugin;
     public boolean isRunning = false;
 
-    public LobbyThread(PropHunt plugin, int startingTime) {
+        public LobbyThread(PropHunt plugin, int startingTime) {
         this.plugin = plugin;
         time = new Integer(startingTime);
     }
