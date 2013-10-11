@@ -68,6 +68,7 @@ public class ArenaStorage {
             for (Arena ar : ArenaManager.playableArenas.values()) {
                 plugin.AM.arenasInRotation.add(ar);
             }
+            plugin.getLogger().log(Level.INFO, plugin.AM.arenasInRotation.size() + " arenas loaded");
             loadCustomSettings(a);
         }
     }
