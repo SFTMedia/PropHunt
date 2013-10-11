@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class PropHuntMessaging {
 
-    private static String prefix = MessageBank.BRACKET_COLOUR + "[" + MessageBank.PROP_COLOUR + "Prop" + MessageBank.HUNT_COLOUR + "Hunt" + MessageBank.BRACKET_COLOUR  + "]: &a";
+    private static String prefix = MessageBank.BRACKET_COLOUR.getMsg() + "[" + MessageBank.PROP_COLOUR.getMsg() + "Prop" + MessageBank.HUNT_COLOUR.getMsg() + "Hunt" + MessageBank.BRACKET_COLOUR.getMsg()  + "]: &a";
     private static String banner = "&60o0&0_______ &bPropHunt &0_______&60o0";
 
     public static void sendMessage(Player p, String msg) {
