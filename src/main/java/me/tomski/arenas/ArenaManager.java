@@ -26,8 +26,8 @@ public class ArenaManager {
     public static Arena currentArena = null;
 
     public static Map<String, Arena> playableArenas = new HashMap<String, Arena>();
-    public static List<Arena> arenasInRotation = new ArrayList<Arena>();
-    public static int rotationCounter = 0;
+    public List<Arena> arenasInRotation = new ArrayList<Arena>();
+    public int rotationCounter = 0;
 
     public void addSettingUp(Player sender, String name) {
         if (setupMap.containsKey(sender.getName())) {
@@ -114,13 +114,13 @@ public class ArenaManager {
         return false;
     }
 
-    public static Arena getNextInRotation() {
+    public Arena getNextInRotation() {
         if (rotationCounter >= arenasInRotation.size()) {
+            System.out.println("Resetting the arena loop");
             rotationCounter = 0;
         }
         Arena a = arenasInRotation.get(rotationCounter);
         rotationCounter++;
-        System.out.println("PROPHUNT DEBUG: " + rotationCounter + "  " + "Arena chosen: " + a.getArenaName());
         return a;
     }
 

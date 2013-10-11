@@ -159,7 +159,7 @@ public class GameManager {
                 PropHuntMessaging.sendMessage(p, msg);
             } else {
                 if (automatic) {
-                    hostGame(null, ArenaManager.getNextInRotation());
+                    hostGame(null, plugin.AM.getNextInRotation());
                     if (dedicated) {
                         for (Player pe : plugin.getServer().getOnlinePlayers()) {
                             addPlayerToGame(pe.getName());
@@ -530,7 +530,7 @@ public class GameManager {
             if (AutomationSettings.runChecks(plugin)) {
                 return;
             }
-            hostGame(null, ArenaManager.getNextInRotation());
+            hostGame(null, plugin.AM.getNextInRotation());
             if (dedicated) {
                 for (Player p : plugin.getServer().getOnlinePlayers()) {
                     addPlayerToGameDedi(p.getName());

@@ -171,22 +171,22 @@ public class PropHunt extends JavaPlugin implements Listener {
     }
 
     private boolean checkAUTOReady() {
-        if (ArenaManager.arenasInRotation == null) {
+        if (AM.arenasInRotation == null) {
             getLogger().log(Level.WARNING, "Arena Not Setup, automatic hosting disabled");
             return false;
         }
-        if (ArenaManager.arenasInRotation.size() == 0) {
+        if (AM.arenasInRotation.size() == 0) {
             GameManager.automatic = false;
             getLogger().log(Level.WARNING, "No arena setup, automatic hosting disabled");
             return false;
         }
-        if (!GM.checkReady(ArenaManager.arenasInRotation.get(0))) {
+        if (!GM.checkReady(AM.arenasInRotation.get(0))) {
             GameManager.automatic = false;
             getLogger().log(Level.WARNING, "Arena Not Setup, automatic hosting disabled");
             return false;
         } else {
             getLogger().log(Level.INFO, "Arena Setup, automatic hosting starting");
-            GM.hostGame(null, ArenaManager.arenasInRotation.get(0));
+            GM.hostGame(null, AM.arenasInRotation.get(0));
             return true;
         }
     }

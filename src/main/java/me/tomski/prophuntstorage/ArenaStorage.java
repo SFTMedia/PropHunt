@@ -66,7 +66,7 @@ public class ArenaStorage {
                 a.saveArenaToFile(plugin);
             }
             for (Arena ar : ArenaManager.playableArenas.values()) {
-                ArenaManager.arenasInRotation.add(ar);
+                plugin.AM.arenasInRotation.add(ar);
             }
             loadCustomSettings(a);
         }
