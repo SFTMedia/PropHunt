@@ -20,6 +20,15 @@ public class ShopSettings {
     public static boolean usingVault;
     public static boolean enabled;
     public static EconomyType economyType;
+
+    public static double pricePerHiderKill;
+    public static double pricePerSeekerKill;
+
+    public static double pricePerSecondsHidden;
+
+    public static double priceSeekerWin;
+    public static double priceHiderWin;
+
     private PropHunt plugin;
 
     private static PropHunt staticPlugin;
@@ -28,7 +37,6 @@ public class ShopSettings {
         staticPlugin = plugin;
         this.plugin = plugin;
     }
-
 
     public List<ShopItem> generateBlockChoices(PropHunt plugin, ShopConfig shopConfig) {
         String path = "Disguises";
@@ -49,7 +57,6 @@ public class ShopSettings {
         }
         return blockChoices;
     }
-
 
     public List<ShopItem> generateItemChoices(PropHunt plugin, ShopConfig shopConfig) {
         String path = "Items";

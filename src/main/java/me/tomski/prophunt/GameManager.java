@@ -82,6 +82,8 @@ public class GameManager {
     public static int lobbyTime;
     public static int currentLobbyTime = 0;
 
+    public long gameStartTime;
+
     public GameManager(PropHunt plugin) {
         this.plugin = plugin;
         this.plugin.setupClasses();
@@ -219,6 +221,7 @@ public class GameManager {
         if (PropHunt.usingTABAPI) {
             setupScoreBoard();
         }
+        gameStartTime = System.currentTimeMillis();
     }
 
     private void setupScoreBoard() {
@@ -331,10 +334,53 @@ public class GameManager {
         PropHuntMessaging.broadcastMessageToPlayers(hiders, seekers, msg);
     }
 
+    private void giveCredits(Player p, double amount) {
+        if (amount <= 0) {
+            return;
+        }
+        switch (ShopSettings.economyType) {
+            case PROPHUNT:
+                int credits = plugin.SQL.getCredits(p.getName());
+                credits += (int) amount;
+                plugin.SQL.setCredits(p.getName(), credits);
+                break;
+            case VAULT:
+                double vaultCredits  = plugin.vaultUtils.economy.getBalance(p.getName());
+                vaultCredits += amount;
+                plugin.vaultUtils.economy.bankDeposit(p.getName(), vaultCredits);
+                break;
+        }
+        ItemMessage im = new ItemMessage(plugin);
+        String message = MessageBank.CREDITS_EARN_POPUP.getMsg();
+        message = message.replace("\\{credits\\}", amount + " " + ShopSettings.currencyName);
+        im.sendMessage(p, ChatColor.translateAlternateColorCodes('&', message));
+    }
+
     public void endGame(Reason reason, boolean shutdown) throws IOException {
         plugin.getServer().getScheduler().cancelTask(TIMERID);
         String bcreason = broadcastEndReason(reason);
         PropHuntMessaging.broadcastMessage(bcreason);
+        if (reason.equals(Reason.HIDERSQUIT) || reason.equals(Reason.SEEKERWON)) {
+            // seekers won
+            if (ShopSettings.enabled) {
+                for (String seeker : seekers) {
+                    if (plugin.getServer().getPlayerExact(seeker) != null) {
+                        giveCredits(plugin.getServer().getPlayerExact(seeker), ShopSettings.priceSeekerWin);
+                    }
+                }
+            }
+        } else if (reason.equals(Reason.SEEKERQUIT) || reason.equals(Reason.TIME) || reason.equals(Reason.HIDERSWON) || reason.equals(Reason.SEEKERDIED)) {
+           // Hiders won
+            if (ShopSettings.enabled) {
+                double timeBonus = (System.currentTimeMillis() - gameStartTime)/1000;
+                timeBonus *= ShopSettings.pricePerSecondsHidden;
+                for (String hider : hiders) {
+                    if (plugin.getServer().getPlayerExact(hider) != null) {
+                        giveCredits(plugin.getServer().getPlayerExact(hider), ShopSettings.priceHiderWin + timeBonus);
+                    }
+                }
+            }
+        }
         for (final String hider : hiders) {
             if (plugin.getServer().getPlayer(hider) != null) {
                 plugin.showPlayer(plugin.getServer().getPlayer(hider));

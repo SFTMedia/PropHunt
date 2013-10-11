@@ -6,7 +6,7 @@
 # Prefix colours
 bracket_colour: "&f"
 prop_colour: "&4"
-hunt_colour: "&c"
+hunt_colour: "&6"
 
 # Game Messages
 toggle_block_lock_on: "You are now block locked!"
@@ -96,6 +96,7 @@ not_enough_currency: "You dont have enough for that item"
 purchase_complete: "You have just bought: "
 shop_not_enabled: "Shop is not enabled"
 currency_balance: "You have : &6"
+credits_earn_popup: "&fYou have earnt &6{credits}"
 
 # setup
 seeker_spawn_set: "Seeker spawn Set"

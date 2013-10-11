@@ -81,3 +81,4 @@
     - LibsDisguises support
 - V 1.40
     - Customize prophunt prefix colours in language.yml
+    - Earnings for killing, time hidden and winning!

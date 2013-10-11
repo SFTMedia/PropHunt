@@ -311,6 +311,11 @@ public class PropHunt extends JavaPlugin implements Listener {
             ShopSettings.enabled = getConfig().getBoolean("ShopSettings.use-shop");
             ShopSettings.usingVault = getConfig().getBoolean("ShopSettings.use-vault-for-currency");
             ShopSettings.currencyName = getConfig().getString("ShopSettings.currency-name");
+            ShopSettings.pricePerHiderKill = getConfig().getDouble("ShopSettings.points-per-hider-kill");
+            ShopSettings.pricePerSeekerKill = getConfig().getDouble("ShopSettings.points-per-seeker-kill");
+            ShopSettings.pricePerSecondsHidden = getConfig().getDouble("ShopSettings.points-per-second-hidden");
+            ShopSettings.priceHiderWin = getConfig().getDouble("ShopSettings.points-hiders-win");
+            ShopSettings.priceSeekerWin = getConfig().getDouble("ShopSettings.points-seekers-win");
         }
         if (getConfig().contains("ServerSettings")) {
             ServerManager.forceMOTD = getConfig().getBoolean("ServerSettings.force-motd-prophunt");

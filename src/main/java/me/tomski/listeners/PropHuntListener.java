@@ -10,9 +10,11 @@ import me.tomski.bungee.Pinger;
 import me.tomski.language.LanguageManager;
 import me.tomski.language.MessageBank;
 import me.tomski.prophunt.*;
+import me.tomski.utils.ItemMessage;
 import me.tomski.utils.PropHuntMessaging;
 import me.tomski.utils.Reason;
 import me.tomski.utils.SolidBlockTracker;
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -314,6 +316,11 @@ public class PropHuntListener implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) throws IllegalAccessException, InvocationTargetException, IOException {
         if (GameManager.hiders.contains(e.getEntity().getName())) {
+            if (e.getEntity().getKiller() != null) {
+                if (ShopSettings.enabled) {
+                    giveHiderKillWinnings(e.getEntity());
+                }
+            }
             e.getDrops().clear();
             if (isLastHider()) {
                 if (GameManager.useSideStats) {
@@ -339,6 +346,11 @@ public class PropHuntListener implements Listener {
             }
             return;
         } else if (GameManager.seekers.contains(e.getEntity().getName())) {
+            if (e.getEntity().getKiller() != null) {
+                if (ShopSettings.enabled) {
+                    giveSeekerKillWinnings(e.getEntity());
+                }
+            }
             e.getDrops().clear();
             if (isLastSeeker()) {
                 if (GameManager.useSideStats) {
@@ -387,6 +399,38 @@ public class PropHuntListener implements Listener {
                 respawnQuick(e.getEntity());
             }
         }
+    }
+
+    private void giveCredits(Player p, double amount) {
+        if (amount <= 0) {
+            return;
+        }
+        switch (ShopSettings.economyType) {
+            case PROPHUNT:
+                int credits = PH.SQL.getCredits(p.getName());
+                credits += (int) amount;
+                PH.SQL.setCredits(p.getName(), credits);
+                break;
+            case VAULT:
+                double vaultCredits  = PH.vaultUtils.economy.getBalance(p.getName());
+                vaultCredits += amount;
+                PH.vaultUtils.economy.bankDeposit(p.getName(), vaultCredits);
+                break;
+        }
+        ItemMessage im = new ItemMessage(PH);
+        String message = MessageBank.CREDITS_EARN_POPUP.getMsg();
+        message = message.replace("\\{credits\\}", amount + " " + ShopSettings.currencyName);
+        im.sendMessage(p, ChatColor.translateAlternateColorCodes('&', message));
+    }
+
+    private void giveHiderKillWinnings(Player p) {
+        double bonusTime = (System.currentTimeMillis()-GM.gameStartTime)/1000;
+        bonusTime *= ShopSettings.pricePerSecondsHidden;
+        giveCredits(p, ShopSettings.pricePerHiderKill + bonusTime);
+    }
+
+    private void giveSeekerKillWinnings(Player p) {
+        giveCredits(p, ShopSettings.pricePerSeekerKill);
     }
 
     private boolean noLivesLeft(Player p) {

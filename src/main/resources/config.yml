@@ -94,6 +94,16 @@ ShopSettings:
   currency-name: "Cookies"
   # Use vault instead of the prophunt currency
   use-vault-for-currency: false
+  # Points per hider kill
+  points-per-hider-kill: 10
+  # Points per seeker kill
+  points-per-seeker-kill: 5
+  # Points per second hidden
+  point-per-second-hidden: 0.2
+  # Points hiders win
+  points-hiders-win: 20
+  # Points seekers win
+  points-seekers-win: 0
 # Database settings for default PropHunt currency
 DatabaseSettings:
     type: mysql

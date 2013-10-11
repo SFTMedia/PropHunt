@@ -87,6 +87,7 @@ public enum MessageBank {
     PURCHASE_COMPLETE(getCfgMsg("purchase_complete")),
     SHOP_NOT_ENABLED(getCfgMsg("shop_not_enabled")),
     CURRENCY_BALANCE(getCfgMsg("currency_balance")),
+    CREDITS_EARN_POPUP(getCfgMsg("credits_earn_popup")),
 
     SEEKER_SPAWN_SET(getCfgMsg("seeker_spawn_set")),
     HIDER_SPAWN_SET(getCfgMsg("hider_spawn_set")),
