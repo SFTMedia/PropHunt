@@ -116,7 +116,6 @@ public class ArenaManager {
 
     public Arena getNextInRotation() {
         if (rotationCounter >= arenasInRotation.size()) {
-            System.out.println("Resetting the arena loop");
             rotationCounter = 0;
         }
         Arena a = arenasInRotation.get(rotationCounter);
