@@ -6,7 +6,7 @@
 
     <groupId>me.tomski</groupId>
     <artifactId>PropHunt</artifactId>
-    <version>1.39-SNAPSHOT</version>
+    <version>1.40-SNAPSHOT</version>
     <name>PropHunt</name>
 
     <build>
@@ -90,7 +90,7 @@
         <dependency>
             <groupId>pgDev</groupId>
             <artifactId>DisguiseCraft</artifactId>
-            <version>4.9</version>
+            <version>5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
