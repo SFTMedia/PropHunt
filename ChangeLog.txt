@@ -79,3 +79,5 @@
     - Add delay to all shops. 2 ticks.
     - Some spelling fixes
     - LibsDisguises support
+- V 1.40
+    - Customize prophunt prefix colours in language.yml

@@ -1,6 +1,7 @@
 package me.tomski.utils;
 
 import me.tomski.arenas.Arena;
+import me.tomski.language.MessageBank;
 import me.tomski.prophunt.GameManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public class PropHuntMessaging {
 
-    private static String prefix = "&0[&6Prop&4Hunt&0]: &a";
+    private static String prefix = MessageBank.BRACKET_COLOUR + "[" + MessageBank.PROP_COLOUR + "Prop" + MessageBank.HUNT_COLOUR + "Hunt" + MessageBank.BRACKET_COLOUR  + "]: &a";
     private static String banner = "&60o0&0_______ &bPropHunt &0_______&60o0";
 
     public static void sendMessage(Player p, String msg) {

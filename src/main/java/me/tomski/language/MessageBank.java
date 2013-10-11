@@ -4,6 +4,10 @@ import org.bukkit.ChatColor;
 
 public enum MessageBank {
 
+    BRACKET_COLOUR(getCfgMsg("bracket_colour")),
+    PROP_COLOUR(getCfgMsg("prop_colour")),
+    HUNT_COLOUR(getCfgMsg("hunt_colour")),
+
     //Game Messages
     TOGGLE_BLOCK_LOCK_ON(getCfgMsg("toggle_block_lock_on")),
     TOGGLE_BLOCK_LOCK_OFF(getCfgMsg("toggle_block_lock_off")),
