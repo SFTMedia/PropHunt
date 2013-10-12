@@ -90,7 +90,7 @@
         <dependency>
             <groupId>pgDev</groupId>
             <artifactId>DisguiseCraft</artifactId>
-            <version>5.0</version>
+            <version>4.9-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
