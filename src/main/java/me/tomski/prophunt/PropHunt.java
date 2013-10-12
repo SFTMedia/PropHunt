@@ -955,6 +955,7 @@ public class PropHunt extends JavaPlugin implements Listener {
             List<String> blockIds = getConfig().getStringList("CustomArenaConfigs." + arenaName + ".block-disguises");
             for (String item : blockIds) {
                 disguiseMap.put(i, new SimpleDisguise(item));
+                i++;
             }
         }
         getLogger().info("Custom disguises loaded: " + disguiseMap.size());
