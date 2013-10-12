@@ -90,8 +90,12 @@ public class PlayerManagement {
             if (playerXP.get(p.getName()) == null) {
                 return;
             }
+            p.setTotalExperience(0);
             p.setLevel(playerXP.get(p.getName()));
             p.updateInventory();
+        } else {
+            p.setExp(0);
+            p.setLevel(0);
         }
     }
 

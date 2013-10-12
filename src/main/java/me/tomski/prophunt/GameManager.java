@@ -587,6 +587,7 @@ public class GameManager {
                 }
                 PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(name));
             } else {
+                PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(name));
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 
                     @Override
@@ -595,7 +596,6 @@ public class GameManager {
                             if (plugin.dm.isDisguised(plugin.getServer().getPlayer(name))) {
                                 plugin.dm.undisguisePlayer(plugin.getServer().getPlayer(name));
                             }
-                            PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(name));
                         }
                     }
                 }, 20L);
