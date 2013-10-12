@@ -71,6 +71,7 @@ public class LibsDisguiseManager extends DisguiseManager {
         if (preChosenDisguise.containsKey(p)) {
             SimpleDisguise simpleDisguise = preChosenDisguise.get(p);
             Disguise lds = getLibsDisguise(simpleDisguise);
+            lds.setViewSelfDisguise(true);
             DisguiseAPI.disguiseToAll(p, lds);
             PropHuntMessaging.sendMessage(p, MessageBank.DISGUISE_MESSAGE.getMsg() + parseDisguiseToName(simpleDisguise));
             preChosenDisguise.remove(p);
@@ -82,6 +83,7 @@ public class LibsDisguiseManager extends DisguiseManager {
             return;
         }
         Disguise lds = getLibsDisguise(ds);
+        lds.setViewSelfDisguise(true);
         DisguiseAPI.disguiseToAll(p, lds);
         PropHuntMessaging.sendMessage(p, MessageBank.DISGUISE_MESSAGE.getMsg() + parseDisguiseToName(ds));
         preChosenDisguise.remove(p);

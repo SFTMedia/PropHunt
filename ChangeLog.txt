@@ -82,3 +82,6 @@
 - V 1.40
     - Customize prophunt prefix colours in language.yml
     - Earnings for killing, time hidden and winning!
+    - Fix problems with arenas not rotating
+    - Fix problems with per arena config disguises
+    - See self
