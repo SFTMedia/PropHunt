@@ -47,7 +47,9 @@ public class LibsDisguiseManager extends DisguiseManager {
 
     @Override
     public void disguisePlayer(Player p, SimpleDisguise d) {
-        DisguiseAPI.disguiseToAll(p, getLibsDisguise(d));
+        Disguise dis = getLibsDisguise(d);
+        dis.setViewSelfDisguise(true);
+        DisguiseAPI.disguiseToAll(p, dis);
     }
 
     @Override
