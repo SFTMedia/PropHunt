@@ -957,6 +957,7 @@ public class PropHunt extends JavaPlugin implements Listener {
                 disguiseMap.put(i, new SimpleDisguise(item));
             }
         }
+        getLogger().info("Custom disguises loaded: " + disguiseMap.size());
         return disguiseMap;
     }
 
