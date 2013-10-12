@@ -58,7 +58,7 @@ public class DisguiseManager implements Listener {
         int size = disguises.size();
         Random rnd = new Random();
         int random = rnd.nextInt(size);
-        return disguises.get(random + 1);
+        return disguises.get(random);
     }
 
     public SimpleDisguise getSimpleDisguise(Player p) {
