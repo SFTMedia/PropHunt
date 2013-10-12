@@ -87,7 +87,6 @@ public class DisguiseCraftManager extends DisguiseManager implements Listener {
         if (isDisguised(p)) {
             if (getSimpleDisguise(p) !=null) {
                 return parseIdToName(dcAPI.getDisguise(p).getBlockID());
-
             }
         }
         return "None";
