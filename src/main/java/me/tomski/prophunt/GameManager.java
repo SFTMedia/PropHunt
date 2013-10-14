@@ -1,5 +1,8 @@
 package me.tomski.prophunt;
 
+import com.comphenix.protocol.Packets;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
 import me.tomski.arenas.Arena;
 import me.tomski.arenas.ArenaManager;
 import me.tomski.blocks.SolidBlock;
@@ -187,7 +190,7 @@ public class GameManager {
         freshPlayers();
         chooseSeekerAndSortPlayers();
         teleportPlayersStart();
-        teleportSeekerStart(plugin.getServer().getPlayer(firstSeeker));
+        teleportSeekerStart(plugin.getServer().getPlayerExact(firstSeeker));
         seekerLives.put(plugin.getServer().getPlayer(firstSeeker), seekerLivesAmount);
         if (seekerDelayTime != 0) {
             sd = new SeekerDelay(plugin.getServer().getPlayer(firstSeeker), seekerDelayTime, plugin);
@@ -345,7 +348,7 @@ public class GameManager {
                 plugin.SQL.setCredits(p.getName(), credits);
                 break;
             case VAULT:
-                double vaultCredits  = plugin.vaultUtils.economy.getBalance(p.getName());
+                double vaultCredits = plugin.vaultUtils.economy.getBalance(p.getName());
                 vaultCredits += amount;
                 plugin.vaultUtils.economy.bankDeposit(p.getName(), vaultCredits);
                 break;
@@ -370,9 +373,9 @@ public class GameManager {
                 }
             }
         } else if (reason.equals(Reason.SEEKERQUIT) || reason.equals(Reason.TIME) || reason.equals(Reason.HIDERSWON) || reason.equals(Reason.SEEKERDIED)) {
-           // Hiders won
+            // Hiders won
             if (ShopSettings.enabled) {
-                double timeBonus = (System.currentTimeMillis() - gameStartTime)/1000;
+                double timeBonus = (System.currentTimeMillis() - gameStartTime) / 1000;
                 timeBonus *= ShopSettings.pricePerSecondsHidden;
                 for (String hider : hiders) {
                     if (plugin.getServer().getPlayerExact(hider) != null) {
@@ -522,6 +525,9 @@ public class GameManager {
         if (BungeeSettings.usingPropHuntSigns && BungeeSettings.kickToHub) {
             Pinger ping = new Pinger(plugin);
             for (Player p : plugin.getServer().getOnlinePlayers()) {
+                if (p.isDead()) {
+                    respawnQuick(p);
+                }
                 ping.connectToServer(p, BungeeSettings.hubname);
             }
         }
@@ -537,6 +543,17 @@ public class GameManager {
                 }
             }
         }
+    }
+
+    private void respawnQuick(final Player player) {
+        PacketContainer packet = new PacketContainer(Packets.Client.CLIENT_COMMAND);
+        packet.getIntegers().write(0, 1);
+        try {
+            ProtocolLibrary.getProtocolManager().recieveClientPacket(player, packet);
+        } catch (Exception e) {
+            throw new RuntimeException("Cannot recieve packet.", e);
+        }
+
     }
 
     private String broadcastEndReason(Reason reason) {
