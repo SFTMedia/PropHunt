@@ -209,13 +209,7 @@ public class GameManager {
         }
 
         givePlayersLoadOuts(currentGameArena);
-        BukkitRunnable delayDisguiseTask = new BukkitRunnable() {
-            @Override
-            public void run() {
-                disguisePlayers(currentGameArena);
-            }
-        };
-        delayDisguiseTask.runTaskLater(plugin, 10L);
+        disguisePlayers(currentGameArena);
 
         gameStatus = true;
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
