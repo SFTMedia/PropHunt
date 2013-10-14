@@ -200,12 +200,11 @@ public class GameManager {
 
         } else {
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-
                 @Override
                 public void run() {
-                    plugin.SBS.addPlayerToGame(plugin, plugin.getServer().getPlayer(firstSeeker));
+                    plugin.SBS.addPlayerToGame(plugin, plugin.getServer().getPlayerExact(firstSeeker));
                 }
-            }, 20L);
+            }, 1L);
         }
 
         givePlayersLoadOuts(currentGameArena);

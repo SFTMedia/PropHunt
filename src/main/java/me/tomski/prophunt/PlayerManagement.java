@@ -80,7 +80,6 @@ public class PlayerManagement {
         if (playerInvents.containsKey(p.getName())) {
             p.getInventory().setContents(playerInvents.get(p.getName()));
             p.getInventory();
-            System.out.println("Inventory restored");
         }
     }
 
@@ -103,7 +102,6 @@ public class PlayerManagement {
     private static void restoreArmour(Player p) {
         p.getInventory().setArmorContents(playerArmour.get(p.getName()));
         p.updateInventory();
-        System.out.println("Armour restored");
     }
 
 }
