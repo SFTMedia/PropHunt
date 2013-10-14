@@ -16,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -208,7 +209,13 @@ public class GameManager {
         }
 
         givePlayersLoadOuts(currentGameArena);
-        disguisePlayers(currentGameArena);
+        BukkitRunnable delayDisguiseTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+                disguisePlayers(currentGameArena);
+            }
+        };
+        delayDisguiseTask.runTaskLater(plugin, 10L);
 
         gameStatus = true;
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {

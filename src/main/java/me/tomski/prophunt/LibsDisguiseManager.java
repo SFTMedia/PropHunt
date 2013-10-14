@@ -70,9 +70,7 @@ public class LibsDisguiseManager extends DisguiseManager {
     public void randomDisguise(Player p, ArenaConfig ac) {
         if (preChosenDisguise.containsKey(p)) {
             SimpleDisguise simpleDisguise = preChosenDisguise.get(p);
-            Disguise lds = getLibsDisguise(simpleDisguise);
-            lds.setViewSelfDisguise(true);
-            DisguiseAPI.disguiseToAll(p, lds);
+            disguisePlayer(p, simpleDisguise);
             PropHuntMessaging.sendMessage(p, MessageBank.DISGUISE_MESSAGE.getMsg() + parseDisguiseToName(simpleDisguise));
             preChosenDisguise.remove(p);
             return;
@@ -82,9 +80,7 @@ public class LibsDisguiseManager extends DisguiseManager {
             PropHuntMessaging.sendMessage(p, MessageBank.DISGUISE_ERROR.getMsg());
             return;
         }
-        Disguise lds = getLibsDisguise(ds);
-        lds.setViewSelfDisguise(true);
-        DisguiseAPI.disguiseToAll(p, lds);
+        disguisePlayer(p, ds);
         PropHuntMessaging.sendMessage(p, MessageBank.DISGUISE_MESSAGE.getMsg() + parseDisguiseToName(ds));
         preChosenDisguise.remove(p);
     }
