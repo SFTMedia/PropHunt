@@ -1137,19 +1137,28 @@ public class PropHunt extends JavaPlugin implements Listener {
         }, 2L);
     }
 
-    public void showPlayer(final Player owner) {
-        getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+    public void showPlayer(final Player owner, boolean shutdown) {
+        if (shutdown) {
+            for (Player viewer : owner.getServer().getOnlinePlayers()) {
+                if (viewer != owner) {
+                    viewer.showPlayer(owner);
 
-            @Override
-            public void run() {
-                for (Player viewer : owner.getServer().getOnlinePlayers()) {
-                    if (viewer != owner) {
-                        viewer.showPlayer(owner);
-
-                    }
                 }
             }
-        }, 1L);
+        } else {
+            getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+
+                @Override
+                public void run() {
+                    for (Player viewer : owner.getServer().getOnlinePlayers()) {
+                        if (viewer != owner) {
+                            viewer.showPlayer(owner);
+
+                        }
+                    }
+                }
+            }, 1L);
+        }
     }
 
 

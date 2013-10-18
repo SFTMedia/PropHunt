@@ -287,7 +287,7 @@ public class PropHuntListener implements Listener {
 
                 @Override
                 public void run() {
-                    PH.showPlayer(e.getPlayer());
+                    PH.showPlayer(e.getPlayer(), false);
 
                     if (PH.dm.isDisguised(e.getPlayer())) {
                         PH.dm.undisguisePlayer(e.getPlayer());

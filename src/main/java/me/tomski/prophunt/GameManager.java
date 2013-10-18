@@ -16,7 +16,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -386,7 +385,7 @@ public class GameManager {
         }
         for (final String hider : hiders) {
             if (plugin.getServer().getPlayer(hider) != null) {
-                plugin.showPlayer(plugin.getServer().getPlayer(hider));
+                plugin.showPlayer(plugin.getServer().getPlayer(hider), shutdown);
                 teleportToExit(plugin.getServer().getPlayer(hider), false);
                 PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(hider));
                 if (PropHunt.usingTABAPI) {
@@ -419,7 +418,7 @@ public class GameManager {
 
         for (final String seeker : seekers) {
             if (plugin.getServer().getPlayer(seeker) != null) {
-                plugin.showPlayer(plugin.getServer().getPlayer(seeker));
+                plugin.showPlayer(plugin.getServer().getPlayer(seeker), shutdown);
                 teleportToExit(plugin.getServer().getPlayer(seeker), false);
                 PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(seeker));
                 if (PropHunt.usingTABAPI) {
