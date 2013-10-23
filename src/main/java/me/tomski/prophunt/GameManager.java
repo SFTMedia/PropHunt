@@ -16,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -358,193 +359,203 @@ public class GameManager {
         im.sendMessage(p, ChatColor.translateAlternateColorCodes('&', message));
     }
 
-    public void endGame(Reason reason, boolean shutdown) throws IOException {
-        plugin.getServer().getScheduler().cancelTask(TIMERID);
-        String bcreason = broadcastEndReason(reason);
-        PropHuntMessaging.broadcastMessage(bcreason);
-        if (reason.equals(Reason.HIDERSQUIT) || reason.equals(Reason.SEEKERWON)) {
-            // seekers won
-            if (ShopSettings.enabled) {
-                for (String seeker : seekers) {
-                    if (plugin.getServer().getPlayerExact(seeker) != null) {
-                        giveCredits(plugin.getServer().getPlayerExact(seeker), ShopSettings.priceSeekerWin);
-                    }
-                }
-            }
-        } else if (reason.equals(Reason.SEEKERQUIT) || reason.equals(Reason.TIME) || reason.equals(Reason.HIDERSWON) || reason.equals(Reason.SEEKERDIED)) {
-            // Hiders won
-            if (ShopSettings.enabled) {
-                double timeBonus = (System.currentTimeMillis() - gameStartTime) / 1000;
-                timeBonus *= ShopSettings.pricePerSecondsHidden;
-                for (String hider : hiders) {
-                    if (plugin.getServer().getPlayerExact(hider) != null) {
-                        giveCredits(plugin.getServer().getPlayerExact(hider), ShopSettings.priceHiderWin + timeBonus);
-                    }
-                }
-            }
-        }
-        for (final String hider : hiders) {
-            if (plugin.getServer().getPlayer(hider) != null) {
-                plugin.showPlayer(plugin.getServer().getPlayer(hider), shutdown);
-                teleportToExit(plugin.getServer().getPlayer(hider), false);
-                PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(hider));
-                if (PropHunt.usingTABAPI) {
-                    SB.removeTab(plugin.getServer().getPlayer(hider));
-                }
-                if (useSideStats) {
-                    plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayer(hider));
-                }
-                if (shutdown) {
-                    if (plugin.getServer().getPlayer(hider) != null) {
-                        if (plugin.dm.isDisguised(plugin.getServer().getPlayer(hider))) {
-                            plugin.dm.undisguisePlayer(plugin.getServer().getPlayer(hider));
+    public void endGame(final Reason reason, final boolean shutdown) throws IOException {
+        BukkitRunnable endGameTask = new BukkitRunnable(){
+            @Override
+            public void run() {
+                plugin.getServer().getScheduler().cancelTask(TIMERID);
+                String bcreason = broadcastEndReason(reason);
+                PropHuntMessaging.broadcastMessage(bcreason);
+                if (reason.equals(Reason.HIDERSQUIT) || reason.equals(Reason.SEEKERWON)) {
+                    // seekers won
+                    if (ShopSettings.enabled) {
+                        for (String seeker : seekers) {
+                            if (plugin.getServer().getPlayerExact(seeker) != null) {
+                                giveCredits(plugin.getServer().getPlayerExact(seeker), ShopSettings.priceSeekerWin);
+                            }
                         }
                     }
-                } else {
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                        @Override
-                        public void run() {
+                } else if (reason.equals(Reason.SEEKERQUIT) || reason.equals(Reason.TIME) || reason.equals(Reason.HIDERSWON) || reason.equals(Reason.SEEKERDIED)) {
+                    // Hiders won
+                    if (ShopSettings.enabled) {
+                        double timeBonus = (System.currentTimeMillis() - gameStartTime) / 1000;
+                        timeBonus *= ShopSettings.pricePerSecondsHidden;
+                        for (String hider : hiders) {
+                            if (plugin.getServer().getPlayerExact(hider) != null) {
+                                giveCredits(plugin.getServer().getPlayerExact(hider), ShopSettings.priceHiderWin + timeBonus);
+                            }
+                        }
+                    }
+                }
+                for (final String hider : hiders) {
+                    if (plugin.getServer().getPlayer(hider) != null) {
+                        plugin.showPlayer(plugin.getServer().getPlayer(hider), shutdown);
+                        teleportToExit(plugin.getServer().getPlayer(hider), false);
+                        PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(hider));
+                        if (PropHunt.usingTABAPI) {
+                            SB.removeTab(plugin.getServer().getPlayer(hider));
+                        }
+                        if (useSideStats) {
+                            plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayer(hider));
+                        }
+                        if (shutdown) {
                             if (plugin.getServer().getPlayer(hider) != null) {
                                 if (plugin.dm.isDisguised(plugin.getServer().getPlayer(hider))) {
                                     plugin.dm.undisguisePlayer(plugin.getServer().getPlayer(hider));
                                 }
                             }
-                        }
-                    }, 20L);
-                }
-            }
-            playerstoundisguise.add(hider);
-        }
-
-        for (final String seeker : seekers) {
-            if (plugin.getServer().getPlayer(seeker) != null) {
-                plugin.showPlayer(plugin.getServer().getPlayer(seeker), shutdown);
-                teleportToExit(plugin.getServer().getPlayer(seeker), false);
-                PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(seeker));
-                if (PropHunt.usingTABAPI) {
-                    SB.removeTab(plugin.getServer().getPlayer(seeker));
-                }
-                if (useSideStats) {
-                    plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayer(seeker));
-                }
-                if (shutdown) {
-                    if (plugin.getServer().getPlayer(seeker) != null) {
-                        if (plugin.dm.isDisguised(plugin.getServer().getPlayer(seeker))) {
-                            plugin.dm.undisguisePlayer(plugin.getServer().getPlayer(seeker));
+                        } else {
+                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (plugin.getServer().getPlayer(hider) != null) {
+                                        if (plugin.dm.isDisguised(plugin.getServer().getPlayer(hider))) {
+                                            plugin.dm.undisguisePlayer(plugin.getServer().getPlayer(hider));
+                                        }
+                                    }
+                                }
+                            }, 20L);
                         }
                     }
-                } else {
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (plugin.getServer().getPlayer(seeker) != null) {
-                                if (plugin.dm.isDisguised(plugin.getServer().getPlayer(seeker))) {
-                                    plugin.dm.undisguisePlayer(plugin.getServer().getPlayer(seeker));
+                    playerstoundisguise.add(hider);
+                }
+
+                for (final String seeker : seekers) {
+                    if (plugin.getServer().getPlayerExact(seeker) != null) {
+                        plugin.showPlayer(plugin.getServer().getPlayerExact(seeker), shutdown);
+                        teleportToExit(plugin.getServer().getPlayerExact(seeker), false);
+                        PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayerExact(seeker));
+                        if (PropHunt.usingTABAPI) {
+                            SB.removeTab(plugin.getServer().getPlayerExact(seeker));
+                        }
+                        if (useSideStats) {
+                            plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayerExact(seeker));
+                        }
+                        if (shutdown) {
+                            if (plugin.getServer().getPlayerExact(seeker) != null) {
+                                if (plugin.dm.isDisguised(plugin.getServer().getPlayerExact(seeker))) {
+                                    plugin.dm.undisguisePlayer(plugin.getServer().getPlayerExact(seeker));
                                 }
                             }
+                        } else {
+                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (plugin.getServer().getPlayerExact(seeker) != null) {
+                                        if (plugin.dm.isDisguised(plugin.getServer().getPlayerExact(seeker))) {
+                                            plugin.dm.undisguisePlayer(plugin.getServer().getPlayerExact(seeker));
+                                        }
+                                    }
+                                }
+                            }, 20L);
                         }
-                    }, 20L);
+
+                    }
+                    playerstoundisguise.add(seeker);
+
                 }
 
-            }
-            playerstoundisguise.add(seeker);
+                for (String spectator : spectators) {
+                    if (plugin.getServer().getPlayerExact(spectator) != null) {
+                        teleportToExit(plugin.getServer().getPlayerExact(spectator), false);
+                        PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayerExact(spectator));
+                        if (PropHunt.usingTABAPI) {
+                            SB.removeTab(plugin.getServer().getPlayerExact(spectator));
+                        }
+                        if (useSideStats) {
+                            plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayerExact(spectator));
+                        }
+                        if (plugin.dm.isDisguised(plugin.getServer().getPlayerExact(spectator))) {
+                            plugin.dm.undisguisePlayer(plugin.getServer().getPlayerExact(spectator));
+                        }
 
-        }
+                    }
+                    playerstoundisguise.add(spectator);
 
-        for (String spectator : spectators) {
-            if (plugin.getServer().getPlayer(spectator) != null) {
-                teleportToExit(plugin.getServer().getPlayer(spectator), false);
-                PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(spectator));
-                if (PropHunt.usingTABAPI) {
-                    SB.removeTab(plugin.getServer().getPlayer(spectator));
                 }
-                if (useSideStats) {
-                    plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayer(spectator));
+
+
+                for (String player : playerstoundisguise) {
+                    if (plugin.getServer().getPlayerExact(player) != null) {
+                        if (plugin.dm.isDisguised(plugin.getServer().getPlayerExact(player))) {
+                            plugin.dm.undisguisePlayer(plugin.getServer().getPlayerExact(player));
+                        }
+                    }
                 }
-                if (plugin.dm.isDisguised(plugin.getServer().getPlayer(spectator))) {
-                    plugin.dm.undisguisePlayer(plugin.getServer().getPlayer(spectator));
+
+
+                for (String player : playersWaiting) {
+                    if (plugin.getServer().getPlayerExact(player) != null) {
+                        teleportToExit((plugin.getServer().getPlayerExact(player)), false);
+                    }
+                    if (useSideStats) {
+                        plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayerExact(player));
+                    }
                 }
 
-            }
-            playerstoundisguise.add(spectator);
 
-        }
-
-
-        for (String player : playerstoundisguise) {
-            if (plugin.getServer().getPlayer(player) != null) {
-                if (plugin.dm.isDisguised(plugin.getServer().getPlayer(player))) {
-                    plugin.dm.undisguisePlayer(plugin.getServer().getPlayer(player));
+                if (SCOREBOARDTASKID != 0) {
+                    plugin.getServer().getScheduler().cancelTask(SCOREBOARDTASKID);
                 }
-            }
-        }
 
-
-        for (String player : playersWaiting) {
-            if (plugin.getServer().getPlayer(player) != null) {
-                teleportToExit((plugin.getServer().getPlayer(player)), false);
-            }
-            if (useSideStats) {
-                plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayer(player));
-            }
-        }
-
-
-        if (SCOREBOARDTASKID != 0) {
-            plugin.getServer().getScheduler().cancelTask(SCOREBOARDTASKID);
-        }
-
-        if (usingSolidBlock) {
-            SolidBlockTracker.solidBlocks.clear();
-            SolidBlockTracker.currentLocation.clear();
-            SolidBlockTracker.movementTracker.clear();
-            plugin.getServer().getScheduler().cancelTask(TRACKERID);
-            plugin.getServer().getScheduler().cancelTask(DETRACKERID);
-        }
-
-
-        playerstoundisguise.clear();
-        playersWaiting.clear();
-        hiders.clear();
-        seekers.clear();
-        spectators.clear();
-        firstSeeker = null;
-        gameStatus = false;
-        isHosting = false;
-        timeleft = 0;
-        PHScoreboard.disguisesBlown = false;
-        SideBarStats.playerBoards.clear();
-        for (SolidBlock sb : SolidBlockTracker.solidBlocks.values()) {
-            try {
-                sb.unSetBlock(plugin);
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-        if (BungeeSettings.usingPropHuntSigns && BungeeSettings.kickToHub) {
-            Pinger ping = new Pinger(plugin);
-            for (Player p : plugin.getServer().getOnlinePlayers()) {
-                if (p.isDead()) {
-                    respawnQuick(p);
+                if (usingSolidBlock) {
+                    SolidBlockTracker.solidBlocks.clear();
+                    SolidBlockTracker.currentLocation.clear();
+                    SolidBlockTracker.movementTracker.clear();
+                    plugin.getServer().getScheduler().cancelTask(TRACKERID);
+                    plugin.getServer().getScheduler().cancelTask(DETRACKERID);
                 }
-                ping.connectToServer(p, BungeeSettings.hubname);
-            }
-        }
-        PropHuntMessaging.broadcastMessage(ChatColor.GREEN + "------------------------");
-        if (automatic) {
-            if (AutomationSettings.runChecks(plugin)) {
-                return;
-            }
-            hostGame(null, plugin.AM.getNextInRotation());
-            if (dedicated) {
-                for (Player p : plugin.getServer().getOnlinePlayers()) {
-                    addPlayerToGameDedi(p.getName());
+
+
+                playerstoundisguise.clear();
+                playersWaiting.clear();
+                hiders.clear();
+                seekers.clear();
+                spectators.clear();
+                firstSeeker = null;
+                gameStatus = false;
+                isHosting = false;
+                timeleft = 0;
+                PHScoreboard.disguisesBlown = false;
+                SideBarStats.playerBoards.clear();
+                for (SolidBlock sb : SolidBlockTracker.solidBlocks.values()) {
+                    try {
+                        sb.unSetBlock(plugin);
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (BungeeSettings.usingPropHuntSigns && BungeeSettings.kickToHub) {
+                    Pinger ping = new Pinger(plugin);
+                    for (Player p : plugin.getServer().getOnlinePlayers()) {
+                        if (p.isDead()) {
+                            respawnQuick(p);
+                        }
+                        try {
+                            ping.connectToServer(p, BungeeSettings.hubname);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                PropHuntMessaging.broadcastMessage(ChatColor.GREEN + "------------------------");
+                if (automatic) {
+                    if (AutomationSettings.runChecks(plugin)) {
+                        return;
+                    }
+                    hostGame(null, plugin.AM.getNextInRotation());
+                    if (dedicated) {
+                        for (Player p : plugin.getServer().getOnlinePlayers()) {
+                            addPlayerToGameDedi(p.getName());
+                        }
+                    }
                 }
             }
-        }
+        };
+        endGameTask.runTaskLater(plugin, 20L);
     }
 
-    private void respawnQuick(final Player player) {
+    public void respawnQuick(final Player player) {
         PacketContainer packet = new PacketContainer(Packets.Client.CLIENT_COMMAND);
         packet.getIntegers().write(0, 1);
         try {
