@@ -86,3 +86,6 @@
     - Fix problems with per arena config disguises
     - See self
     - No delay on shutdown
+- V 1.41
+    - Use vault for perm checks
+    - Fix prechosen disguises
