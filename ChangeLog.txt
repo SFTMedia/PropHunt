@@ -86,3 +86,4 @@
     - Fix problems with per arena config disguises
     - See self
     - No delay on shutdown
+    - Fix rewards going wrong!
