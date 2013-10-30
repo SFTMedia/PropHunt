@@ -89,3 +89,4 @@
 - V 1.41
     - Use vault for perm checks
     - Fix prechosen disguises
+    - Fix rewards
