@@ -67,9 +67,9 @@ public class BlockChooser implements Listener {
 
     private boolean hasPermsForBlock(Player player, ItemStack currentItem) {
         if (currentItem.getData().getData() == 0) {
-            return player.hasPermission("prophunt.blockchooser." + currentItem.getTypeId());
+            return plugin.vaultUtils.permission.has(player, "prophunt.blockchooser." + currentItem.getTypeId());
         } else {
-            return player.hasPermission("prophunt.blockchooser." + currentItem.getTypeId() + "-" + currentItem.getData().getData());
+            return plugin.vaultUtils.permission.has(player, "prophunt.blockchooser." + currentItem.getTypeId() + "-" + currentItem.getData().getData());
         }
     }
 

@@ -225,6 +225,7 @@ public class GameManager {
             setupScoreBoard();
         }
         gameStartTime = System.currentTimeMillis();
+        DisguiseManager.preChosenDisguise.clear();
     }
 
     private void setupScoreBoard() {
@@ -308,8 +309,13 @@ public class GameManager {
             if (seekers.contains(s) || firstSeeker.equals(s)) {
                 continue;
             }
-            if (plugin.getServer().getPlayer(s) != null) {
-                plugin.dm.randomDisguise(plugin.getServer().getPlayer(s), ArenaManager.arenaConfigs.get(a));
+            if (plugin.getServer().getPlayerExact(s) != null) {
+                Player player = plugin.getServer().getPlayerExact(s);
+                if (DisguiseManager.preChosenDisguise.containsKey(player)) {
+                   plugin.dm.disguisePlayer(player, DisguiseManager.preChosenDisguise.get(player));
+                } else {
+                    plugin.dm.randomDisguise(player, ArenaManager.arenaConfigs.get(a));
+                }
             }
         }
 
