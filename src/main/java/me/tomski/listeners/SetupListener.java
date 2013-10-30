@@ -31,36 +31,36 @@ public class SetupListener implements Listener {
                 if (e.getItem().getData().getData() == 1) {
                     ArenaManager.currentArena.setHiderSpawn(e.getPlayer().getLocation());
                     PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.HIDER_SPAWN_SET.getMsg());
-                    ifCompleteFinish(e);
                     e.setCancelled(true);
+                    ifCompleteFinish(e);
                     return;
                 }
                 if (e.getItem().getData().getData() == 2) {
                     ArenaManager.currentArena.setSeekerSpawn(e.getPlayer().getLocation());
                     PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.SEEKER_SPAWN_SET.getMsg());
-                    ifCompleteFinish(e);
                     e.setCancelled(true);
+                    ifCompleteFinish(e);
                     return;
                 }
                 if (e.getItem().getData().getData() == 3) {
                     ArenaManager.currentArena.setLobbySpawn(e.getPlayer().getLocation());
                     PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.LOBBY_SPAWN_SET.getMsg());
-                    ifCompleteFinish(e);
                     e.setCancelled(true);
+                    ifCompleteFinish(e);
                     return;
                 }
                 if (e.getItem().getData().getData() == 4) {
                     ArenaManager.currentArena.setSpectatorSpawn(e.getPlayer().getLocation());
                     PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.SPECTATOR_SPAWN_SET.getMsg());
-                    ifCompleteFinish(e);
                     e.setCancelled(true);
+                    ifCompleteFinish(e);
                     return;
                 }
                 if (e.getItem().getData().getData() == 5) {
                     ArenaManager.currentArena.setExitSpawn(e.getPlayer().getLocation());
                     PropHuntMessaging.sendMessage(e.getPlayer(), MessageBank.EXIT_SPAWN_SET.getMsg());
-                    ifCompleteFinish(e);
                     e.setCancelled(true);
+                    ifCompleteFinish(e);
                     return;
                 }
             }
