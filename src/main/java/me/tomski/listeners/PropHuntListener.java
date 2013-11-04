@@ -318,8 +318,11 @@ public class PropHuntListener implements Listener {
         if (GameManager.hiders.contains(e.getEntity().getName())) {
             if (e.getEntity().getKiller() != null) {
                 if (ShopSettings.enabled) {
-                    giveHiderKillWinnings(e.getEntity());
+                    giveHiderKillWinnings(e.getEntity().getKiller());
                 }
+            }
+            if (ShopSettings.enabled) {
+                giveHiderBonusTimeWinnings(e.getEntity());
             }
             e.getDrops().clear();
             if (isLastHider()) {
@@ -348,7 +351,7 @@ public class PropHuntListener implements Listener {
         } else if (GameManager.seekers.contains(e.getEntity().getName())) {
             if (e.getEntity().getKiller() != null) {
                 if (ShopSettings.enabled) {
-                    giveSeekerKillWinnings(e.getEntity());
+                    giveSeekerKillWinnings(e.getEntity().getKiller());
                 }
             }
             e.getDrops().clear();
@@ -424,9 +427,13 @@ public class PropHuntListener implements Listener {
     }
 
     private void giveHiderKillWinnings(Player p) {
+        giveCredits(p, ShopSettings.pricePerHiderKill);
+    }
+
+    private void giveHiderBonusTimeWinnings(Player p) {
         double bonusTime = (System.currentTimeMillis()-GM.gameStartTime)/1000;
         bonusTime *= ShopSettings.pricePerSecondsHidden;
-        giveCredits(p, ShopSettings.pricePerHiderKill + bonusTime);
+        giveCredits(p, bonusTime);
     }
 
     private void giveSeekerKillWinnings(Player p) {
