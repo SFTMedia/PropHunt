@@ -62,7 +62,7 @@ public class ProtocolTask implements Listener {
 
             @Override
             public void onPacketReceiving(PacketEvent event) {
-                final int ATTACK_REACH = 4;
+                final int ATTACK_REACH = 3;
 
                 Player observer = event.getPlayer();
                 Location observerPos = observer.getEyeLocation();
