@@ -5,11 +5,10 @@ import me.tomski.enums.EconomyType;
 import me.tomski.prophuntstorage.ShopConfig;
 import me.tomski.shop.ShopItem;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ShopSettings {
 
@@ -65,7 +64,7 @@ public class ShopSettings {
             String name = shopConfig.getShopConfig().getString(path + "." + key + ".Name");
             String Id = shopConfig.getShopConfig().getString(path + "." + key + ".Id");
             double cost = shopConfig.getShopConfig().getDouble(path + "." + key + ".Cost");
-            ItemStack stack = parseStringToStack(plugin, Id);
+            ItemStack stack = parseITEMStringToStack(Id);
             if (stack != null) {
                 ShopItem item = new ShopItem(plugin, stack, name, (int) cost, getStackPermission(stack));
                 itemChoices.add(item);
@@ -134,6 +133,76 @@ public class ShopSettings {
             return null;
         }
         return null;
+    }
+
+    private ItemStack parseITEMStringToStack(String s) {
+        ItemStack stack = null;
+        String[] enchantsplit = s.split(" ");
+        if (enchantsplit.length > 1) {
+            //get enchants
+            String item = enchantsplit[0];
+            String enchants = enchantsplit[1];
+            String[] totalenchants = enchants.split(";");
+            int ENCHANTID = 0;
+            int ENCHANTLEVEL = 0;
+            Map<Enchantment, Integer> TOTEnchants = new HashMap<Enchantment, Integer>();
+            int itemint = 0;
+            try {
+                itemint = Integer.parseInt(item);
+            } catch (NumberFormatException nfe) {
+                return null;
+            }
+            int i = totalenchants.length;
+            for (int z = 0; z < i; ) {
+                String[] subsplit = totalenchants[z].split(":");
+                try {
+                    ENCHANTID = Integer.parseInt(subsplit[0]);
+                    ENCHANTLEVEL = Integer.parseInt(subsplit[1]);
+                } catch (NumberFormatException nfe) {
+                    return null;
+                }
+                TOTEnchants.put(Enchantment.getById(ENCHANTID), ENCHANTLEVEL);
+                z++;
+
+            }
+            stack = new ItemStack(itemint, 1);
+            stack.addUnsafeEnchantments(TOTEnchants);
+            return stack;
+        }
+        String[] damagesplit = s.split(":");
+        if (damagesplit.length > 2) {
+            //get damage value
+            String id = damagesplit[0];
+            String damage = damagesplit[1];
+            String amount = damagesplit[2];
+            int ID = 0;
+            short DAMAGE = 0;
+            int AMOUNT = 0;
+            try {
+                ID = Integer.parseInt(id);
+                DAMAGE = Short.parseShort(damage);
+                AMOUNT = Integer.parseInt(amount);
+            } catch (NumberFormatException NFE) {
+                return null;
+            }
+            stack = new ItemStack(Material.getMaterial(ID), AMOUNT, DAMAGE);
+            return stack;
+        }
+        //simple stack
+        String[] normalsplit = s.split(":");
+        String id = normalsplit[0];
+        String amount = normalsplit[1];
+        int ID = 0;
+        int AMOUNT = 0;
+        try {
+            ID = Integer.parseInt(id);
+            AMOUNT = Integer.parseInt(amount);
+        } catch (NumberFormatException NFE) {
+            return null;
+        }
+
+        stack = new ItemStack(Material.getMaterial(ID), AMOUNT);
+        return stack;
     }
 
 }

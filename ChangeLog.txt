@@ -90,3 +90,4 @@
     - Use vault for perm checks
     - Fix prechosen disguises
     - Fix rewards
+    - Support enchants in shop
