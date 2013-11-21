@@ -21,7 +21,7 @@ Items:
       # Name of the item
       Name: First Seeker
       # Item id of the item
-      Id: 339
+      Id: 339:1
       # Cost of the item
       Cost: 250
 ##################################################
