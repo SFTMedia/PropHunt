@@ -24,6 +24,10 @@ Items:
       Id: 339:1
       # Cost of the item
       Cost: 250
+    2:
+      Name: Red Wool
+      Id: "35:14:1"
+      Cost: 300
 ##################################################
 ## Manage all ids for special items here, set to 0 if you dont want to use
 # Unique items to PropHunt that have special effects
@@ -32,12 +36,14 @@ Items:
 # FirstSeeker item is 339, there is an item with Id 339 in the ItemShop, this means that if the player
 # buys the First Seeker item from the shop, they will get the special item as defined below
 #
+# For items, you must supply an amount
+#
 #
 # The following config for the Items: would not give the player anything special, as the item 338 is not a
 # unique PropHuntItem, so they would just recieve the item 338 when the game starts
 #   1:
 #     Name: First Seeker
-#     Id: 338
+#     Id: 338:1
 #     Cost: 250
 # PropHuntItems:
 #  FirstSeeker: 339
