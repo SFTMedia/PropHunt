@@ -55,6 +55,7 @@ public class GameManager {
     public static int time_reward;
     public static int TIMERID;
     public static boolean chooseNewSeeker;
+    public static boolean randomArenas;
 
     private int TRACKERID;
 

@@ -1,5 +1,6 @@
 package me.tomski.arenas;
 
+import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -114,7 +115,13 @@ public class ArenaManager {
         return false;
     }
 
+    Random rand = new Random();
+    int selection;
     public Arena getNextInRotation() {
+        if (GameManager.randomArenas) {
+            selection = rand.nextInt(arenasInRotation.size());
+            return arenasInRotation.get(selection);
+        }
         if (rotationCounter >= arenasInRotation.size()) {
             rotationCounter = 0;
         }

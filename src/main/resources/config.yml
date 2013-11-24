@@ -22,6 +22,9 @@ automatic: false
 dedicated: false
 # Only works if you are using the custom tab. Will display the disguises that you are chasing
 # in the last 30 seconds of the game
+# Random arenas
+# If using automatic/dedicated mode, arenas will be chosen at random instead of sequential
+random-arenas: true
 blow-disguises-last-30-seconds: true
 # Delay the seeker at the start of the round to give hiders a chance to hide
 seeker-delay-time: 0

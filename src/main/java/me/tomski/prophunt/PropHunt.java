@@ -239,14 +239,15 @@ public class PropHunt extends JavaPlugin implements Listener {
     private void loadConfigSettings() {
         if (getConfig().contains("automatic")) {
             GameManager.automatic = getConfig().getBoolean("automatic");
-            if (GameManager.automatic) {
-                if (getConfig().contains("dedicated")) {
-                    GameManager.dedicated = getConfig().getBoolean("dedicated");
-                    if (GameManager.dedicated) {
-                        GameManager.automatic = true;
-                    }
-                }
+        }
+        if (getConfig().contains("dedicated")) {
+            GameManager.dedicated = getConfig().getBoolean("dedicated");
+            if (GameManager.dedicated) {
+                GameManager.automatic = true;
             }
+        }
+        if (getConfig().contains("random-arenas")) {
+            GameManager.randomArenas = getConfig().getBoolean("random-arenas");
         }
         if (getConfig().contains("players-to-start")) {
             GameManager.playersToStartGame = getConfig().getInt("players-to-start");
