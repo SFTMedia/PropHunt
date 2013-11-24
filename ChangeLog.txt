@@ -91,3 +91,4 @@
     - Fix prechosen disguises
     - Fix rewards
     - Support enchants in shop
+    - Add random mode for arena selection
