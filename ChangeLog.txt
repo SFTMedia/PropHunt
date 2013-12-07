@@ -92,3 +92,5 @@
     - Fix rewards
     - Support enchants in shop
     - Add random mode for arena selection
+- V 1.42
+    - 1.7.2 compile

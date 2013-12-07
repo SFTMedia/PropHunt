@@ -6,7 +6,7 @@
 
     <groupId>me.tomski</groupId>
     <artifactId>PropHunt</artifactId>
-    <version>1.41-SNAPSHOT</version>
+    <version>1.42-SNAPSHOT</version>
     <name>PropHunt</name>
 
     <build>
@@ -85,17 +85,17 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.6.4-R0.1-SNAPSHOT</version>
+            <version>1.7.2-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>pgDev</groupId>
             <artifactId>DisguiseCraft</artifactId>
-            <version>5.0</version>
+            <version>5.1</version>
         </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
-            <version>LATEST</version>
+            <version>3.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.mcsg.double0negative.tabapi</groupId>
