@@ -1,8 +1,9 @@
 package me.tomski.blocks;
 
-import com.comphenix.protocol.Packets;
+import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.reflect.FieldAccessException;
 import me.tomski.listeners.PropHuntListener;
 import me.tomski.objects.SimpleDisguise;
 import me.tomski.prophunt.PropHunt;
@@ -59,25 +60,33 @@ public class SolidBlock {
     }
 
     private PacketContainer getBlockPacket() {
-        blockChange = pm.createPacket(Packets.Server.BLOCK_CHANGE);
-        blockChange.getIntegers().
-                write(0, loc.getBlockX()).
-                write(1, loc.getBlockY()).
-                write(2, loc.getBlockZ()).
-                write(3, id).
-                write(4, damage);
+        blockChange = pm.createPacket(PacketType.findCurrent(PacketType.Protocol.GAME, PacketType.Sender.SERVER, 53), true);
+        try {
+            blockChange.getIntegers().
+                    write(0, loc.getBlockX()).
+                    write(1, loc.getBlockY()).
+                    write(2, loc.getBlockZ()).
+                    write(3, id).
+                    write(4, damage);
+        } catch (FieldAccessException e) {
+            System.out.println(e.getCause() + " " + e.getLocalizedMessage());
+        }
         return blockChange;
     }
 
     public void unSetBlock(PropHunt plugin) throws InvocationTargetException {
         dead = true;
-        blockChange = pm.createPacket(Packets.Server.BLOCK_CHANGE);
-        blockChange.getIntegers().
-                write(0, loc.getBlockX()).
-                write(1, loc.getBlockY()).
-                write(2, loc.getBlockZ()).
-                write(3, 0).
-                write(4, (int) damage);
+        blockChange = pm.createPacket(PacketType.findCurrent(PacketType.Protocol.GAME, PacketType.Sender.SERVER, 53), true);
+        try {
+            blockChange.getIntegers().
+                    write(0, loc.getBlockX()).
+                    write(1, loc.getBlockY()).
+                    write(2, loc.getBlockZ()).
+                    write(3, 0).
+                    write(4, damage);
+        } catch (FieldAccessException e) {
+            System.out.println(e.getCause() + " " + e.getLocalizedMessage());
+        }
 
         PropHuntListener.tempIgnoreUndisguise.remove(owner);
         plugin.dm.disguisePlayer(owner, d);
