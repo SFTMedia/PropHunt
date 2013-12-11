@@ -405,7 +405,7 @@ public class PropHuntListener implements Listener {
     }
 
     private void giveCredits(Player p, double amount) {
-        if (amount <= 0) {
+        if (amount <= 0 || !ShopSettings.enabled) {
             return;
         }
         switch (ShopSettings.economyType) {

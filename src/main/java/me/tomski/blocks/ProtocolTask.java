@@ -1,9 +1,9 @@
 package me.tomski.blocks;
 
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.Packets;
-import com.comphenix.protocol.events.*;
-import com.comphenix.protocol.injector.GamePhase;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.events.PacketEvent;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.utils.SolidBlockTracker;
@@ -22,6 +22,11 @@ public class ProtocolTask implements Listener {
 
     public void initProtocol() {
         PropHunt.protocolManager.getAsynchronousManager().registerAsyncHandler(new PacketAdapter(plugin, PacketType.Play.Client.BLOCK_PLACE) {
+
+            @Override
+            public void onPacketSending(PacketEvent event) {
+                System.out.println("sent packet " + event.getPacketType());
+            }
 
             @Override
             public void onPacketReceiving(PacketEvent event) {
@@ -60,6 +65,11 @@ public class ProtocolTask implements Listener {
 
 
         PropHunt.protocolManager.getAsynchronousManager().registerAsyncHandler(new PacketAdapter(plugin, PacketType.Play.Server.ANIMATION) {
+
+            @Override
+            public void onPacketSending(PacketEvent event) {
+                System.out.println("sent packet " + event.getPacketType());
+            }
 
             @Override
             public void onPacketReceiving(PacketEvent event) {
