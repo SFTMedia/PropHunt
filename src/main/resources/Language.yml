@@ -96,7 +96,7 @@ not_enough_currency: "You dont have enough for that item"
 purchase_complete: "You have just bought: "
 shop_not_enabled: "Shop is not enabled"
 currency_balance: "You have : &6"
-credits_earn_popup: "&fYou have earnt &6{credits}"
+credits_earn_popup: "&fYou have earnt&6 credits"
 
 # setup
 seeker_spawn_set: "Seeker spawn Set"

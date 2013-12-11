@@ -362,8 +362,8 @@ public class GameManager {
         }
         ItemMessage im = new ItemMessage(plugin);
         String message = MessageBank.CREDITS_EARN_POPUP.getMsg();
-        message = message.replaceAll("\\{credits\\}", amount + " " + ShopSettings.currencyName);
-        im.sendMessage(p, ChatColor.translateAlternateColorCodes('&', message), 5, 0);
+        message = message.replaceAll("credits", amount + " " + ShopSettings.currencyName);
+        im.sendMessage(p, ChatColor.translateAlternateColorCodes('&', message));
     }
 
     public void endGame(final Reason reason, final boolean shutdown) throws IOException {

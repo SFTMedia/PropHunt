@@ -425,7 +425,7 @@ public class PropHuntListener implements Listener {
         ItemMessage im = new ItemMessage(PH);
         String message = MessageBank.CREDITS_EARN_POPUP.getMsg();
         message = message.replace("\\{credits\\}", amount + " " + ShopSettings.currencyName);
-        im.sendMessage(p, ChatColor.translateAlternateColorCodes('&', message), 5, 0);
+        im.sendMessage(p, ChatColor.translateAlternateColorCodes('&', message));
     }
 
     private void giveHiderKillWinnings(Player p) {
