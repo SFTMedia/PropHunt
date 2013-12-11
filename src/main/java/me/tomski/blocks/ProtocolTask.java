@@ -1,5 +1,6 @@
 package me.tomski.blocks;
 
+import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.Packets;
 import com.comphenix.protocol.events.*;
 import com.comphenix.protocol.injector.GamePhase;
@@ -20,7 +21,7 @@ public class ProtocolTask implements Listener {
 
 
     public void initProtocol() {
-        PropHunt.protocolManager.getAsynchronousManager().registerAsyncHandler(new PacketAdapter(plugin, ConnectionSide.CLIENT_SIDE, ListenerPriority.NORMAL, GamePhase.PLAYING, Packets.Client.PLACE) {
+        PropHunt.protocolManager.getAsynchronousManager().registerAsyncHandler(new PacketAdapter(plugin, PacketType.Play.Client.BLOCK_PLACE) {
 
             @Override
             public void onPacketReceiving(PacketEvent event) {
@@ -58,7 +59,7 @@ public class ProtocolTask implements Listener {
         }).syncStart();
 
 
-        PropHunt.protocolManager.getAsynchronousManager().registerAsyncHandler(new PacketAdapter(plugin, ConnectionSide.CLIENT_SIDE, ListenerPriority.NORMAL, GamePhase.PLAYING, Packets.Server.ARM_ANIMATION) {
+        PropHunt.protocolManager.getAsynchronousManager().registerAsyncHandler(new PacketAdapter(plugin, PacketType.Play.Server.ANIMATION) {
 
             @Override
             public void onPacketReceiving(PacketEvent event) {
@@ -95,7 +96,7 @@ public class ProtocolTask implements Listener {
 
                 // Simulate a hit against the closest player
                 if (hit != null) {
-                    PacketContainer useEntity = PropHunt.protocolManager.createPacket(Packets.Client.USE_ENTITY, false);
+                    PacketContainer useEntity = PropHunt.protocolManager.createPacket(PacketType.Play.Client.USE_ENTITY);
                     useEntity.getIntegers()
                             .write(0, observer.getEntityId())
                             .write(1, hit.getEntityId())
