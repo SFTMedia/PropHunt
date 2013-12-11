@@ -1,6 +1,7 @@
 package me.tomski.listeners;
 
 
+import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.Packets;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
@@ -503,8 +504,8 @@ public class PropHuntListener implements Listener {
 
             @Override
             public void run() {
-                PacketContainer packet = new PacketContainer(Packets.Client.CLIENT_COMMAND);
-                packet.getIntegers().write(0, 1);
+                PacketContainer packet = new PacketContainer(PacketType.Play.Client.CLIENT_COMMAND);
+                packet.getIntegers().write(0, 0);
 
                 try {
                     ProtocolLibrary.getProtocolManager().recieveClientPacket(player, packet);
