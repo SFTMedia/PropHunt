@@ -21,6 +21,7 @@ public class VaultUtils {
         } else {
             ShopSettings.enabled = false;
             plugin.getLogger().info("Vault permissions not found! Shop disabling!");
+            return;
         }
         if (setupEconomy()) {
             ShopSettings.enabled = true;

@@ -5,6 +5,7 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.reflect.FieldAccessException;
+import com.comphenix.protocol.wrappers.EnumWrappers;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.utils.SolidBlockTracker;
@@ -23,7 +24,6 @@ public class ProtocolTask implements Listener {
 
     public void initProtocol() {
         PropHunt.protocolManager.getAsynchronousManager().
-
                 registerAsyncHandler(new PacketAdapter(plugin, PacketType.Play.Client.BLOCK_PLACE) {
 
                     @Override
@@ -120,8 +120,8 @@ public class ProtocolTask implements Listener {
                         // Simulate a hit against the closest player
                         if (hit != null) {
                             PacketContainer useEntity = PropHunt.protocolManager.createPacket(PacketType.Play.Client.USE_ENTITY);
-                            useEntity.getIntegers()
-                                    .write(0, hit.getEntityId());
+                            useEntity.getIntegers().write(0, hit.getEntityId());
+                            useEntity.getEntityUseActions().write(0, EnumWrappers.EntityUseAction.ATTACK);
                             try {
                                 PropHunt.protocolManager.recieveClientPacket(event.getPlayer(), useEntity);
                             } catch (Exception e) {

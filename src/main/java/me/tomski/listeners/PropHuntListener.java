@@ -5,6 +5,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.Packets;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.EnumWrappers;
 import me.tomski.arenas.ArenaManager;
 import me.tomski.blocks.SolidBlock;
 import me.tomski.bungee.Pinger;
@@ -505,14 +506,12 @@ public class PropHuntListener implements Listener {
             @Override
             public void run() {
                 PacketContainer packet = new PacketContainer(PacketType.Play.Client.CLIENT_COMMAND);
-                packet.getIntegers().write(0, 0);
-
+                packet.getClientCommands().write(0, EnumWrappers.ClientCommand.PERFORM_RESPAWN);
                 try {
                     ProtocolLibrary.getProtocolManager().recieveClientPacket(player, packet);
                 } catch (Exception e) {
                     throw new RuntimeException("Cannot recieve packet.", e);
                 }
-
             }
         }, 5L);
 
