@@ -4,6 +4,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.reflect.FieldAccessException;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
 import me.tomski.utils.SolidBlockTracker;
@@ -85,32 +86,35 @@ public class ProtocolTask implements Listener {
                 Player hit = null;
 
                 // Get nearby entities
-                for (Player target : PropHunt.protocolManager.getEntityTrackers(observer)) {
-                    // No need to simulate an attack if the
-                    // player is already visible
-                    if (!observer.canSee(target)) {
-                        // Bounding box of the given player
-                        Vector3D targetPos = new Vector3D(target.getLocation());
-                        Vector3D minimum = targetPos.add(-0.5, 0, -0.5);
-                        Vector3D maximum = targetPos.add(0.5, 1.67, 0.5);
+                try {
+                    for (Player target : PropHunt.protocolManager.getEntityTrackers(observer)) {
+                        // No need to simulate an attack if the
+                        // player is already visible
+                        if (!observer.canSee(target)) {
+                            // Bounding box of the given player
+                            Vector3D targetPos = new Vector3D(target.getLocation());
+                            Vector3D minimum = targetPos.add(-0.5, 0, -0.5);
+                            Vector3D maximum = targetPos.add(0.5, 1.67, 0.5);
 
-                        if (hasIntersection(observerStart,
-                                observerEnd, minimum, maximum)) {
-                            if (hit == null
-                                    || hit.getLocation().distanceSquared(observerPos) > target.getLocation().distanceSquared(observerPos)) {
-                                hit = target;
+                            if (hasIntersection(observerStart,
+                                    observerEnd, minimum, maximum)) {
+                                if (hit == null
+                                        || hit.getLocation().distanceSquared(observerPos) > target.getLocation().distanceSquared(observerPos)) {
+                                    hit = target;
+                                }
                             }
                         }
                     }
+                } catch (FieldAccessException ex) {
+                    // Player is dead
                 }
 
                 // Simulate a hit against the closest player
                 if (hit != null) {
                     PacketContainer useEntity = PropHunt.protocolManager.createPacket(PacketType.Play.Client.USE_ENTITY);
                     useEntity.getIntegers()
-                            .write(0, observer.getEntityId())
-                            .write(1, hit.getEntityId())
-                            .write(2, 1 /* LEFT_CLICK */);
+                            .write(0, hit.getEntityId())
+                            .write(1, 0 /* LEFT_CLICK */);
 
                     try {
                         PropHunt.protocolManager.recieveClientPacket(event.getPlayer(), useEntity);
@@ -122,7 +126,11 @@ public class ProtocolTask implements Listener {
             }
 
             // Get entity trackers is not thread safe
-        }).syncStart();
+        }
+
+        ).
+
+                syncStart();
     }
 
     private boolean hasIntersection(Vector3D p1, Vector3D p2, Vector3D min,
