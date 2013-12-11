@@ -64,7 +64,7 @@ public class ProtocolTask implements Listener {
         }).syncStart();
 
 
-        PropHunt.protocolManager.getAsynchronousManager().registerAsyncHandler(new PacketAdapter(plugin, PacketType.Play.Server.ANIMATION) {
+        PropHunt.protocolManager.getAsynchronousManager().registerAsyncHandler(new PacketAdapter(plugin, PacketType.Play.Client.ARM_ANIMATION) {
 
             @Override
             public void onPacketSending(PacketEvent event) {
