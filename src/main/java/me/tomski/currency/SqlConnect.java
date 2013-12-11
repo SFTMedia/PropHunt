@@ -37,9 +37,9 @@ public class SqlConnect {
 
     private void testConnection() throws SQLException {
         connection = DriverManager.getConnection(settings.getConnector() + settings.getHost() + ":" + settings.getPort() + "/", settings.getUsername(), settings.getPass()); //Creates the connection
-        PreparedStatement sampleQueryStatement = connection.prepareStatement("CREATE DATABASE IF NOT EXISTS " + settings.getDatabase().toString()); //gen new Database if required
+        PreparedStatement sampleQueryStatement = connection.prepareStatement("CREATE DATABASE IF NOT EXISTS `" + settings.getDatabase() + "`"); //gen new Database if required
         sampleQueryStatement.execute();
-        sampleQueryStatement.executeUpdate("USE " + settings.getDatabase().toString());
+        sampleQueryStatement.executeUpdate("USE `" + settings.getDatabase() + "`");
         sampleQueryStatement.executeUpdate("CREATE TABLE IF NOT EXISTS PropHuntCurrency (playerName VARCHAR(255) PRIMARY KEY," + "credits INT)");
         sampleQueryStatement.executeUpdate();
         sampleQueryStatement.close();
