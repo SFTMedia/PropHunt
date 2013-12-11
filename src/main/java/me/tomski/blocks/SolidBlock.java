@@ -8,6 +8,7 @@ import me.tomski.listeners.PropHuntListener;
 import me.tomski.objects.SimpleDisguise;
 import me.tomski.prophunt.PropHunt;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
@@ -60,32 +61,32 @@ public class SolidBlock {
     }
 
     private PacketContainer getBlockPacket() {
-        blockChange = pm.createPacket(PacketType.findCurrent(PacketType.Protocol.GAME, PacketType.Sender.SERVER, 53), true);
+        blockChange = pm.createPacket(PacketType.Play.Server.BLOCK_CHANGE);
         try {
             blockChange.getIntegers().
                     write(0, loc.getBlockX()).
                     write(1, loc.getBlockY()).
                     write(2, loc.getBlockZ()).
-                    write(3, id).
-                    write(4, damage);
+                    write(3, damage);
+            blockChange.getBlocks().write(0, Material.getMaterial(id));
         } catch (FieldAccessException e) {
-            System.out.println(e.getCause() + " " + e.getLocalizedMessage());
+            System.out.println("PropHunt: Error with block change packet");
         }
         return blockChange;
     }
 
     public void unSetBlock(PropHunt plugin) throws InvocationTargetException {
         dead = true;
-        blockChange = pm.createPacket(PacketType.findCurrent(PacketType.Protocol.GAME, PacketType.Sender.SERVER, 53), true);
+        blockChange = pm.createPacket(PacketType.Play.Server.BLOCK_CHANGE);
         try {
             blockChange.getIntegers().
                     write(0, loc.getBlockX()).
                     write(1, loc.getBlockY()).
                     write(2, loc.getBlockZ()).
-                    write(3, 0).
                     write(4, damage);
+            blockChange.getBlocks().write(0, Material.AIR);
         } catch (FieldAccessException e) {
-            System.out.println(e.getCause() + " " + e.getLocalizedMessage());
+            System.out.println("PropHunt: Error with block change packet");
         }
 
         PropHuntListener.tempIgnoreUndisguise.remove(owner);
