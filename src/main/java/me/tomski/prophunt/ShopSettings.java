@@ -48,7 +48,7 @@ public class ShopSettings {
             if (stack != null) {
                 ShopItem item = new ShopItem(plugin, stack, name, (int) cost, getStackPermission(stack));
                 blockChoices.add(item);
-                plugin.getLogger().info("Loaded Shop Disguise with perm: " + getStackPermission(stack));
+                plugin.getLogger().info("Loaded Shop Disguise: " + Id);
             } else {
                 plugin.getLogger().warning("DISABLING SHOP, error with item : " + name);
                 return blockChoices;
@@ -68,7 +68,7 @@ public class ShopSettings {
             if (stack != null) {
                 ShopItem item = new ShopItem(plugin, stack, name, (int) cost, getItemStackPermission(stack));
                 itemChoices.add(item);
-                plugin.getLogger().info("Loaded Shop item with perm: " + getItemStackPermission(stack));
+                plugin.getLogger().info("Loaded Shop item: " + Id);
             } else {
                 plugin.getLogger().warning("DISABLING SHOP, error with item : " + name);
                 return itemChoices;
