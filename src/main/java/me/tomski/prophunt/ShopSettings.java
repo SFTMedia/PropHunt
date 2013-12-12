@@ -66,7 +66,7 @@ public class ShopSettings {
             double cost = shopConfig.getShopConfig().getDouble(path + "." + key + ".Cost");
             ItemStack stack = parseITEMStringToStack(Id);
             if (stack != null) {
-                ShopItem item = new ShopItem(plugin, stack, name, (int) cost, getStackPermission(stack));
+                ShopItem item = new ShopItem(plugin, stack, name, (int) cost, getItemStackPermission(stack));
                 itemChoices.add(item);
                 plugin.getLogger().info("Loaded Shop item: " + key);
             } else {
@@ -114,6 +114,15 @@ public class ShopSettings {
             return "prophunt.blockchooser." + currentItem.getTypeId() + "-" + currentItem.getData().getData();
         }
     }
+
+    private String getItemStackPermission(ItemStack currentItem) {
+        if (currentItem.getData().getData() == 0) {
+            return "prophunt.loadout." + currentItem.getTypeId();
+        } else {
+            return "prophunt.loadout." + currentItem.getTypeId() + "-" + currentItem.getData().getData();
+        }
+    }
+
 
 
     private ItemStack parseStringToStack(PropHunt plugin, String s) {
