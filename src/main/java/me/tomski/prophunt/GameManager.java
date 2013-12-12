@@ -559,7 +559,11 @@ public class GameManager {
                 }
             }
         };
-        endGameTask.runTaskLater(plugin, 20L);
+        if (shutdown) {
+            endGameTask.runTask(plugin);
+        } else {
+            endGameTask.runTaskLater(plugin, 20L);
+        }
     }
 
     public void respawnQuick(final Player player) {
