@@ -65,12 +65,13 @@ public class ArenaStorage {
             if (!plugin.getConfig().contains("CustomArenaConfigs." + key)) {
                 a.saveArenaToFile(plugin);
             }
-            for (Arena ar : ArenaManager.playableArenas.values()) {
-                plugin.AM.arenasInRotation.add(ar);
-            }
-            plugin.getLogger().log(Level.INFO, plugin.AM.arenasInRotation.size() + " arenas loaded");
-            loadCustomSettings(a);
         }
+        for (Arena ar : ArenaManager.playableArenas.values()) {
+            plugin.AM.arenasInRotation.add(ar);
+            loadCustomSettings(ar);
+        }
+        plugin.getLogger().log(Level.INFO, plugin.AM.arenasInRotation.size() + " arenas loaded");
+
     }
 
     private void loadCustomSettings(Arena a) {
