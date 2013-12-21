@@ -95,3 +95,4 @@
 - V 1.42
     - 1.7.2 compile
     - Translate blocks
+    - Economy support from console

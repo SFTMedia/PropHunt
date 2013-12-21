@@ -599,7 +599,45 @@ public class PropHunt extends JavaPlugin implements Listener {
             return true;
 
         }
+        if (args[0].equalsIgnoreCase("currency")) {
+            if (args.length == 2) {
+                return true;
+            }
+            if (args.length == 4) {
+                handleEconomyCommand(sender, args);
+                return true;
+            }
+            return true;
+        }
         return false;
+    }
+
+    private void handleEconomyCommand(CommandSender p, String[] args) {
+        String playerName = args[1];
+        String type = args[2];
+        String amount = args[3];
+        if (!isInt(amount)) {
+            p.sendMessage("Please supply an integer");
+            return;
+        }
+        if (!p.hasPermission("prophunt.economy" + type.toLowerCase())) {
+            p.sendMessage("You dont have permission for " + type);
+            return;
+        }
+        if (type.equalsIgnoreCase("set")) {
+            setCurrencyBalance(p, playerName, Integer.parseInt(amount));
+        } else if (type.equalsIgnoreCase("give")) {
+            int currentAmount = getCurrencyBalance(p, playerName);
+            currentAmount += Math.abs(Integer.parseInt(amount));
+            setCurrencyBalance(p, playerName, currentAmount);
+        } else if (type.equalsIgnoreCase("remove")) {
+            int currentAmount = getCurrencyBalance(p, playerName);
+            currentAmount -= Math.abs(Integer.parseInt(amount));
+            if (currentAmount <= 0) {
+                currentAmount = 0;
+            }
+            setCurrencyBalance(p, playerName, currentAmount);
+        }
     }
 
     private void handleEconomyCommand(Player p, String[] args) {
@@ -630,24 +668,36 @@ public class PropHunt extends JavaPlugin implements Listener {
         }
     }
 
-    private void setCurrencyBalance(Player setter, String p, int amount) {
+    private void setCurrencyBalance(CommandSender setter, String p, int amount) {
         switch (ShopSettings.economyType) {
             case PROPHUNT:
                 SQL.setCredits(p, amount);
-                PropHuntMessaging.sendMessage(setter, p + " now has " + amount + " " + ShopSettings.currencyName);
+                if (setter instanceof Player) {
+                    PropHuntMessaging.sendMessage((Player)setter, p + " now has " + amount + " " + ShopSettings.currencyName);
+                } else {
+                    setter.sendMessage(p + " now has " + amount + " " + ShopSettings.currencyName);
+                }
                 break;
             case VAULT:
-                PropHuntMessaging.sendMessage(setter, "Use your economy commands");
+                if (setter instanceof Player) {
+                    PropHuntMessaging.sendMessage((Player)setter, "Use your economy commands");
+                } else {
+                    setter.sendMessage("Use your normal economy commands");
+                }
                 break;
         }
     }
 
-    private int getCurrencyBalance(Player setter, String p) {
+    private int getCurrencyBalance(CommandSender setter, String p) {
         switch (ShopSettings.economyType) {
             case PROPHUNT:
                 return SQL.getCredits(p);
             case VAULT:
-                PropHuntMessaging.sendMessage(setter, "Use your economy commands");
+                if (setter instanceof Player) {
+                    PropHuntMessaging.sendMessage((Player)setter, "Use your economy commands");
+                }  else {
+                    setter.sendMessage("Use your normal economy commands");
+                }
             default:
                 return 0;
         }
