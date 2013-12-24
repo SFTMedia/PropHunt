@@ -357,7 +357,7 @@ public class GameManager {
             case VAULT:
                 double vaultCredits = plugin.vaultUtils.economy.getBalance(p.getName());
                 vaultCredits += amount;
-                plugin.vaultUtils.economy.bankDeposit(p.getName(), vaultCredits);
+                plugin.vaultUtils.economy.depositPlayer(p.getName(), vaultCredits);
                 break;
         }
         ItemMessage im = new ItemMessage(plugin);

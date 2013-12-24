@@ -2,7 +2,6 @@ package me.tomski.listeners;
 
 
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.Packets;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.EnumWrappers;
@@ -417,9 +416,9 @@ public class PropHuntListener implements Listener {
                 PH.SQL.setCredits(p.getName(), credits);
                 break;
             case VAULT:
-                double vaultCredits  = PH.vaultUtils.economy.getBalance(p.getName());
+                double vaultCredits = PH.vaultUtils.economy.getBalance(p.getName());
                 vaultCredits += amount;
-                PH.vaultUtils.economy.bankDeposit(p.getName(), vaultCredits);
+                PH.vaultUtils.economy.depositPlayer(p.getName(), vaultCredits);
                 break;
         }
         ItemMessage im = new ItemMessage(PH);
