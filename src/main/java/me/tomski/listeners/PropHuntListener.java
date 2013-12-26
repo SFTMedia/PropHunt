@@ -416,9 +416,7 @@ public class PropHuntListener implements Listener {
                 PH.SQL.setCredits(p.getName(), credits);
                 break;
             case VAULT:
-                double vaultCredits = PH.vaultUtils.economy.getBalance(p.getName());
-                vaultCredits += amount;
-                PH.vaultUtils.economy.depositPlayer(p.getName(), vaultCredits);
+                PH.vaultUtils.economy.depositPlayer(p.getName(), amount);
                 break;
         }
         ItemMessage im = new ItemMessage(PH);
