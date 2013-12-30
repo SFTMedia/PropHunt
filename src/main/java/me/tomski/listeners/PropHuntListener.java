@@ -426,7 +426,10 @@ public class PropHuntListener implements Listener {
     }
 
     private void giveHiderKillWinnings(Player p) {
-        giveCredits(p, ShopSettings.pricePerHiderKill);
+        if (p.hasPermission("prophunt.currency.vip"))
+            giveCredits(p, ShopSettings.vipBonus * ShopSettings.pricePerHiderKill);
+        else
+            giveCredits(p, ShopSettings.pricePerHiderKill);
     }
 
     private void giveHiderBonusTimeWinnings(Player p) {
@@ -436,7 +439,10 @@ public class PropHuntListener implements Listener {
     }
 
     private void giveSeekerKillWinnings(Player p) {
-        giveCredits(p, ShopSettings.pricePerSeekerKill);
+        if (p.hasPermission("prophunt.currency.vip"))
+            giveCredits(p, ShopSettings.vipBonus * ShopSettings.pricePerSeekerKill);
+        else
+            giveCredits(p, ShopSettings.pricePerSeekerKill);
     }
 
     private boolean noLivesLeft(Player p) {

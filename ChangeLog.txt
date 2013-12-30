@@ -98,3 +98,4 @@
     - Economy support from console
 - V 1.43
     - Economy rewards, not bank accounts
+    - Add bonus vip, prophunt.currency.vip

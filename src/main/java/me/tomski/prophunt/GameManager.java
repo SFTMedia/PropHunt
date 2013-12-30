@@ -376,7 +376,10 @@ public class GameManager {
                     if (ShopSettings.enabled) {
                         for (String seeker : seekers) {
                             if (plugin.getServer().getPlayerExact(seeker) != null) {
-                                giveCredits(plugin.getServer().getPlayerExact(seeker), ShopSettings.priceSeekerWin);
+                                if (plugin.getServer().getPlayerExact(seeker).hasPermission("prophunt.currency.vip"))
+                                    giveCredits(plugin.getServer().getPlayerExact(seeker), ShopSettings.vipBonus * ShopSettings.priceSeekerWin);
+                                else
+                                    giveCredits(plugin.getServer().getPlayerExact(seeker), ShopSettings.priceSeekerWin);
                             }
                         }
                     }
@@ -387,7 +390,10 @@ public class GameManager {
                         timeBonus *= ShopSettings.pricePerSecondsHidden;
                         for (String hider : hiders) {
                             if (plugin.getServer().getPlayerExact(hider) != null) {
-                                giveCredits(plugin.getServer().getPlayerExact(hider), ShopSettings.priceHiderWin + timeBonus);
+                                if (plugin.getServer().getPlayerExact(hider).hasPermission("prophunt.currency.vip"))
+                                    giveCredits(plugin.getServer().getPlayerExact(hider), ShopSettings.vipBonus * (ShopSettings.priceHiderWin + timeBonus));
+                                else
+                                    giveCredits(plugin.getServer().getPlayerExact(hider), ShopSettings.priceHiderWin + timeBonus);
                             }
                         }
                     }

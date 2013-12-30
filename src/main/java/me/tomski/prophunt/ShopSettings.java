@@ -28,6 +28,8 @@ public class ShopSettings {
     public static double priceSeekerWin;
     public static double priceHiderWin;
 
+    public static double vipBonus;
+
     private PropHunt plugin;
 
     private static PropHunt staticPlugin;

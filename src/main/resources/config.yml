@@ -107,6 +107,8 @@ ShopSettings:
   points-hiders-win: 20
   # Points seekers win
   points-seekers-win: 0
+  # Bonus credit earn for donators
+  vip-bonus: 2
 # Database settings for default PropHunt currency
 DatabaseSettings:
     type: mysql
