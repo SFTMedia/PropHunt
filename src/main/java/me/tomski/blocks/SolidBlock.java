@@ -36,10 +36,7 @@ public class SolidBlock {
         blockChange = getBlockPacket();
         this.owner = p;
         PropHuntListener.tempIgnoreUndisguise.add(owner);
-
         plugin.hidePlayer(owner, owner.getInventory().getArmorContents());
-
-
     }
 
     public boolean hasMoved(PropHunt plugin) {
@@ -83,7 +80,7 @@ public class SolidBlock {
                     write(0, loc.getBlockX()).
                     write(1, loc.getBlockY()).
                     write(2, loc.getBlockZ()).
-                    write(3, damage);
+                    write(3, 0);
             blockChange.getBlocks().write(0, Material.AIR);
         } catch (FieldAccessException e) {
             System.out.println("PropHunt: Error with block change packet");
