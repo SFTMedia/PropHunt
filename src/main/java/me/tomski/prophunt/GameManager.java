@@ -1,8 +1,9 @@
 package me.tomski.prophunt;
 
-import com.comphenix.protocol.Packets;
+import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.EnumWrappers;
 import me.tomski.arenas.Arena;
 import me.tomski.arenas.ArenaManager;
 import me.tomski.blocks.SolidBlock;
@@ -570,14 +571,20 @@ public class GameManager {
         }
     }
 
-    public void respawnQuick(final Player player) {
-        PacketContainer packet = new PacketContainer(Packets.Client.CLIENT_COMMAND);
-        packet.getIntegers().write(0, 1);
-        try {
-            ProtocolLibrary.getProtocolManager().recieveClientPacket(player, packet);
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot recieve packet.", e);
-        }
+    private void respawnQuick(final Player player) {
+        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+
+            @Override
+            public void run() {
+                PacketContainer packet = new PacketContainer(PacketType.Play.Client.CLIENT_COMMAND);
+                packet.getClientCommands().write(0, EnumWrappers.ClientCommand.PERFORM_RESPAWN);
+                try {
+                    ProtocolLibrary.getProtocolManager().recieveClientPacket(player, packet);
+                } catch (Exception e) {
+                    throw new RuntimeException("Cannot recieve packet.", e);
+                }
+            }
+        }, 5L);
 
     }
 
