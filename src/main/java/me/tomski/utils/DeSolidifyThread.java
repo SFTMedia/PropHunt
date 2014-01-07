@@ -5,7 +5,6 @@ import me.tomski.language.MessageBank;
 import me.tomski.listeners.PropHuntListener;
 import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
@@ -31,14 +30,12 @@ public class DeSolidifyThread implements Runnable {
                 try {
                     PropHuntMessaging.sendMessage(sb.getValue().owner, MessageBank.BROKEN_SOLID_BLOCK.getMsg());
                     sb.getValue().unSetBlock(plugin);
-                    sb.getValue().sendPacket(Bukkit.getOnlinePlayers());
                     removeList.add(sb.getValue().owner.getName());
                     SolidBlockTracker.currentLocation.put(sb.getValue().owner.getName(), sb.getValue().owner.getLocation());
                     SolidBlockTracker.movementTracker.put(sb.getValue().owner.getName(), 0);
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();
                 }
-
             }
         }
         for (String s : removeList) {

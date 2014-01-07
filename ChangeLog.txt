@@ -100,3 +100,6 @@
     - Economy rewards, not bank accounts
     - Add bonus vip, prophunt.currency.vip
     - Update gm respawn
+    - Make transition into SolidBlock smooth
+    - Get rid of hacky methods
+    - Fix problem with duplicates

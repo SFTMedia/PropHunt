@@ -121,6 +121,6 @@ public class SolidBlockTracker implements Runnable {
 
 
     private boolean shouldBeSolid(int i) {
-        return i == GameManager.solidBlockTime;
+        return i >= GameManager.solidBlockTime;
     }
 }

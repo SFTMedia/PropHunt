@@ -2,19 +2,15 @@ package me.tomski.prophunt;
 
 import me.tomski.arenas.ArenaConfig;
 import me.tomski.language.MessageBank;
-import me.tomski.listeners.PropHuntListener;
 import me.tomski.objects.Loadout;
 import me.tomski.objects.SimpleDisguise;
 import me.tomski.utils.PropHuntMessaging;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import pgDev.bukkit.DisguiseCraft.DisguiseCraft;
 import pgDev.bukkit.DisguiseCraft.api.DisguiseCraftAPI;
-import pgDev.bukkit.DisguiseCraft.api.PlayerUndisguiseEvent;
 import pgDev.bukkit.DisguiseCraft.disguise.Disguise;
 import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
 
@@ -44,25 +40,16 @@ public class DisguiseCraftManager extends DisguiseManager implements Listener {
         return dcAPI;
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void playerundis(PlayerUndisguiseEvent e) {
-        if (GameManager.hiders.contains(e.getPlayer().getName())) {
-            if (PropHuntListener.tempIgnoreUndisguise.contains(e.getPlayer())) {
-                PropHuntListener.tempIgnoreUndisguise.remove(e.getPlayer());
-                return;
-            }
-            e.setCancelled(true);
-        }
-    }
-
     private Disguise getDisguise(SimpleDisguise sd) {
         if (sd.getEntityType() == null) {
             LinkedList<String> data = new LinkedList<String>();
             data.add("blockID:" + sd.getID());
             data.add("blockData:" + sd.getDamage());
-            return new Disguise(getDcAPI().newEntityID(), data, DisguiseType.FallingBlock);
+            int id = getDcAPI().newEntityID();
+            return new Disguise(id, data, DisguiseType.FallingBlock);
         } else {
-            return new Disguise(getDcAPI().newEntityID(), "", DisguiseType.fromString(sd.getEntityType().name()));
+            int id = getDcAPI().newEntityID();
+            return new Disguise(id, "", DisguiseType.fromString(sd.getEntityType().name()));
         }
 
     }
@@ -79,7 +66,7 @@ public class DisguiseCraftManager extends DisguiseManager implements Listener {
 
     @Override
     public void undisguisePlayer(Player p) {
-        dcAPI.undisguisePlayer(p);
+        dcAPI.undisguisePlayer(p, false);
     }
 
     @Override

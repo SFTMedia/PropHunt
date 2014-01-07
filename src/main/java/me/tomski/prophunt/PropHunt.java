@@ -1164,29 +1164,12 @@ public class PropHunt extends JavaPlugin implements Listener {
 
     @SuppressWarnings("deprecation")
     public void hidePlayer(final Player owner, ItemStack[] armour) {
-        final ItemStack[] armourclone = armour.clone();
-        owner.getInventory().setArmorContents(null);
-        owner.updateInventory();
-        owner.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 4, 1));
-        getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-
-            @Override
-            public void run() {
-                dm.undisguisePlayer(owner);
+        for (Player viewer : owner.getServer().getOnlinePlayers()) {
+            if (viewer != owner) {
+                viewer.hidePlayer(owner);
             }
-        }, 1L);
-        getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-
-            @Override
-            public void run() {
-                for (Player viewer : owner.getServer().getOnlinePlayers()) {
-                    if (viewer != owner) {
-                        viewer.hidePlayer(owner);
-                    }
-                }
-                owner.getInventory().setArmorContents(armourclone);
-            }
-        }, 2L);
+        }
+        dm.undisguisePlayer(owner);
     }
 
     public void showPlayer(final Player owner, boolean shutdown) {
@@ -1194,7 +1177,6 @@ public class PropHunt extends JavaPlugin implements Listener {
             for (Player viewer : owner.getServer().getOnlinePlayers()) {
                 if (viewer != owner) {
                     viewer.showPlayer(owner);
-
                 }
             }
         } else {
@@ -1205,7 +1187,6 @@ public class PropHunt extends JavaPlugin implements Listener {
                     for (Player viewer : owner.getServer().getOnlinePlayers()) {
                         if (viewer != owner) {
                             viewer.showPlayer(owner);
-
                         }
                     }
                 }

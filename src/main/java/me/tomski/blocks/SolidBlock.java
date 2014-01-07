@@ -35,8 +35,8 @@ public class SolidBlock {
 
         blockChange = getBlockPacket();
         this.owner = p;
-        PropHuntListener.tempIgnoreUndisguise.add(owner);
         plugin.hidePlayer(owner, owner.getInventory().getArmorContents());
+        PropHuntListener.tempIgnoreUndisguise.add(owner);
     }
 
     public boolean hasMoved(PropHunt plugin) {
@@ -87,6 +87,7 @@ public class SolidBlock {
         }
 
         PropHuntListener.tempIgnoreUndisguise.remove(owner);
+        sendPacket(plugin.getServer().getOnlinePlayers());
         plugin.dm.disguisePlayer(owner, d);
     }
 
