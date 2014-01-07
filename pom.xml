@@ -79,6 +79,10 @@
             <id>libs-disguises-repo</id>
             <url>http://repo.md-5.net/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>drtshocks</id>
+            <url>http://ci.drtshock.com/plugin/repository/everything/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -100,7 +104,7 @@
         <dependency>
             <groupId>org.mcsg.double0negative.tabapi</groupId>
             <artifactId>TabAPI</artifactId>
-            <version>0.1.15</version>
+            <version>B 0.1.15</version>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
