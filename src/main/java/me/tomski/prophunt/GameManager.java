@@ -10,6 +10,7 @@ import me.tomski.blocks.SolidBlock;
 import me.tomski.bungee.Pinger;
 import me.tomski.classes.HiderClass;
 import me.tomski.classes.SeekerClass;
+import me.tomski.events.PropHuntEndEvent;
 import me.tomski.language.LanguageManager;
 import me.tomski.language.MessageBank;
 import me.tomski.utils.*;
@@ -366,6 +367,8 @@ public class GameManager {
     }
 
     public void endGame(final Reason reason, final boolean shutdown) throws IOException {
+        PropHuntEndEvent endEvent = new PropHuntEndEvent(reason, seekers, hiders, spectators);
+        Bukkit.getPluginManager().callEvent(endEvent);
         BukkitRunnable endGameTask = new BukkitRunnable(){
             @Override
             public void run() {
