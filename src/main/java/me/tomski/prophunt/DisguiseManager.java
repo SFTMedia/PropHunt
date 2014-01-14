@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class DisguiseManager implements Listener {
+public abstract class DisguiseManager implements Listener {
 
     private static PropHunt plugin;
     public static Map<Integer, SimpleDisguise> blockDisguises = new HashMap<Integer, SimpleDisguise>();
@@ -35,6 +35,8 @@ public class DisguiseManager implements Listener {
 
     public void undisguisePlayer(Player p) {
     }
+
+    public abstract void undisguisePlayerEnd(Player p);
 
     public String getDisguiseName(Player p) {
         return "";

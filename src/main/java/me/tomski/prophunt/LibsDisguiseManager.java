@@ -59,6 +59,11 @@ public class LibsDisguiseManager extends DisguiseManager {
     }
 
     @Override
+    public void undisguisePlayerEnd(Player p) {
+        DisguiseAPI.undisguiseToAll(p);
+    }
+
+    @Override
     public String getDisguiseName(Player p) {
         return DisguiseAPI.getDisguise(p).getType().equals(me.libraryaddict.disguise.disguisetypes.DisguiseType.FALLING_BLOCK) ? parseIdToName(((MiscDisguise) DisguiseAPI.getDisguise(p)).getId()) : DisguiseAPI.getDisguise(p).getEntity().getType().name();
     }

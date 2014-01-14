@@ -103,3 +103,6 @@
     - Make transition into SolidBlock smooth
     - Get rid of hacky methods
     - Fix problem with duplicates
+- V 1.44
+    - Event thrown on game end
+    - Fix invis on end

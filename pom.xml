@@ -6,7 +6,7 @@
 
     <groupId>me.tomski</groupId>
     <artifactId>PropHunt</artifactId>
-    <version>1.43-SNAPSHOT</version>
+    <version>1.44-SNAPSHOT</version>
     <name>PropHunt</name>
 
     <build>

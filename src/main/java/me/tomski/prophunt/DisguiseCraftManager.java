@@ -70,6 +70,11 @@ public class DisguiseCraftManager extends DisguiseManager implements Listener {
     }
 
     @Override
+    public void undisguisePlayerEnd(Player p) {
+        dcAPI.undisguisePlayer(p, true);
+    }
+
+    @Override
     public String getDisguiseName(Player p) {
         if (isDisguised(p)) {
             if (getSimpleDisguise(p) !=null) {
