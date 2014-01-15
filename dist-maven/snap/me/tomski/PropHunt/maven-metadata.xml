@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>me.tomski</groupId>
+  <artifactId>PropHunt</artifactId>
+  <versioning>
+    <versions>
+      <version>1.44-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20140115020523</lastUpdated>
+  </versioning>
+</metadata>

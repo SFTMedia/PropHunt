@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>me.tomski</groupId>
+  <artifactId>PropHunt</artifactId>
+  <version>1.44-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20140115.020523</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20140115020523</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.44-20140115.020523-1</value>
+        <updated>20140115020523</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.44-20140115.020523-1</value>
+        <updated>20140115020523</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <classifier>bin</classifier>
+        <extension>zip</extension>
+        <value>1.44-20140115.020523-1</value>
+        <updated>20140115020523</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
