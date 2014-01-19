@@ -5,12 +5,23 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.EnumWrappers;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import me.tomski.arenas.ArenaManager;
 import me.tomski.blocks.SolidBlock;
 import me.tomski.bungee.Pinger;
+import me.tomski.events.PropHuntHiderDeathEvent;
 import me.tomski.language.LanguageManager;
 import me.tomski.language.MessageBank;
-import me.tomski.prophunt.*;
+import me.tomski.prophunt.BungeeSettings;
+import me.tomski.prophunt.GameManager;
+import me.tomski.prophunt.PlayerManagement;
+import me.tomski.prophunt.PropHunt;
+import me.tomski.prophunt.ShopSettings;
 import me.tomski.utils.ItemMessage;
 import me.tomski.utils.PropHuntMessaging;
 import me.tomski.utils.Reason;
@@ -28,14 +39,14 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.*;
-
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 public class PropHuntListener implements Listener {
 
@@ -317,6 +328,10 @@ public class PropHuntListener implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) throws IllegalAccessException, InvocationTargetException, IOException {
         if (GameManager.hiders.contains(e.getEntity().getName())) {
+            
+            PropHuntHiderDeathEvent endEvent = new PropHuntHiderDeathEvent(e.getEntity().getName(), GameManager.hiders.size());
+            PH.getServer().getPluginManager().callEvent(endEvent);
+            
             if (e.getEntity().getKiller() != null) {
                 if (ShopSettings.enabled) {
                     giveHiderKillWinnings(e.getEntity().getKiller());
