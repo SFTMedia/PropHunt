@@ -27,7 +27,7 @@ public class PropHuntHiderDeathEvent extends Event {
     
     /**
      *
-     * @return int the number of hiders left in the arena
+     * @return the amount of hiders, this includes the hider that just died
      */
     public int getHidersLeftCount() {
         return hidersLeftCount;
