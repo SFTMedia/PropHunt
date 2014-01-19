@@ -44,7 +44,9 @@ public class GameTimer implements Runnable {
 
         if (timeleft == 0 || timeleft < 0) {
             try {
-                GM.endGame(Reason.TIME, false);
+                if (!GM.endNotifier) {
+                    GM.endGame(Reason.TIME, false);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

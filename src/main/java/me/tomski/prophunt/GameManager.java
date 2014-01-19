@@ -90,6 +90,7 @@ public class GameManager {
     public static int currentLobbyTime = 0;
 
     public long gameStartTime;
+    public boolean endNotifier;
 
     public GameManager(PropHunt plugin) {
         this.plugin = plugin;
@@ -369,6 +370,7 @@ public class GameManager {
     public void endGame(final Reason reason, final boolean shutdown) throws IOException {
         PropHuntEndEvent endEvent = new PropHuntEndEvent(reason, seekers, hiders, spectators);
         Bukkit.getPluginManager().callEvent(endEvent);
+        endNotifier = true;
         BukkitRunnable endGameTask = new BukkitRunnable(){
             @Override
             public void run() {
@@ -572,6 +574,8 @@ public class GameManager {
         } else {
             endGameTask.runTaskLater(plugin, 20L);
         }
+
+        endNotifier = false;
     }
 
     private void respawnQuick(final Player player) {

@@ -106,3 +106,5 @@
 - V 1.44
     - Event thrown on game end
     - Fix invis on end
+    - Event thrown for Hider Death
+    - Fix for double end game
