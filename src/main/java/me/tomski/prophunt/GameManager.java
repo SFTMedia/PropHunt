@@ -567,6 +567,7 @@ public class GameManager {
                         }
                     }
                 }
+                endNotifier = false;
             }
         };
         if (shutdown) {
@@ -574,8 +575,6 @@ public class GameManager {
         } else {
             endGameTask.runTaskLater(plugin, 20L);
         }
-
-        endNotifier = false;
     }
 
     private void respawnQuick(final Player player) {
