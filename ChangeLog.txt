@@ -109,3 +109,4 @@
     - Event thrown for Hider Death
     - Fix for double end game
     - Stop dead trackers
+    - Possible solution for disguises after game end

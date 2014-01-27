@@ -407,31 +407,13 @@ public class GameManager {
                 for (final String hider : hiders) {
                     if (plugin.getServer().getPlayer(hider) != null) {
                         plugin.showPlayer(plugin.getServer().getPlayer(hider), shutdown);
-                        teleportToExit(plugin.getServer().getPlayer(hider), false);
                         PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayer(hider));
+                        teleportToExit(plugin.getServer().getPlayer(hider), false);
                         if (PropHunt.usingTABAPI) {
                             SB.removeTab(plugin.getServer().getPlayer(hider));
                         }
                         if (useSideStats) {
                             plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayer(hider));
-                        }
-                        if (shutdown) {
-                            if (plugin.getServer().getPlayer(hider) != null) {
-                                if (plugin.dm.isDisguised(plugin.getServer().getPlayer(hider))) {
-                                    plugin.dm.undisguisePlayerEnd(plugin.getServer().getPlayer(hider));
-                                }
-                            }
-                        } else {
-                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (plugin.getServer().getPlayer(hider) != null) {
-                                        if (plugin.dm.isDisguised(plugin.getServer().getPlayer(hider))) {
-                                            plugin.dm.undisguisePlayerEnd(plugin.getServer().getPlayer(hider));
-                                        }
-                                    }
-                                }
-                            }, 20L);
                         }
                     }
                     playerstoundisguise.add(hider);
@@ -440,66 +422,32 @@ public class GameManager {
                 for (final String seeker : seekers) {
                     if (plugin.getServer().getPlayerExact(seeker) != null) {
                         plugin.showPlayer(plugin.getServer().getPlayerExact(seeker), shutdown);
-                        teleportToExit(plugin.getServer().getPlayerExact(seeker), false);
                         PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayerExact(seeker));
+                        teleportToExit(plugin.getServer().getPlayerExact(seeker), false);
                         if (PropHunt.usingTABAPI) {
                             SB.removeTab(plugin.getServer().getPlayerExact(seeker));
                         }
                         if (useSideStats) {
                             plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayerExact(seeker));
                         }
-                        if (shutdown) {
-                            if (plugin.getServer().getPlayerExact(seeker) != null) {
-                                if (plugin.dm.isDisguised(plugin.getServer().getPlayerExact(seeker))) {
-                                    plugin.dm.undisguisePlayerEnd(plugin.getServer().getPlayerExact(seeker));
-                                }
-                            }
-                        } else {
-                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (plugin.getServer().getPlayerExact(seeker) != null) {
-                                        if (plugin.dm.isDisguised(plugin.getServer().getPlayerExact(seeker))) {
-                                            plugin.dm.undisguisePlayerEnd(plugin.getServer().getPlayerExact(seeker));
-                                        }
-                                    }
-                                }
-                            }, 20L);
-                        }
-
                     }
                     playerstoundisguise.add(seeker);
-
                 }
 
                 for (String spectator : spectators) {
                     if (plugin.getServer().getPlayerExact(spectator) != null) {
-                        teleportToExit(plugin.getServer().getPlayerExact(spectator), false);
                         PlayerManagement.gameRestorePlayer(plugin.getServer().getPlayerExact(spectator));
+                        teleportToExit(plugin.getServer().getPlayerExact(spectator), false);
                         if (PropHunt.usingTABAPI) {
                             SB.removeTab(plugin.getServer().getPlayerExact(spectator));
                         }
                         if (useSideStats) {
                             plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayerExact(spectator));
                         }
-                        if (plugin.dm.isDisguised(plugin.getServer().getPlayerExact(spectator))) {
-                            plugin.dm.undisguisePlayerEnd(plugin.getServer().getPlayerExact(spectator));
-                        }
-
                     }
                     playerstoundisguise.add(spectator);
 
                 }
-
-
-                for (String player : playerstoundisguise) {
-                    if (plugin.getServer().getPlayerExact(player) != null) {
-                        if (plugin.dm.isDisguised(plugin.getServer().getPlayerExact(player))) {
-                            plugin.dm.undisguisePlayerEnd(plugin.getServer().getPlayerExact(player));
-                        }
-                    }
-                }
-
 
                 for (String player : playersWaiting) {
                     if (plugin.getServer().getPlayerExact(player) != null) {
@@ -509,7 +457,6 @@ public class GameManager {
                         plugin.SBS.removeScoreboard(plugin, plugin.getServer().getPlayerExact(player));
                     }
                 }
-
 
                 if (SCOREBOARDTASKID != 0) {
                     plugin.getServer().getScheduler().cancelTask(SCOREBOARDTASKID);
@@ -523,8 +470,6 @@ public class GameManager {
                     plugin.getServer().getScheduler().cancelTask(DETRACKERID);
                 }
 
-
-                playerstoundisguise.clear();
                 playersWaiting.clear();
                 hiders.clear();
                 seekers.clear();
@@ -542,6 +487,20 @@ public class GameManager {
                         e.printStackTrace();
                     }
                 }
+
+                for (String player : playerstoundisguise) {
+                    if (plugin.getServer().getPlayerExact(player) != null) {
+                        Player p = plugin.getServer().getPlayerExact(player);
+                        if (p.isDead()) {
+                            respawnQuick(p);
+                        }
+                        if (plugin.dm.isDisguised(p)) {
+                            plugin.dm.undisguisePlayerEnd(p);
+                        }
+                    }
+                }
+                playerstoundisguise.clear();
+
                 if (BungeeSettings.usingPropHuntSigns && BungeeSettings.kickToHub) {
                     Pinger ping = new Pinger(plugin);
                     for (Player p : plugin.getServer().getOnlinePlayers()) {
