@@ -85,6 +85,9 @@ public class ProtocolTask implements Listener {
                         final int ATTACK_REACH = 3;
 
                         Player observer = event.getPlayer();
+                        if (observer.isDead()) {
+                            return;
+                        }
                         Location observerPos = observer.getEyeLocation();
                         Vector3D observerDir = new Vector3D(observerPos.getDirection());
 
