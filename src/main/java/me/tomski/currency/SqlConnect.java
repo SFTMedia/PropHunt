@@ -30,7 +30,7 @@ public class SqlConnect {
     }
 
     private void refreshConnect() throws SQLException {
-        if (connection == null) {
+        if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(settings.getUrl(), settings.getUsername(), settings.getPass()); //Creates the connection
         }
     }
