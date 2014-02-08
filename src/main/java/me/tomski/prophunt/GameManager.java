@@ -192,10 +192,11 @@ public class GameManager {
 
         }
 
-        freshPlayers();
         chooseSeekerAndSortPlayers();
         teleportPlayersStart();
         teleportSeekerStart(plugin.getServer().getPlayerExact(firstSeeker));
+        freshPlayers();
+
         seekerLives.put(plugin.getServer().getPlayer(firstSeeker), seekerLivesAmount);
         if (seekerDelayTime != 0) {
             sd = new SeekerDelay(plugin.getServer().getPlayer(firstSeeker), seekerDelayTime, plugin);

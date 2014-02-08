@@ -29,9 +29,7 @@ public class LibsDisguiseManager extends DisguiseManager {
         super(plugin);
         int i = plugin.loadBlockDisguises();
         plugin.getLogger().log(Level.INFO, "PropHunt: " + i + " disgiuses loaded");
-        DisguiseAPI.setViewDisguises(true);
     }
-
 
     private Disguise getLibsDisguise(SimpleDisguise sd) {
         if (sd.getEntityType() == null) {

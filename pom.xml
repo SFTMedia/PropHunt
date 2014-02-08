@@ -114,7 +114,7 @@
         <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
-            <version>7.6.3</version>
+            <version>7.9.7-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
