@@ -300,13 +300,15 @@ public class GameManager {
 
     private void freshPlayers() {
         for (String s : playersWaiting) {
-            if (plugin.getServer().getPlayer(s) != null) {
-                if (plugin.getServer().getPlayer(s).getGameMode().equals(GameMode.CREATIVE)) {
-                    plugin.getServer().getPlayer(s).setGameMode(GameMode.SURVIVAL);
+            if (plugin.getServer().getPlayerExact(s) != null) {
+                if (plugin.getServer().getPlayerExact(s).getGameMode().equals(GameMode.CREATIVE)) {
+                    plugin.getServer().getPlayerExact(s).setGameMode(GameMode.SURVIVAL);
                 }
-                PlayerManagement.gameStartPlayer(plugin.getServer().getPlayer(s));
+                PlayerManagement.gameStartPlayer(plugin.getServer().getPlayerExact(s));
             }
         }
+        PlayerManagement.gameStartPlayer(plugin.getServer().getPlayerExact(firstSeeker));
+        playersWaiting.clear();
     }
 
     private void disguisePlayers(Arena a) {
@@ -342,7 +344,6 @@ public class GameManager {
             }
             hiders.add(hider);
         }
-        playersWaiting.clear();
         String msg = MessageBank.BROADCAST_FIRST_SEEKER.getMsg();
         msg = LanguageManager.regex(msg, "\\{seeker\\}", seeker);
         PropHuntMessaging.broadcastMessageToPlayers(hiders, seekers, msg);

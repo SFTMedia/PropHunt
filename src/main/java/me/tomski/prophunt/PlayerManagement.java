@@ -20,6 +20,14 @@ public class PlayerManagement {
         healPlayer(p);
         saveInvent(p);
         saveXp(p);
+        clearEffects(p);
+    }
+
+    private static void clearPlayer(Player p) {
+        p.getInventory().clear();
+        p.setTotalExperience(0);
+        p.setLevel(0);
+        p.updateInventory();
     }
 
     private static void removeFromMaps(Player p) {
@@ -36,7 +44,7 @@ public class PlayerManagement {
 
     @SuppressWarnings("deprecation")
     private static void saveArmour(Player p) {
-        playerArmour.put(p.getName(), p.getInventory().getArmorContents());
+        playerArmour.put(p.getName(), p.getInventory().getArmorContents().clone());
         p.updateInventory();
     }
 
@@ -49,7 +57,7 @@ public class PlayerManagement {
 
     @SuppressWarnings("deprecation")
     private static void saveInvent(Player p) {
-        playerInvents.put(p.getName(), p.getInventory().getContents());
+        playerInvents.put(p.getName(), p.getInventory().getContents().clone());
         p.getInventory().clear();
         p.updateInventory();
     }
@@ -68,18 +76,19 @@ public class PlayerManagement {
     }
 
     public static void gameRestorePlayer(Player p) {
+        clearPlayer(p);
         restoreXp(p);
         restoreInvent(p);
         restoreArmour(p);
         removeFromMaps(p);
         clearEffects(p);
+        System.out.println("restored " + p.getName());
     }
 
     @SuppressWarnings("deprecation")
     private static void restoreInvent(Player p) {
         if (playerInvents.containsKey(p.getName())) {
             p.getInventory().setContents(playerInvents.get(p.getName()));
-            p.getInventory();
         }
     }
 

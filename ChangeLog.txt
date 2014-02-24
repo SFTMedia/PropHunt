@@ -112,3 +112,4 @@
     - Possible solution for disguises after game end
     - libs work
     - change teleport order
+    - Fix inventory problems
