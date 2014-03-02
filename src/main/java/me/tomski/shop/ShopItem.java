@@ -51,9 +51,7 @@ public class ShopItem {
 
     private ItemStack makeItem() {
         ItemMeta im = itemStack.getItemMeta();
-        String name = itemStack.getType().name().toLowerCase().replaceAll("_", " ");
-        String finalName = name.substring(0, 1).toUpperCase() + name.substring(1);
-        im.setDisplayName(ChatColor.GOLD + finalName);
+        im.setDisplayName(ChatColor.GOLD + itemName);
         itemStack.setItemMeta(im);
         return itemStack;
     }
