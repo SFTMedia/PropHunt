@@ -6,7 +6,7 @@
 
     <groupId>me.tomski</groupId>
     <artifactId>PropHunt</artifactId>
-    <version>1.44-SNAPSHOT</version>
+    <version>1.44-alt</version>
     <name>PropHunt</name>
 
     <build>
@@ -67,21 +67,12 @@
             <url>http://repo.comphenix.net/content/groups/public/</url>
         </repository>
         <repository>
-            <id>disguisecraft-repo</id>
-            <name>DisguiseCraft Repo</name>
-            <url>http://build.yu8.me:8080/plugin/repository/everything/</url>
-        </repository>
-        <repository>
-            <id>vault-repo</id>
-            <url>http://ci.herocraftonline.com/plugin/repository/everything/</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
         <repository>
             <id>libs-disguises-repo</id>
             <url>http://repo.md-5.net/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>drtshocks</id>
-            <url>http://ci.drtshock.com/plugin/repository/everything/</url>
         </repository>
     </repositories>
 
@@ -89,12 +80,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.7.2-R0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>pgDev</groupId>
-            <artifactId>DisguiseCraft</artifactId>
-            <version>5.1</version>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
@@ -104,7 +90,7 @@
         <dependency>
             <groupId>org.mcsg.double0negative</groupId>
             <artifactId>tabapi</artifactId>
-            <version>B%200.1.15</version>
+            <version>B 0.1.15</version>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>

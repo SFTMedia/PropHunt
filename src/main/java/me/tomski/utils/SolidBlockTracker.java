@@ -6,6 +6,7 @@ import me.tomski.prophunt.GameManager;
 import me.tomski.prophunt.PropHunt;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class SolidBlockTracker implements Runnable {
                     solidBlocks.put(s, sb);
                     try {
                         PropHuntMessaging.sendMessage(sb.owner, MessageBank.SOLID_BLOCK.getMsg());
-                        sb.sendPacket(Bukkit.getOnlinePlayers());
+                        sb.sendPacket(Bukkit.getOnlinePlayers().toArray(new Player[]{}));
                     } catch (InvocationTargetException e) {
                         e.printStackTrace();
                     }

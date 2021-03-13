@@ -2,7 +2,7 @@ name: PropHunt
 main: me.tomski.prophunt.PropHunt
 version: 1.44
 depend: [ProtocolLib]
-softdepend: [DisguiseCraft, LibsDisguises ,TabAPI ,PropHuntSigns, Vault, Multiverse-Core]
+softdepend: [LibsDisguises ,TabAPI ,PropHuntSigns, Vault, Multiverse-Core]
 author: Tomski - Owner of Skicraft
 website: www.skicraft.enjin.com
 commands:

@@ -110,8 +110,6 @@ public class PropHuntListener implements Listener {
                     return true;
                 case STORAGE_MINECART:
                     return true;
-                case LOCKED_CHEST:
-                    return true;
                 case TRAPPED_CHEST:
                     return true;
                 case DISPENSER:
@@ -635,7 +633,7 @@ public class PropHuntListener implements Listener {
         if (GameManager.useSideStats) {
             PH.SBS.removeScoreboard(PH, e.getPlayer());
         }
-        if (BungeeSettings.usingBungee && PH.getServer().getOnlinePlayers().length == 1) {
+        if (BungeeSettings.usingBungee && PH.getServer().getOnlinePlayers().size() == 1) {
             final Pinger p = new Pinger(PH);
             p.sentData = true;
             p.sendServerDataEmpty();

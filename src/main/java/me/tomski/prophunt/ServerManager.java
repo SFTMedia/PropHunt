@@ -55,7 +55,7 @@ public class ServerManager implements Listener {
         }
         if (forceMaxPlayers) {
             if (!e.getPlayer().isOp() || e.getPlayer().hasPermission("prophunt.joinoverride")) {
-                if (plugin.getServer().getOnlinePlayers().length >= forceMaxPlayersSize) {
+                if (plugin.getServer().getOnlinePlayers().size() >= forceMaxPlayersSize) {
                     e.disallow(Result.KICK_FULL, ChatColor.translateAlternateColorCodes('&', MessageBank.SERVER_FULL_MESSAGE.getMsg()));
                 }
             }

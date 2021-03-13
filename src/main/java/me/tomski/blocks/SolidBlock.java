@@ -50,7 +50,7 @@ public class SolidBlock {
             return true;
         }
         try {
-            sendPacket(plugin.getServer().getOnlinePlayers());
+            sendPacket(plugin.getServer().getOnlinePlayers().toArray(new Player[]{}));
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -87,7 +87,7 @@ public class SolidBlock {
         }
 
         PropHuntListener.tempIgnoreUndisguise.remove(owner);
-        sendPacket(plugin.getServer().getOnlinePlayers());
+        sendPacket(plugin.getServer().getOnlinePlayers().toArray(new Player[]{}));
         plugin.dm.disguisePlayer(owner, d);
     }
 

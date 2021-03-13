@@ -96,10 +96,7 @@ public class PropHunt extends JavaPlugin implements Listener {
         AS = new ArenaStorage(this, GM);
         AM = new ArenaManager(this);
 
-        if (getServer().getPluginManager().isPluginEnabled("DisguiseCraft")) {
-            dm = new DisguiseCraftManager(this);
-            getServer().getPluginManager().registerEvents(dm, this);
-        } else if (getServer().getPluginManager().isPluginEnabled("LibsDisguises")) {
+        if (getServer().getPluginManager().isPluginEnabled("LibsDisguises")) {
             dm = new LibsDisguiseManager(this);
         } else {
             shouldDisable = true;
